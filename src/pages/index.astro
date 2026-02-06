@@ -1,10 +1,12 @@
 ---
 // ==============================================
-// TWProbe Hub - 2026 Performance Optimized Master
+// TWProbe Hub - 2026 Final Master (Native Speed Edition)
 // ==============================================
 
 const brandName = "TWProbe";
-const mainSiteUrl = "https://www.twprobe.com";
+// 修正：根據伺服器數據，主站使用無 www 版本以避免轉址
+const mainSiteUrl = "https://twprobe.com";
+// Hub 保持子網域標準
 const hubUrl = "https://hub.twprobe.com/";
 
 // 靜態資源路徑 (皆位於 public/ 資料夾)
@@ -39,7 +41,6 @@ const ecosystem = [
   { group: "VISION", sites: [{ n: "YouTube", u: "https://www.youtube.com/@TWProbe", icon: "youtube" }, { n: "Instagram", u: "https://www.instagram.com/twprobe/", icon: "instagram" }, { n: "Pinterest", u: "https://www.pinterest.com/infotwprobe/", icon: "pinterest" }] }
 ];
 
-// 頁尾連結：純中文 3+3 矩陣配置
 const footerLinks = [
     { name: "關於本站", u: "https://twprobe.com/about-twprobe/" },
     { name: "網站地圖", u: "https://twprobe.com/sitemap/" },
@@ -79,42 +80,30 @@ const footerLinks = [
     <meta name="twitter:description" content="一站式掌握台灣房產市場深度情報。" />
     <meta name="twitter:image" content={ogImage} />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <link 
-        href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" 
-        rel="stylesheet" 
-        media="print" 
-        onload="this.media='all'"
-    />
-    <noscript>
-        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-    </noscript>
-
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
-
     <style>
         :root { 
             --dark: #1A202C; 
-            --body-text: #2D3748; /* 加深內文顏色以提升對比 */
+            --body-text: #2D3748; /* 加深 */
             --blue: #2B6CB0; 
             --border: #E5E5E5; 
             --item-bg: #FAFAFA;
+            --gray-text: #4A5568; /* 加深通過 Accessibility */
+            --copyright-text: #4A5568; /* 加深通過 Accessibility */
             
-            /* 無障礙優化：大幅加深灰色文字 */
-            --gray-text: #4A5568; /* 原本太淺導致扣分，現改為深灰 */
-            --copyright-text: #4A5568; /* 原本太淺導致扣分，現改為深灰 */
+            /* 現代系統字體堆疊：自動調用裝置內建的最美黑體 */
+            --font-stack: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans TC", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
         }
         
         body { 
-            font-family: 'Source Sans Pro', 'Noto Sans TC', sans-serif; 
+            font-family: var(--font-stack);
             color: var(--body-text); 
             margin: 0; 
             background: #ffffff; 
             line-height: 1.7; 
             font-size: 18px; 
             letter-spacing: -0.01em; 
+            -webkit-font-smoothing: antialiased; 
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .wrapper { max-width: 900px; margin: 0 auto; padding: 3.5rem 1.5rem; }
@@ -130,8 +119,6 @@ const footerLinks = [
         .pillar-header { margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.8rem; text-align: center; }
         .pillar-title { display: block; color: var(--dark); font-size: 20px; font-weight: 700; text-decoration: none; }
         .pillar-title:hover { color: var(--blue); }
-        
-        /* 使用加深後的變數 */
         .pillar-desc { font-size: 13px; color: var(--gray-text); margin-top: 0.2rem; font-weight: 500; }
 
         .topic-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
@@ -140,13 +127,9 @@ const footerLinks = [
 
         .eco-section { background: var(--item-bg); padding: 3rem 1.5rem; border-radius: 16px; margin-bottom: 4rem; text-align: center; }
         .eco-grid { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
-        
-        /* 使用加深後的變數 */
         .eco-group-title { font-size: 11px; color: var(--gray-text); margin-bottom: 1.2rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
         .eco-icons { display: grid; grid-template-columns: repeat(3, 1fr); max-width: 240px; margin: 0 auto; gap: 1rem; }
-        
-        /* 提升透明度以通過對比測試 */
-        .eco-link { color: var(--dark); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; font-size: 12px; text-decoration: none; opacity: 0.85; transition: 0.2s; font-weight: 500; } 
+        .eco-link { color: var(--dark); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; font-size: 12px; text-decoration: none; opacity: 0.85; transition: 0.2s; font-weight: 500; }
         .eco-link:hover { opacity: 1; color: var(--blue); }
         .icon-svg { width: 22px; height: 22px; fill: currentColor; }
 
@@ -160,8 +143,6 @@ const footerLinks = [
         }
         .footer-nav a { color: var(--body-text); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
         .footer-nav a:hover { color: var(--blue); }
-        
-        /* 使用加深後的變數 */
         .copyright { font-size: 12px; color: var(--copyright-text); }
 
         @media (max-width: 650px) {
