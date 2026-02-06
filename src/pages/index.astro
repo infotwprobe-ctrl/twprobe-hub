@@ -157,20 +157,20 @@ const footerLinks = [
                 <span class="brand-name">{brandName}</span>
             </a>
             <div class="divider"></div>
-            <p class="mission-text">致力於資訊的結構化與透明化。整合交易、開發、投資三大脈絡，提供數據支撐的深度分析。</p>
+            <p class="mission-text">致力於資訊的結構化與透明化。整合交易、開發、投資三大脈絡，提供數據支撐的深度分析。 [cite: 2025-09-25]</p>
         </header>
 
         <main class="pillar-grid">
             {pillars.map(p => (
                 <article class="pillar-card">
                     <header class="pillar-header">
-                        {/* 修改處 1：已移除 /category/ */}
+                        {/* 修正：已移除 /category/ */}
                         <a href={`${mainSiteUrl}/${p.slug}/`} class="pillar-title">{p.title}</a>
                         <p class="pillar-desc">{p.desc}</p>
                     </header>
                     <div class="topic-list">
                         {p.topics.map(t => (
-                            {/* 修改處 2：已移除 /category/ */}
+                            /* 修正：已移除 /category/ */
                             <a href={`${mainSiteUrl}/${p.slug}/`} class="topic-link">{t}</a>
                         ))}
                     </div>
