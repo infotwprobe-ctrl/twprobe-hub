@@ -1,13 +1,13 @@
 ---
 // ==============================================
-// TWProbe Hub - 2026 終極登陸頁版
+// TWProbe Hub - 2026 體系導覽版
 // ==============================================
 
 const brandName = "TWProbe Hub";
 const tagline = "專業知識．獨特觀點．數據支撐";
-// SEO Meta 設定
-const seoTitle = "TWProbe Hub | 台灣房產情報數據中心 & 市場趨勢分析實驗室";
-const seoDesc = "TWProbe 數位總部。整合台灣房市三大核心數據：購屋交易流程解密、開發與危老都更工程、以及最新的投資法規稅務分析。串聯九大社群平台，提供最具權威的房產洞察。";
+// SEO Meta: 強調「入口」與「導覽」性質
+const seoTitle = "TWProbe 體系導覽 | 連結台灣房產情報的數位指揮中心";
+const seoDesc = "TWProbe 的數位戰略總部。這是一張房產佈局的戰略地圖，為您解構「交易、開發、投資」三大板塊，並提供通往九大社群平台與深度分析官網的快速入口。";
 const mainSiteUrl = "https://www.twprobe.com";
 
 // 三大核心板塊
@@ -15,7 +15,7 @@ const pillars = [
   {
     title: "交易與持有",
     slug: "real-estate-holding",
-    desc: "從簽約到交屋的完整SOP", // 新增描述，增加 SEO 密度
+    desc: "從簽約到交屋的完整SOP",
     topics: ["購屋流程", "房產銷售", "驗屋重點", "租賃指南", "室內裝修", "管理維護"]
   },
   {
@@ -32,12 +32,14 @@ const pillars = [
   },
 ];
 
+// 九大社群生態系
 const ecosystem = [
   { group: "PULSE (即時脈動)", sites: [{ n: "X", u: "https://x.com/probe54670", icon: "x" }, { n: "Reddit", u: "https://www.reddit.com/r/TWProbe/", icon: "reddit" }, { n: "Quora", u: "https://taiwanpropertylabbytwprobe.quora.com/", icon: "quora" }] },
   { group: "ECHO (深度觀點)", sites: [{ n: "Medium", u: "https://medium.com/@twprobe", icon: "medium" }, { n: "Substack", u: "https://substack.com/@twprobe", icon: "substack" }, { n: "Blogger", u: "https://twprobe.blogspot.com/", icon: "blogger" }] },
   { group: "VISION (視覺情報)", sites: [{ n: "YouTube", u: "https://www.youtube.com/@TWProbe", icon: "youtube" }, { n: "Instagram", u: "https://www.instagram.com/twprobe/", icon: "instagram" }, { n: "Pinterest", u: "https://www.pinterest.com/infotwprobe/", icon: "pinterest" }] }
 ];
 
+// Hub 頁尾連結
 const footerLinks = [
     { name: "關於本站", u: "https://twprobe.com/about-twprobe/" },
     { name: "網站地圖", u: "https://twprobe.com/sitemap/" },
@@ -45,6 +47,8 @@ const footerLinks = [
     { name: "服務條款", u: "https://twprobe.com/terms-of-service/" },
     { name: "免責聲明", u: "https://twprobe.com/disclaimer/" },
 ];
+
+const contactEmail = "info@twprobe.com";
 ---
 
 <html lang="zh-TW">
@@ -59,36 +63,30 @@ const footerLinks = [
     <meta property="twitter:image" content="/images/og-social-preview.jpg" />
 
     <style>
-        :root { --dark: #1A202C; --gray: #4A5568; --blue: #2B6CB0; --navy: #1A365D; --bg-gray: #F7FAFC; }
+        :root { --dark: #1A202C; --gray: #4A5568; --blue: #2B6CB0; --bg-gray: #F7FAFC; }
         body { font-family: 'Source Sans Pro', 'Noto Sans TC', sans-serif; color: var(--gray); margin: 0; background: #fff; line-height: 1.7; font-size: 18px; }
         .wrapper { max-width: 1000px; margin: 0 auto; padding: 4rem 1.5rem; }
 
-        /* Header 區域 */
+        /* Header */
         header { display: flex; flex-direction: column; align-items: center; margin-bottom: 3.5rem; }
         .brand-link { text-decoration: none; display: flex; flex-direction: column; align-items: center; transition: transform 0.2s; }
         .brand-link:hover { transform: scale(1.02); }
-        
         .brand-box { display: flex; align-items: center; gap: 1rem; }
         .logo-img { width: 64px; height: 64px; object-fit: contain; }
         h1 { color: var(--dark); font-size: 42px; font-weight: 700; margin: 0; letter-spacing: -0.01em; }
         .tagline { color: var(--blue); font-size: 15px; font-weight: 600; letter-spacing: 0.15em; margin-top: 0.5rem; text-transform: uppercase; }
 
-        /* SEO 文案與 CTA */
-        .hero-section { text-align: center; max-width: 760px; margin: 0 auto 5rem; }
-        .hero-title { color: var(--dark); font-size: 26px; font-weight: 700; margin-bottom: 1.5rem; line-height: 1.4; }
-        .hero-desc { font-size: 18px; color: var(--gray); margin-bottom: 2rem; text-align: justify; text-align-last: center; }
-        .main-site-btn { display: inline-block; background: var(--dark); color: #fff; padding: 12px 32px; border-radius: 50px; font-weight: 600; font-size: 16px; transition: all 0.2s; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        /* 文案區：體系導覽定位 */
+        .hero-section { text-align: center; max-width: 780px; margin: 0 auto 5rem; }
+        .hero-title { color: var(--dark); font-size: 28px; font-weight: 700; margin-bottom: 1.5rem; line-height: 1.4; }
+        .hero-desc { font-size: 18px; color: var(--gray); margin-bottom: 2.5rem; text-align: justify; text-align-last: center; }
+        
+        /* 按鈕優化：強調「進入官網」 */
+        .main-site-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--dark); color: #fff; padding: 14px 36px; border-radius: 50px; font-weight: 600; font-size: 16px; transition: all 0.2s; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
         .main-site-btn:hover { background: var(--blue); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(43, 108, 176, 0.3); }
 
-        /* 三大板塊 (置中優化) */
-        .pillar-grid { 
-            display: grid; 
-            gap: 2.5rem; 
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            justify-content: center; /* 關鍵：讓卡片置中 */
-            margin-bottom: 6rem; 
-        }
-        
+        /* 三大板塊：置中對齊 */
+        .pillar-grid { display: grid; gap: 2.5rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); justify-content: center; margin-bottom: 6rem; }
         .pillar-card { display: flex; flex-direction: column; height: 100%; }
         .pillar-header { margin-bottom: 1rem; border-bottom: 2px solid #E2E8F0; padding-bottom: 0.75rem; }
         .pillar-title { display: block; color: var(--dark); font-size: 24px; font-weight: 700; text-decoration: none; margin-bottom: 0.25rem; }
@@ -96,22 +94,31 @@ const footerLinks = [
         .pillar-desc { font-size: 14px; color: #718096; margin: 0; }
 
         .topic-list { display: flex; flex-direction: column; gap: 0.5rem; flex-grow: 1; }
-        .topic-link { display: flex; justify-content: space-between; padding: 0.75rem 1rem; background: var(--bg-gray); border-radius: 8px; color: var(--gray); font-weight: 500; font-size: 16px; transition: all 0.2s; }
+        .topic-link { display: flex; justify-content: space-between; padding: 0.75rem 1rem; background: var(--bg-gray); border-radius: 8px; color: var(--gray); font-weight: 500; font-size: 16px; transition: all 0.2s; text-decoration: none; }
         .topic-link:hover { background: var(--blue); color: #fff; transform: translateX(5px); }
         .arrow { opacity: 0.5; }
 
-        /* 生態系與 Footer (維持原樣) */
-        .eco-section { background: var(--bg-gray); padding: 3rem 2rem; border-radius: 20px; margin-bottom: 5rem; text-align: center; }
+        /* Ecosystem & Footer */
+        .eco-section { background: var(--bg-gray); padding: 3rem 2rem; border-radius: 20px; margin-bottom: 6rem; text-align: center; }
         .eco-grid { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); justify-content: center; }
         .eco-link { color: var(--dark); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; font-size: 14px; font-weight: 600; text-decoration: none; opacity: 0.8; transition: all 0.2s; }
         .eco-link:hover { color: var(--blue); opacity: 1; transform: translateY(-3px); }
         .icon-svg { width: 32px; height: 32px; fill: currentColor; }
 
-        footer { border-top: 1px solid #E2E8F0; padding: 4rem 0 2rem; text-align: center; }
-        .footer-nav { margin-bottom: 1.5rem; display: flex; justify-content: center; flex-wrap: wrap; gap: 2rem; }
-        .footer-nav a { color: var(--gray); text-decoration: none; font-size: 15px; font-weight: 500; }
+        footer { margin-top: 6rem; border-top: 1px solid #E2E8F0; padding: 4rem 1.5rem 3rem; text-align: center; background: #FAFAFA; border-radius: 24px 24px 0 0; }
+        .footer-brand { display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 2rem; opacity: 0.8; transition: opacity 0.2s; text-decoration: none; }
+        .footer-brand:hover { opacity: 1; }
+        .footer-logo { width: 28px; height: 28px; filter: grayscale(100%); opacity: 0.6; }
+        .footer-brand-name { font-weight: 700; color: var(--dark); font-size: 16px; letter-spacing: 0.05em; }
+        
+        .footer-nav { margin-bottom: 2rem; display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem; }
+        .footer-nav a { color: var(--gray); text-decoration: none; font-size: 14px; font-weight: 500; }
         .footer-nav a:hover { color: var(--blue); }
-        .copyright { font-size: 13px; color: #A0AEC0; margin-top: 1rem; }
+        
+        .footer-contact { margin-bottom: 2rem; font-size: 14px; color: #718096; }
+        .footer-contact a { color: var(--blue); text-decoration: none; font-weight: 600; }
+        
+        .copyright { font-size: 12px; color: #CBD5E0; margin-top: 1rem; border-top: 1px dashed #E2E8F0; padding-top: 2rem; line-height: 1.6; }
 
         @media (max-width: 600px) {
             h1 { font-size: 32px; }
@@ -124,7 +131,7 @@ const footerLinks = [
 <body>
     <div class="wrapper">
         <header>
-            <a href={mainSiteUrl} class="brand-link" title="回官網首頁">
+            <a href={mainSiteUrl} class="brand-link" title="回 TWProbe 官網首頁">
                 <div class="brand-box">
                     <img src="/logo.png" alt="TWProbe Logo" class="logo-img" onerror="this.style.display='none'" />
                     <h1>{brandName}</h1>
@@ -134,16 +141,18 @@ const footerLinks = [
         </header>
 
         <section class="hero-section">
-            <h2 class="hero-title">解構台灣房產市場的數據真相<br>從土地開發到資產傳承的完整戰略</h2>
+            <h2 class="hero-title">房產佈局的戰略地圖<br>連結 TWProbe 生態系的核心樞紐</h2>
             <div class="hero-desc">
                 <p>
-                    <strong>TWProbe Hub (房產實驗室)</strong> 是台灣最權威的房地產數據分析中心。我們不只提供新聞，更提供「決策依據」。整合實價登錄大數據、預售屋合約陷阱解析、危老都更成本試算，以及最新的房地合一稅務法規。
+                    歡迎來到 <strong>TWProbe 的數位指揮中心</strong>。這裡不僅是入口，更是您掌握市場全貌的導航儀。
                 </p>
                 <p>
-                    無論您是需要精準估價的投資人、尋求合建機會的地主，還是計畫購屋的自住客，TWProbe 生態系都能為您連結所需的深度知識與專業觀點。
+                    我們將龐大的房產資訊，解構為「交易、開發、投資」三大戰略板塊。透過這張<strong>體系導覽</strong>，您可以避開碎片化的雜訊，快速對接主站的深度分析，或直達九大社群平台掌握即時脈動。
                 </p>
             </div>
-            <a href={mainSiteUrl} class="main-site-btn">前往 TWProbe 官網閱讀深度分析 →</a>
+            <a href={mainSiteUrl} class="main-site-btn">
+                <span>🚀</span> 進入 TWProbe 官網閱讀深度分析
+            </a>
         </section>
 
         <main class="pillar-grid">
@@ -169,7 +178,7 @@ const footerLinks = [
             <div class="eco-grid">
                 {ecosystem.map(e => (
                     <div>
-                        <div style="font-size:12px; color:#A0AEC0; margin-bottom:1.5rem; font-weight:700; letter-spacing:0.1em;">{e.group}</div>
+                        <div style="font-size:12px; color:#A0AEC0; margin-bottom:1.5rem; font-weight:700; letter-spacing:0.1em; text-transform: uppercase;">{e.group}</div>
                         <div style="display:flex; justify-content:center; gap:2rem;">
                             {e.sites.map(s => (
                                 <a href={s.u} class="eco-link" target="_blank" rel="me noopener noreferrer" title={s.n}>
@@ -195,12 +204,25 @@ const footerLinks = [
         </section>
 
         <footer>
+            <a href={mainSiteUrl} class="footer-brand" title="返回 TWProbe 官網">
+                <img src="/logo.png" alt="TWProbe" class="footer-logo" />
+                <span class="footer-brand-name">TWProbe</span>
+            </a>
+            
             <nav class="footer-nav">
                 {footerLinks.map(f => (
                     <a href={f.u}>{f.name}</a>
                 ))}
             </nav>
-            <p class="copyright">© 2026 {brandName}. All rights reserved.</p>
+
+            <div class="footer-contact">
+                合作洽詢：<a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+            </div>
+
+            <p class="copyright">
+                © 2026 {brandName}. All rights reserved. <br>
+                Powered by TWProbe Intelligence Lab.
+            </p>
         </footer>
     </div>
 </body>
