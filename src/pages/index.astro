@@ -1,15 +1,14 @@
 ---
 // ==============================================
-// TWProbe Hub - 2026 儀表板矩陣版 (Dashboard Matrix)
+// TWProbe Hub - 2026 Apple 視覺平衡版
 // ==============================================
 
 const brandName = "TWProbe Hub";
-const tagline = "專業知識．獨特觀點．數據支撐";
 const seoTitle = "TWProbe 體系導覽 | 台灣房產公共知識庫索引";
-const seoDesc = "TWProbe 致力於資訊的結構化與透明化。整合交易、開發、投資三大脈絡，提供中立客觀的分析，讓專業知識成為可及的公共資源。";
+const seoDesc = "TWProbe 致力於房地產資訊的結構化與透明化。整合交易、開發、投資三大領域的數據與法規，提供中立、客觀的市場分析。";
 const mainSiteUrl = "https://www.twprobe.com";
 
-// 三大核心板塊
+// 三大核心板塊 (維持 2 欄矩陣)
 const pillars = [
   {
     title: "交易與持有",
@@ -54,53 +53,84 @@ const footerLinks = [
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{seoTitle}</title>
     <meta name="description" content={seoDesc}>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
     
     <meta property="og:image" content="/images/og-social-preview.jpg" />
     <meta property="twitter:image" content="/images/og-social-preview.jpg" />
 
     <style>
         :root { 
-            --dark: #1A202C; 
-            --gray: #4A5568; 
-            --light-gray: #718096;
-            --blue: #2B6CB0; 
+            --dark: #1D1D1F; /* Apple Dark */
+            --gray: #86868B; /* Apple Gray */
+            --blue: #0066CC; /* Apple Link Blue */
             --bg-gray: #F5F5F7;
-            --item-bg: #FAFAFA; /* 卡片微背景色 */
+            --item-bg: #FAFAFA;
         }
-        body { font-family: 'Source Sans Pro', 'Noto Sans TC', sans-serif; color: var(--dark); margin: 0; background: #fff; line-height: 1.6; font-size: 17px; letter-spacing: -0.01em; }
+        body { font-family: 'Source Sans Pro', 'Noto Sans TC', sans-serif; color: var(--dark); margin: 0; background: #fff; line-height: 1.5; font-size: 17px; letter-spacing: -0.01em; }
         
         .wrapper { max-width: 900px; margin: 0 auto; padding: 4rem 1.5rem; }
 
-        /* Header */
-        header { display: flex; flex-direction: column; align-items: center; margin-bottom: 3rem; }
-        .brand-link { text-decoration: none; display: flex; flex-direction: column; align-items: center; transition: opacity 0.2s; }
-        .brand-link:hover { opacity: 0.7; }
-        .brand-box { display: flex; align-items: center; gap: 0.8rem; }
-        .logo-img { width: 48px; height: 48px; object-fit: contain; }
-        h1 { color: var(--dark); font-size: 32px; font-weight: 600; margin: 0; letter-spacing: -0.02em; }
-        .tagline { color: var(--blue); font-size: 13px; font-weight: 500; letter-spacing: 0.12em; margin-top: 0.5rem; text-transform: uppercase; }
+        /* 新的 Header 結構：
+           將 Brand 弱化為「標籤」，將 Hero Title 強化為「主標」
+        */
+        .hero-container {
+            text-align: center;
+            margin-bottom: 5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-        /* 文案區：極簡版 */
-        .hero-section { text-align: center; max-width: 640px; margin: 0 auto 5rem; }
-        .hero-title { color: var(--dark); font-size: 26px; font-weight: 600; margin-bottom: 1.2rem; letter-spacing: -0.01em; }
-        
-        .hero-desc { font-size: 16px; color: var(--light-gray); margin-bottom: 2rem; text-align: justify; text-align-last: center; font-weight: 400; line-height: 1.7; }
-        
+        /* 1. 頂部品牌標籤 (Eyebrow) */
+        .brand-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+        .brand-label:hover { opacity: 1; }
+        .logo-img { width: 32px; height: 32px; object-fit: contain; } /* Logo 縮小，更精緻 */
+        .brand-text { font-size: 15px; font-weight: 600; color: var(--dark); }
+
+        /* 2. 主標題 (Hero Title) */
+        h1 { 
+            font-size: 40px; /* 加大 */
+            font-weight: 700; 
+            color: var(--dark); 
+            margin: 0 0 1.25rem 0; 
+            letter-spacing: -0.02em; 
+            line-height: 1.1;
+        }
+
+        /* 3. 描述文字 (Hero Desc) */
+        .hero-desc { 
+            font-size: 19px; /* 稍微加大，提升閱讀感 */
+            color: var(--gray); 
+            max-width: 680px; 
+            margin: 0 auto 2rem; 
+            text-align: center; /* 改回置中，因為 Apple 風格通常是置中的 */
+            font-weight: 400; 
+            line-height: 1.6;
+        }
+
+        /* 4. 連結 (Link) */
         .main-site-link { 
             display: inline-flex; 
             align-items: center; 
-            gap: 0.4rem; 
+            gap: 0.3rem; 
             color: var(--blue); 
-            font-size: 15px; 
+            font-size: 17px; 
             font-weight: 500; 
             text-decoration: none; 
             transition: gap 0.2s; 
         }
-        .main-site-link:hover { text-decoration: underline; gap: 0.6rem; }
+        .main-site-link:hover { text-decoration: underline; gap: 0.5rem; }
         .link-arrow { font-size: 14px; }
 
-        /* 三大板塊：Grid 佈局 */
+        /* 三大板塊 & 儀表板矩陣 (維持不變) */
         .pillar-grid { 
             display: grid; 
             gap: 2.5rem; 
@@ -112,46 +142,25 @@ const footerLinks = [
         .pillar-header { margin-bottom: 1.25rem; border-bottom: 1px solid #E2E8F0; padding-bottom: 0.75rem; }
         .pillar-title { display: block; color: var(--dark); font-size: 20px; font-weight: 600; text-decoration: none; margin-bottom: 0.25rem; }
         .pillar-title:hover { color: var(--blue); }
-        .pillar-desc { font-size: 13px; color: var(--light-gray); margin: 0; }
+        .pillar-desc { font-size: 13px; color: var(--gray); margin: 0; }
 
-        /* Topic List: 雙欄矩陣 (2 Columns Matrix) */
-        .topic-list { 
-            display: grid; 
-            grid-template-columns: repeat(2, 1fr); /* 強制兩欄 */
-            gap: 0.8rem; /* 卡片間距 */
-        }
-        
+        .topic-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
         .topic-link { 
-            display: flex; 
-            justify-content: center; /* 文字置中 */
-            align-items: center;
-            padding: 0.6rem 0.5rem; 
-            background: var(--item-bg); /* 極淡灰底 */
-            border-radius: 8px; /* 圓角 */
-            color: var(--gray); 
-            font-size: 15px; 
-            font-weight: 500; 
-            text-decoration: none; 
-            transition: all 0.2s ease; 
+            display: flex; justify-content: center; align-items: center; padding: 0.6rem 0.5rem; 
+            background: var(--item-bg); border-radius: 8px; color: #424245; font-size: 15px; font-weight: 500; 
+            text-decoration: none; transition: all 0.2s ease; 
         }
-        
-        /* 滑鼠懸停效果：變藍色底白字，像按鈕一樣 */
-        .topic-link:hover { 
-            background: var(--blue); 
-            color: #fff; 
-            transform: translateY(-1px);
-        }
+        .topic-link:hover { background: var(--blue); color: #fff; transform: translateY(-1px); }
 
-        /* 中間品牌錨點 */
+        /* Ecosystem (維持不變) */
         .mid-brand-section { display: flex; flex-direction: column; align-items: center; margin-bottom: 2.5rem; opacity: 0.5; transition: opacity 0.3s; }
         .mid-brand-section:hover { opacity: 1; }
         .mid-logo { width: 22px; height: 22px; filter: grayscale(100%); margin-bottom: 0.5rem; }
         .mid-brand-name { font-size: 11px; font-weight: 600; color: var(--dark); letter-spacing: 0.05em; text-transform: uppercase; }
 
-        /* Ecosystem */
         .eco-section { background: var(--bg-gray); padding: 2.5rem 2rem; border-radius: 16px; margin-bottom: 4rem; text-align: center; }
         .eco-grid { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); justify-content: center; }
-        .eco-group-title { font-size: 11px; color: var(--light-gray); margin-bottom: 1rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+        .eco-group-title { font-size: 11px; color: var(--gray); margin-bottom: 1rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
         .eco-link { color: var(--dark); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; font-size: 13px; font-weight: 500; text-decoration: none; opacity: 0.6; transition: all 0.2s; }
         .eco-link:hover { opacity: 1; transform: translateY(-1px); }
         .icon-svg { width: 24px; height: 24px; fill: currentColor; }
@@ -159,43 +168,36 @@ const footerLinks = [
         /* Footer */
         footer { border-top: 1px solid #E2E8F0; padding: 2rem 0; text-align: center; }
         .footer-nav { margin-bottom: 1.5rem; display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem; }
-        .footer-nav a { color: var(--light-gray); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+        .footer-nav a { color: var(--gray); text-decoration: none; font-size: 13px; transition: color 0.2s; }
         .footer-nav a:hover { color: var(--dark); }
-        .copyright { font-size: 12px; color: #CBD5E0; }
+        .copyright { font-size: 12px; color: #D2D2D7; }
 
         @media (max-width: 600px) {
-            h1 { font-size: 28px; }
-            .brand-box { flex-direction: row; }
-            .logo-img { width: 40px; height: 40px; }
-            .hero-desc { text-align: left; }
-            /* 手機上如果覺得字太多，可以考慮把 grid gap 調小 */
-            .topic-list { gap: 0.6rem; }
+            h1 { font-size: 30px; }
+            .hero-desc { text-align: left; font-size: 17px; } /* 手機版靠左對齊較易閱讀 */
+            .logo-img { width: 28px; height: 28px; }
         }
     </style>
 </head>
 <body>
     <div class="wrapper">
-        <header>
-            <a href={mainSiteUrl} class="brand-link" title="回 TWProbe 官網首頁">
-                <div class="brand-box">
-                    <img src="/logo.png" alt="TWProbe Logo" class="logo-img" onerror="this.style.display='none'" />
-                    <h1>{brandName}</h1>
-                </div>
-                <div class="tagline">{tagline}</div>
+        
+        <div class="hero-container">
+            <a href={mainSiteUrl} class="brand-label" title="回 TWProbe 官網首頁">
+                <img src="/logo.png" alt="TWProbe" class="logo-img" onerror="this.style.display='none'" />
+                <span class="brand-text">{brandName}</span>
             </a>
-        </header>
 
-        <section class="hero-section">
-            <h2 class="hero-title">建構台灣房產的公共知識庫</h2>
-            <div class="hero-desc">
-                <p>
-                    致力於資訊的結構化與透明化。整合交易、開發、投資三大脈絡，提供中立客觀的分析，讓專業知識成為可及的公共資源。
-                </p>
-            </div>
+            <h1>建構台灣房產的公共知識庫</h1>
+
+            <p class="hero-desc">
+                TWProbe 致力於資訊的結構化與透明化。整合交易、開發、投資三大領域的數據與法規，提供中立客觀的分析，讓專業知識成為可及的公共資源。
+            </p>
+
             <a href={mainSiteUrl} class="main-site-link">
                 前往官網閱讀深度分析 <span class="link-arrow">→</span>
             </a>
-        </section>
+        </div>
 
         <main class="pillar-grid">
             {pillars.map(p => (
