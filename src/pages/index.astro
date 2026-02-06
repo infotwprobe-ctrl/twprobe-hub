@@ -1,0 +1,197 @@
+---
+// ==============================================
+// TWProbe Hub - 2026 最終定案版資料結構
+// ==============================================
+
+// 1. 品牌核心資訊
+const brandName = "TWProbe Hub";
+const tagline = "專業知識．獨特觀點．數據支撐";
+const description = "TWProbe 房產實驗室的數位總部。匯集交易、開發、投資三大領域的深度解析，與九大社群平台的即時情報脈動。"; // 這段話會出現在 Google 搜尋和 FB 分享摘要裡
+const siteUrl = "https://hub.twprobe.com"; // 你的 Hub 網址
+const socialImageURL = `${siteUrl}/images/og-social-preview.jpg?v=1`; // 社群縮圖的路徑 (請見下方說明)
+
+// 2. 三大核心板塊 (Pillars & Topics)
+// 網址結構統一為：https://www.twprobe.com/category/[slug]/
+const pillars = [
+  {
+    title: "交易與持有",
+    superHubSlug: "real-estate-holding",
+    topics: [
+      { name: "購屋流程", slug: "buying-process" },
+      { name: "房產銷售", slug: "property-sales" },
+      { name: "驗屋重點", slug: "home-inspection" },
+      { name: "租賃指南", slug: "rental-guide" },
+      { name: "室內裝修", slug: "interior-renovation" },
+      { name: "管理維護", slug: "maintenance-management" },
+    ]
+  },
+  {
+    title: "開發與工程",
+    superHubSlug: "development-engineering",
+    topics: [
+      { name: "土地開發", slug: "land-development" },
+      { name: "營造工程", slug: "construction-work" },
+      { name: "建商評估", slug: "developer-evaluation" },
+      { name: "建案分析", slug: "project-analysis" },
+      { name: "建築設計", slug: "architectural-design" },
+      { name: "都更危老", slug: "urban-renewal" },
+    ]
+  },
+  {
+    title: "投資與法規",
+    superHubSlug: "investment-regulation",
+    topics: [
+      { name: "市場趨勢", slug: "market-trends" },
+      { name: "區域發展", slug: "area-development" },
+      { name: "房貸理財", slug: "mortgage-finance" },
+      { name: "法規稅務", slug: "tax-regulation" },
+      { name: "投資策略", slug: "investment-strategy" },
+      { name: "商用房產", slug: "commercial-property" },
+    ]
+  },
+];
+
+// 3. 九大社群生態系 (Ecosystem)
+const ecosystem = [
+  { group: "PULSE (即時脈動)", sites: [{ n: "X (Twitter)", u: "https://x.com/probe54670" }, { n: "Reddit", u: "https://www.reddit.com/r/TWProbe/" }, { n: "Quora", u: "https://taiwanpropertylabbytwprobe.quora.com/" }] },
+  { group: "ECHO (深度觀點)", sites: [{ n: "Medium", u: "https://medium.com/@twprobe" }, { n: "Substack", u: "https://substack.com/@twprobe" }, { n: "Blogger", u: "https://twprobe.blogspot.com/" }] },
+  { group: "VISION (視覺情報)", sites: [{ n: "YouTube", u: "https://www.youtube.com/@TWProbe" }, { n: "Instagram", u: "https://www.instagram.com/twprobe/" }, { n: "Pinterest", u: "https://www.pinterest.com/infotwprobe/" }] }
+];
+
+// 4. 底部導覽 (Footer Links)
+const footerLinks = [
+    { name: "關於本站", u: "https://twprobe.com/about-twprobe/" },
+    { name: "隱私政策", u: "https://twprobe.com/privacy-policy/" },
+    { name: "服務條款", u: "https://twprobe.com/terms-of-service/" },
+    { name: "免責聲明", u: "https://twprobe.com/disclaimer/" },
+    { name: "網站地圖", u: "https://twprobe.com/sitemap/" },
+];
+---
+
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{brandName} | {tagline}</title>
+    <meta name="description" content={description}>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={siteUrl} />
+    <meta property="og:title" content={`${brandName} | ${tagline}`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={socialImageURL} />
+
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={siteUrl} />
+    <meta property="twitter:title" content={`${brandName} | ${tagline}`} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={socialImageURL} />
+
+    <style>
+        /* TWProbe 品牌色碼定義 */
+        :root { --dark: #1A202C; --gray: #4A5568; --blue: #2B6CB0; --navy: #1A365D; --border: #E2E8F0; --bg-gray: #F7FAFC; }
+        
+        /* 全域設定 */
+        body { font-family: 'Source Sans Pro', 'Noto Sans TC', sans-serif; color: var(--gray); margin: 0; background: #fff; line-height: 1.7; font-size: 16px; }
+        a { text-decoration: none; transition: color 0.2s; }
+        .wrapper { max-width: 900px; margin: 0 auto; padding: 4rem 1.5rem; }
+
+        /* Header 區域：包含小房子 Logo */
+        header { text-align: center; margin-bottom: 4rem; }
+        .brand-container { display: inline-flex; align-items: center; gap: 0.75rem; justify-content: center; }
+        .house-icon { font-size: 32px; line-height: 1; } /* 使用 Emoji 作為最快速、乾淨的解決方案 */
+        h1 { color: var(--dark); font-size: 32px; font-weight: 700; margin: 0; letter-spacing: -0.02em; }
+        .tagline { color: var(--blue); font-size: 15px; font-weight: 600; letter-spacing: 0.15em; margin-top: 0.75rem; text-transform: uppercase; }
+
+        /* 三大板塊區塊 */
+        .pillar-grid { display: grid; gap: 3rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-bottom: 5rem; }
+        .pillar-card { background: #fff; }
+        .pillar-title-link { display: block; color: var(--dark); font-size: 22px; font-weight: 700; margin-bottom: 1.25rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--border); }
+        .pillar-title-link:hover { color: var(--blue); border-color: var(--blue); }
+        
+        .topic-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem; }
+        .topic-link { display: block; color: var(--gray); font-size: 16px; padding: 0.5rem 0.75rem; background: var(--bg-gray); border-radius: 6px; font-weight: 500; }
+        .topic-link:hover { color: #fff; background: var(--blue); }
+        .topic-arrow { float: right; opacity: 0.5; }
+
+        /* 九大社群區塊 */
+        .eco-section { background: var(--bg-gray); padding: 3rem 2rem; border-radius: 16px; text-align: center; margin-bottom: 4rem; }
+        .eco-grid { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 2.5rem; }
+        .eco-group b { display: block; font-size: 12px; color: #A0AEC0; margin-bottom: 1rem; letter-spacing: 0.1em; text-transform: uppercase; }
+        .eco-links { display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap; }
+        .eco-link { color: var(--dark); font-weight: 700; font-size: 15px; padding-bottom: 2px; border-bottom: 2px solid transparent; }
+        .eco-link:hover { color: var(--blue); border-bottom-color: var(--blue); }
+
+        /* 底部導覽 */
+        footer { margin-top: auto; border-top: 1px solid var(--border); padding-top: 2.5rem; text-align: center; font-size: 14px; color: #A0AEC0; }
+        .footer-nav { margin-bottom: 1.5rem; display: flex; justify-content: center; flex-wrap: wrap; gap: 0.5rem; }
+        .footer-link { color: var(--gray); margin: 0 0.5rem; font-weight: 500; }
+        .footer-link:hover { color: var(--blue); }
+        .copyright { font-size: 13px; opacity: 0.8; }
+
+        /* 電腦版適配 */
+        @media (min-width: 1024px) { 
+            body { font-size: 17px; }
+            .wrapper { padding: 5rem 1.5rem; }
+            .house-icon { font-size: 40px; }
+            h1 { font-size: 42px; }
+            .pillar-grid { gap: 4rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <div class="brand-container">
+                <span class="house-icon">🏠</span> 
+                <h1>{brandName}</h1>
+            </div>
+            <div class="tagline">{tagline}</div>
+        </header>
+
+        <main class="pillar-grid">
+            {pillars.map(p => (
+                <section class="pillar-card">
+                    <a href={`https://www.twprobe.com/category/${p.superHubSlug}/`} class="pillar-title-link">
+                        {p.title} →
+                    </a>
+                    <div class="topic-list">
+                        {p.topics.map(t => (
+                            <a href={`https://www.twprobe.com/category/${t.slug}/`} class="topic-link">
+                                {t.name}
+                                <span class="topic-arrow">›</span>
+                            </a>
+                        ))}
+                    </div>
+                </section>
+            ))}
+        </main>
+
+        <section class="eco-section">
+            <div class="eco-grid">
+                {ecosystem.map(e => (
+                    <div class="eco-group">
+                        <b>{e.group}</b>
+                        <div class="eco-links">
+                            {e.sites.map(s => <a href={s.u} class="eco-link" target="_blank" rel="noopener noreferrer">{s.n}</a>)}
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </section>
+
+        footer>
+            <nav class="footer-nav">
+                {footerLinks.map((f, index) => (
+                    <>
+                        <a href={f.u} class="footer-link">{f.name}</a>
+                        {index < footerLinks.length - 1 && <span style="color:#E2E8F0">|</span>}
+                    </>
+                ))}
+            </nav>
+            <p class="copyright">© 2026 TWProbe 房產實驗室. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
