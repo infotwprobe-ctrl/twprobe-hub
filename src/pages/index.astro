@@ -164,12 +164,14 @@ const footerLinks = [
             {pillars.map(p => (
                 <article class="pillar-card">
                     <header class="pillar-header">
-                        <a href={`${mainSiteUrl}/category/${p.slug}/`} class="pillar-title">{p.title}</a>
+                        {/* 修改處 1：已移除 /category/ */}
+                        <a href={`${mainSiteUrl}/${p.slug}/`} class="pillar-title">{p.title}</a>
                         <p class="pillar-desc">{p.desc}</p>
                     </header>
                     <div class="topic-list">
                         {p.topics.map(t => (
-                            <a href={`${mainSiteUrl}/category/${p.slug}/`} class="topic-link">{t}</a>
+                            {/* 修改處 2：已移除 /category/ */}
+                            <a href={`${mainSiteUrl}/${p.slug}/`} class="topic-link">{t}</a>
                         ))}
                     </div>
                 </article>
