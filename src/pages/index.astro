@@ -1,9 +1,9 @@
 ---
 // ==============================================
-// TWProbe Hub - 2026 極簡檔案室版 (Archive Edition)
+// TWProbe Hub - 2026 緊湊檔案室版 (Compact Archive)
 // ==============================================
 
-const brandName = "TWProbe"; // 這裡只留 TWProbe，Hub 的概念隱含在頁面功能裡
+const brandName = "TWProbe";
 const seoTitle = "TWProbe 體系導覽 | 台灣房產公共知識庫索引";
 const seoDesc = "TWProbe 致力於房地產資訊的結構化與透明化。整合交易、開發、投資三大領域的數據與法規，提供中立、客觀的市場分析。";
 const mainSiteUrl = "https://www.twprobe.com";
@@ -60,166 +60,128 @@ const footerLinks = [
 
     <style>
         :root { 
-            --dark: #1D1D1F; /* Apple Dark: 用於標題 */
-            --gray: #86868B; /* Apple Gray: 用於說明文 */
-            --border: #E5E5E5; /* 極淡的邊框色 */
-            --blue: #0066CC; /* 品牌藍：只在 Hover 出現 (10%) */
-            --item-bg: #FAFAFA; /* 卡片微背景 */
+            --dark: #1D1D1F; 
+            --gray: #86868B; 
+            --border: #E5E5E5; 
+            --blue: #0066CC; 
+            --item-bg: #FAFAFA; 
         }
         body { font-family: 'Source Sans Pro', 'Noto Sans TC', sans-serif; color: var(--dark); margin: 0; background: #fff; line-height: 1.5; font-size: 16px; letter-spacing: -0.01em; }
         
-        /* 容器寬度鎖定，保持緊湊 */
-        .wrapper { max-width: 900px; margin: 0 auto; padding: 3rem 1.5rem; }
+        /* 調整 1：縮減頂部 Padding */
+        .wrapper { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
 
-        /* =========================================
-           1. 全新橫向 Header (Side-by-Side)
-           ========================================= */
+        /* Header */
         .compact-header {
             display: flex;
-            align-items: center; /* 垂直置中 */
-            justify-content: center; /* 水平置中 */
-            margin-bottom: 5rem; /* 與下方目錄的距離 */
-            gap: 1.5rem; /* Logo區與文字區的間距 */
-            padding-bottom: 2rem;
-            border-bottom: 1px solid transparent; /* 預留位置，若想要分隔線可改成 var(--border) */
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 3rem; /* 調整 2：大幅縮減 Header 底部留白 (原 5rem) */
+            gap: 1.5rem;
+            padding-bottom: 1.5rem; /* 調整 3：縮減分隔線下方的留白 */
+            border-bottom: 1px solid transparent; 
         }
 
-        /* 左側：品牌區 */
         .brand-section {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            text-decoration: none;
-            opacity: 1;
-            transition: opacity 0.2s;
-            flex-shrink: 0; /* 防止Logo被擠壓 */
+            display: flex; align-items: center; gap: 0.8rem; text-decoration: none; opacity: 1; transition: opacity 0.2s; flex-shrink: 0;
         }
         .brand-section:hover { opacity: 0.7; }
-        .logo-img { width: 36px; height: 36px; object-fit: contain; }
-        .brand-name { font-size: 20px; font-weight: 700; color: var(--dark); letter-spacing: -0.02em; }
+        .logo-img { width: 32px; height: 32px; object-fit: contain; } /* 稍微縮小 Logo */
+        .brand-name { font-size: 19px; font-weight: 700; color: var(--dark); letter-spacing: -0.02em; }
 
-        /* 中間：分隔線 */
-        .divider {
-            width: 1px;
-            height: 24px;
-            background-color: #D1D1D6;
-            display: block;
-        }
+        .divider { width: 1px; height: 20px; background-color: #D1D1D6; display: block; } /* 分隔線變短一點 */
 
-        /* 右側：文案區 */
         .mission-text {
-            font-size: 14px;
+            font-size: 13px; /* 字體微調小一點，更精緻 */
             color: var(--gray);
-            max-width: 480px; /* 限制寬度，避免太長 */
-            line-height: 1.6;
+            max-width: 460px;
+            line-height: 1.5;
             text-align: left;
             margin: 0;
             font-weight: 400;
         }
 
-        /* =========================================
-           2. 三大板塊 (目錄區)
-           ========================================= */
+        /* 三大板塊 */
         .pillar-grid { 
             display: grid; 
-            gap: 3.5rem; /* 增加一點板塊間的呼吸感 */
+            gap: 2rem; /* 調整 4：縮減板塊左右間距 (原 3.5rem) */
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
             justify-content: center; 
-            margin-bottom: 6rem; 
+            margin-bottom: 3.5rem; /* 調整 5：大幅縮減板塊底部留白 (原 6rem) */
         }
         .pillar-card { display: flex; flex-direction: column; height: 100%; }
         
-        /* 標題區：強制置中 */
         .pillar-header { 
-            margin-bottom: 1.25rem; 
+            margin-bottom: 1rem; /* 標題下方留白微縮 */
             border-bottom: 1px solid var(--border); 
-            padding-bottom: 0.75rem; 
-            text-align: center; /* 關鍵：置中對齊 */
+            padding-bottom: 0.6rem; 
+            text-align: center; 
         }
         .pillar-title { 
-            display: block; 
-            color: var(--dark); 
-            font-size: 19px; 
-            font-weight: 600; 
-            text-decoration: none; 
-            margin-bottom: 0.25rem; 
+            display: block; color: var(--dark); font-size: 18px; font-weight: 600; text-decoration: none; margin-bottom: 0.2rem; 
         }
-        /* 只有這裡 Hover 會變藍 */
         .pillar-title:hover { color: var(--blue); }
         .pillar-desc { font-size: 12px; color: var(--gray); margin: 0; }
 
-        /* 子目錄：2欄矩陣 */
-        .topic-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+        .topic-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.6rem; } /* 子項目間距微縮 */
         .topic-link { 
             display: flex; justify-content: center; align-items: center; 
-            padding: 0.6rem 0.5rem; 
-            background: var(--item-bg); /* 85% 灰階的一部分 */
+            padding: 0.5rem 0.4rem; /* 按鈕變扁一點，更緊湊 */
+            background: var(--item-bg); 
             border-radius: 6px; 
-            color: #424245; /* 深灰，接近黑 */
+            color: #424245; 
             font-size: 14px; 
             font-weight: 500; 
             text-decoration: none; 
             transition: all 0.2s ease; 
         }
-        /* Hover 時出現 10% 的藍色 */
-        .topic-link:hover { 
-            background: var(--blue); 
-            color: #fff; 
-            transform: translateY(-1px);
-        }
+        .topic-link:hover { background: var(--blue); color: #fff; transform: translateY(-1px); }
 
-        /* =========================================
-           3. Ecosystem & Footer
-           ========================================= */
-        .mid-brand-section { display: flex; flex-direction: column; align-items: center; margin-bottom: 2.5rem; opacity: 0.4; transition: opacity 0.3s; }
+        /* Ecosystem & Footer */
+        .mid-brand-section { display: flex; flex-direction: column; align-items: center; margin-bottom: 2rem; opacity: 0.4; transition: opacity 0.3s; }
         .mid-brand-section:hover { opacity: 1; }
-        .mid-logo { width: 20px; height: 20px; filter: grayscale(100%); margin-bottom: 0.5rem; }
-        .mid-brand-name { font-size: 11px; font-weight: 600; color: var(--dark); letter-spacing: 0.05em; text-transform: uppercase; }
+        .mid-logo { width: 18px; height: 18px; filter: grayscale(100%); margin-bottom: 0.4rem; }
+        .mid-brand-name { font-size: 10px; font-weight: 600; color: var(--dark); letter-spacing: 0.05em; text-transform: uppercase; }
 
-        .eco-section { background: var(--item-bg); padding: 2.5rem 2rem; border-radius: 12px; margin-bottom: 4rem; text-align: center; }
-        .eco-grid { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); justify-content: center; }
-        .eco-group-title { font-size: 11px; color: var(--gray); margin-bottom: 1rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
-        .eco-link { color: var(--dark); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; font-size: 12px; font-weight: 500; text-decoration: none; opacity: 0.6; transition: all 0.2s; }
-        .eco-link:hover { opacity: 1; transform: translateY(-1px); color: var(--blue); } /* Hover 變藍 */
-        .icon-svg { width: 24px; height: 24px; fill: currentColor; }
+        .eco-section { 
+            background: var(--item-bg); 
+            padding: 2rem 1.5rem; /* 調整 6：Ecosystem 內距縮減 */
+            border-radius: 12px; 
+            margin-bottom: 2.5rem; /* 底部留白縮減 */
+            text-align: center; 
+        }
+        .eco-grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); justify-content: center; }
+        .eco-group-title { font-size: 11px; color: var(--gray); margin-bottom: 0.8rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+        .eco-link { color: var(--dark); display: flex; flex-direction: column; align-items: center; gap: 0.4rem; font-size: 12px; font-weight: 500; text-decoration: none; opacity: 0.6; transition: all 0.2s; }
+        .eco-link:hover { opacity: 1; transform: translateY(-1px); color: var(--blue); }
+        .icon-svg { width: 22px; height: 22px; fill: currentColor; }
 
-        footer { border-top: 1px solid var(--border); padding: 2rem 0; text-align: center; }
-        .footer-nav { margin-bottom: 1.5rem; display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem; }
+        footer { border-top: 1px solid var(--border); padding: 1.5rem 0; text-align: center; } /* Footer 變扁 */
+        .footer-nav { margin-bottom: 1rem; display: flex; justify-content: center; flex-wrap: wrap; gap: 1.2rem; }
         .footer-nav a { color: var(--gray); text-decoration: none; font-size: 12px; transition: color 0.2s; }
         .footer-nav a:hover { color: var(--dark); }
         .copyright { font-size: 11px; color: #D2D2D7; }
 
-        /* RWD: 手機版調整 */
         @media (max-width: 768px) {
             .compact-header {
-                flex-direction: column; /* 手機上垂直排列 */
-                gap: 1rem;
+                flex-direction: column;
+                gap: 0.8rem;
                 text-align: center;
-                margin-bottom: 3rem;
+                margin-bottom: 2.5rem;
             }
-            .divider { 
-                width: 40px; height: 1px; /* 變成水平線 */
-                margin: 0.5rem 0;
-            }
-            .mission-text {
-                text-align: center;
-                font-size: 13px;
-                padding: 0 1rem;
-            }
+            .divider { width: 40px; height: 1px; margin: 0.4rem 0; }
+            .mission-text { text-align: center; padding: 0 1rem; }
         }
     </style>
 </head>
 <body>
     <div class="wrapper">
-        
         <header class="compact-header">
             <a href={mainSiteUrl} class="brand-section" title="回 TWProbe 官網首頁">
                 <img src="/logo.png" alt="TWProbe" class="logo-img" onerror="this.style.display='none'" />
                 <span class="brand-name">{brandName}</span>
             </a>
-
             <div class="divider"></div>
-
             <p class="mission-text">
                 致力於資訊的結構化與透明化。整合交易、開發、投資三大脈絡，提供中立客觀的分析，讓專業知識成為可及的公共資源。
             </p>
@@ -263,7 +225,7 @@ const footerLinks = [
                                         {s.icon === 'quora' && <path d="M11.96 0C5.352 0 0 4.697 0 11.455c0 5.097 2.996 8.566 7.373 9.77-.384-.96-.64-2.132-.64-3.41 0-3.943 2.651-6.18 5.753-6.18 2.65 0 4.69 1.705 4.69 4.368 0 2.77-1.812 5.54-4.796 5.54-1.705 0-2.877-.96-2.877-2.238 0-1.598 1.066-3.09 1.812-4.262.32-.426.426-.96.426-1.385 0-1.066-.853-1.918-2.025-1.918-1.598 0-2.877 1.492-2.877 3.73 0 2.663 1.066 5.54 3.73 6.924C5.011 22.06 2.663 20.355 1.598 17.584c-.426 1.492-.64 2.877-.64 4.05 0 .745.107 1.385.213 1.918C4.158 23.868 7.672 24 11.96 24c6.606 0 11.96-4.697 11.96-11.455C23.92 5.656 18.566 0 11.96 0z"/>}
                                         {s.icon === 'medium' && <path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>}
                                         {s.icon === 'substack' && <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/>}
-                                        {s.icon === 'blogger' && <path d="M21.25 0H2.75C1.23 0 0 1.23 0 2.75v18.5C0 22.77 1.23 24 2.75 24h18.5c1.52 0 2.75-1.23 2.75-2.75V2.75C24 1.23 22.77 0 21.25 0zm-1.5 18h-4.5c-.825 0-1.5-.675-1.5-1.5v-1.5h-4.5c-.825 0-1.5-.675-1.5-1.5v-3c0-.825.675-1.5 1.5-1.5h1.5v-1.5c0-.825.675-1.5 1.5-1.5h4.5c.825 0 1.5.675 1.5 1.5v4.5c0 .825-.675 1.5-1.5 1.5h-1.5v1.5c0 .825.675 1.5 1.5 1.5h1.5v1.5c0 .825-.675 1.5-1.5 1.5z"/>}
+                                        {s.icon === 'blogger' && <path d="M21.25 0H2.75C1.23 0 0 1.23 0 2.75v18.5C0 22.77 1.23 24 2.75 24h18.5c1.52 0 2.75-1.23 2.75-2.75V2.75C24 1.23 22.77 0 21.25 0zm-1.5 18h-4.5c-.825 0-1.5-.675-1.5-1.5v-1.5h-4.5c-.825 0-1.5-.675-1.5-1.5v-3c0-.825.675-1.5 1.5-1.5h1.5v-1.5c0-.825.675 1.5 1.5-1.5h4.5c.825 0 1.5.675 1.5 1.5v4.5c0 .825-.675 1.5-1.5 1.5h-1.5v1.5c0 .825.675 1.5 1.5 1.5h1.5v1.5c0 .825-.675 1.5-1.5 1.5z"/>}
                                         {s.icon === 'instagram' && <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.332.014 7.052.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>}
                                         {s.icon === 'pinterest' && <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.399.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.951-7.252 4.173 0 7.41 2.967 7.41 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.367 18.62 0 12.017 0z"/>}
                                         {!s.icon && <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>}
