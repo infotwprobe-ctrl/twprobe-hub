@@ -1,13 +1,13 @@
 ---
 // ==============================================
-// TWProbe Hub - 2026 體系導覽版
+// TWProbe Hub - 2026 極簡公共財版
 // ==============================================
 
 const brandName = "TWProbe Hub";
 const tagline = "專業知識．獨特觀點．數據支撐";
-// SEO Meta: 強調「入口」與「導覽」性質
-const seoTitle = "TWProbe 體系導覽 | 連結台灣房產情報的數位指揮中心";
-const seoDesc = "TWProbe 的數位戰略總部。這是一張房產佈局的戰略地圖，為您解構「交易、開發、投資」三大板塊，並提供通往九大社群平台與深度分析官網的快速入口。";
+// SEO Meta: 中立、客觀、結構化
+const seoTitle = "TWProbe 體系導覽 | 台灣房產公共知識庫索引";
+const seoDesc = "TWProbe 致力於房產資訊的透明化與結構化。本頁面為體系導覽索引，將市場資訊梳理為交易持有、開發工程與投資法規三大脈絡，提供中立客觀的數據分析入口。";
 const mainSiteUrl = "https://www.twprobe.com";
 
 // 三大核心板塊
@@ -15,31 +15,31 @@ const pillars = [
   {
     title: "交易與持有",
     slug: "real-estate-holding",
-    desc: "從簽約到交屋的完整SOP",
+    desc: "交易流程與資產管理", // 極簡化描述
     topics: ["購屋流程", "房產銷售", "驗屋重點", "租賃指南", "室內裝修", "管理維護"]
   },
   {
     title: "開發與工程",
     slug: "development-engineering",
-    desc: "解構土地價值與營造細節",
+    desc: "土地價值與營造細節",
     topics: ["土地開發", "營造工程", "建商評估", "建案分析", "建築設計", "都更危老"]
   },
   {
     title: "投資與法規",
     slug: "investment-regulation",
-    desc: "掌握稅務優勢與市場脈動",
+    desc: "稅務法規與市場趨勢",
     topics: ["市場趨勢", "區域發展", "房貸理財", "法規稅務", "投資策略", "商用房產"]
   },
 ];
 
 // 九大社群生態系
 const ecosystem = [
-  { group: "PULSE (即時脈動)", sites: [{ n: "X", u: "https://x.com/probe54670", icon: "x" }, { n: "Reddit", u: "https://www.reddit.com/r/TWProbe/", icon: "reddit" }, { n: "Quora", u: "https://taiwanpropertylabbytwprobe.quora.com/", icon: "quora" }] },
-  { group: "ECHO (深度觀點)", sites: [{ n: "Medium", u: "https://medium.com/@twprobe", icon: "medium" }, { n: "Substack", u: "https://substack.com/@twprobe", icon: "substack" }, { n: "Blogger", u: "https://twprobe.blogspot.com/", icon: "blogger" }] },
-  { group: "VISION (視覺情報)", sites: [{ n: "YouTube", u: "https://www.youtube.com/@TWProbe", icon: "youtube" }, { n: "Instagram", u: "https://www.instagram.com/twprobe/", icon: "instagram" }, { n: "Pinterest", u: "https://www.pinterest.com/infotwprobe/", icon: "pinterest" }] }
+  { group: "PULSE", sites: [{ n: "X", u: "https://x.com/probe54670", icon: "x" }, { n: "Reddit", u: "https://www.reddit.com/r/TWProbe/", icon: "reddit" }, { n: "Quora", u: "https://taiwanpropertylabbytwprobe.quora.com/", icon: "quora" }] },
+  { group: "ECHO", sites: [{ n: "Medium", u: "https://medium.com/@twprobe", icon: "medium" }, { n: "Substack", u: "https://substack.com/@twprobe", icon: "substack" }, { n: "Blogger", u: "https://twprobe.blogspot.com/", icon: "blogger" }] },
+  { group: "VISION", sites: [{ n: "YouTube", u: "https://www.youtube.com/@TWProbe", icon: "youtube" }, { n: "Instagram", u: "https://www.instagram.com/twprobe/", icon: "instagram" }, { n: "Pinterest", u: "https://www.pinterest.com/infotwprobe/", icon: "pinterest" }] }
 ];
 
-// Hub 頁尾連結
+// Footer 導覽
 const footerLinks = [
     { name: "關於本站", u: "https://twprobe.com/about-twprobe/" },
     { name: "網站地圖", u: "https://twprobe.com/sitemap/" },
@@ -47,8 +47,6 @@ const footerLinks = [
     { name: "服務條款", u: "https://twprobe.com/terms-of-service/" },
     { name: "免責聲明", u: "https://twprobe.com/disclaimer/" },
 ];
-
-const contactEmail = "info@twprobe.com";
 ---
 
 <html lang="zh-TW">
@@ -57,73 +55,101 @@ const contactEmail = "info@twprobe.com";
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{seoTitle}</title>
     <meta name="description" content={seoDesc}>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
     
     <meta property="og:image" content="/images/og-social-preview.jpg" />
     <meta property="twitter:image" content="/images/og-social-preview.jpg" />
 
     <style>
-        :root { --dark: #1A202C; --gray: #4A5568; --blue: #2B6CB0; --bg-gray: #F7FAFC; }
-        body { font-family: 'Source Sans Pro', 'Noto Sans TC', sans-serif; color: var(--gray); margin: 0; background: #fff; line-height: 1.7; font-size: 18px; }
-        .wrapper { max-width: 1000px; margin: 0 auto; padding: 4rem 1.5rem; }
+        :root { 
+            --dark: #1A202C; 
+            --gray: #4A5568; 
+            --light-gray: #718096;
+            --blue: #2B6CB0; 
+            --bg-gray: #F5F5F7; /* Apple 風格的淺灰底 */
+            --bg-hover: #E8E8ED;
+        }
+        body { font-family: 'Source Sans Pro', 'Noto Sans TC', sans-serif; color: var(--dark); margin: 0; background: #fff; line-height: 1.6; font-size: 17px; letter-spacing: -0.01em; }
+        .wrapper { max-width: 980px; margin: 0 auto; padding: 4rem 1.5rem; }
 
-        /* Header */
-        header { display: flex; flex-direction: column; align-items: center; margin-bottom: 3.5rem; }
-        .brand-link { text-decoration: none; display: flex; flex-direction: column; align-items: center; transition: transform 0.2s; }
-        .brand-link:hover { transform: scale(1.02); }
-        .brand-box { display: flex; align-items: center; gap: 1rem; }
-        .logo-img { width: 64px; height: 64px; object-fit: contain; }
-        h1 { color: var(--dark); font-size: 42px; font-weight: 700; margin: 0; letter-spacing: -0.01em; }
-        .tagline { color: var(--blue); font-size: 15px; font-weight: 600; letter-spacing: 0.15em; margin-top: 0.5rem; text-transform: uppercase; }
+        /* Header: 極簡化 */
+        header { display: flex; flex-direction: column; align-items: center; margin-bottom: 4rem; }
+        .brand-link { text-decoration: none; display: flex; flex-direction: column; align-items: center; transition: opacity 0.2s; }
+        .brand-link:hover { opacity: 0.7; }
+        .brand-box { display: flex; align-items: center; gap: 0.8rem; }
+        .logo-img { width: 48px; height: 48px; object-fit: contain; }
+        h1 { color: var(--dark); font-size: 32px; font-weight: 600; margin: 0; letter-spacing: -0.02em; }
+        .tagline { color: var(--blue); font-size: 13px; font-weight: 500; letter-spacing: 0.12em; margin-top: 0.5rem; text-transform: uppercase; }
 
-        /* 文案區：體系導覽定位 */
-        .hero-section { text-align: center; max-width: 780px; margin: 0 auto 5rem; }
-        .hero-title { color: var(--dark); font-size: 28px; font-weight: 700; margin-bottom: 1.5rem; line-height: 1.4; }
-        .hero-desc { font-size: 18px; color: var(--gray); margin-bottom: 2.5rem; text-align: justify; text-align-last: center; }
+        /* 文案區：Apple 風格排版 */
+        .hero-section { text-align: center; max-width: 720px; margin: 0 auto 5rem; }
+        .hero-title { color: var(--dark); font-size: 24px; font-weight: 600; margin-bottom: 1rem; line-height: 1.3; }
+        .hero-desc { font-size: 17px; color: var(--light-gray); margin-bottom: 2rem; text-align: justify; text-align-last: center; font-weight: 400; }
         
-        /* 按鈕優化：強調「進入官網」 */
-        .main-site-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--dark); color: #fff; padding: 14px 36px; border-radius: 50px; font-weight: 600; font-size: 16px; transition: all 0.2s; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-        .main-site-btn:hover { background: var(--blue); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(43, 108, 176, 0.3); }
+        /* Apple Style Link Button */
+        .main-site-link { 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 0.3rem; 
+            color: var(--blue); 
+            font-size: 17px; 
+            font-weight: 500; 
+            text-decoration: none; 
+            transition: gap 0.2s; 
+        }
+        .main-site-link:hover { text-decoration: underline; gap: 0.5rem; }
+        .link-arrow { font-size: 14px; }
 
-        /* 三大板塊：置中對齊 */
-        .pillar-grid { display: grid; gap: 2.5rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); justify-content: center; margin-bottom: 6rem; }
+        /* 三大板塊：乾淨無框感 */
+        .pillar-grid { display: grid; gap: 3rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); justify-content: center; margin-bottom: 6rem; }
         .pillar-card { display: flex; flex-direction: column; height: 100%; }
-        .pillar-header { margin-bottom: 1rem; border-bottom: 2px solid #E2E8F0; padding-bottom: 0.75rem; }
-        .pillar-title { display: block; color: var(--dark); font-size: 24px; font-weight: 700; text-decoration: none; margin-bottom: 0.25rem; }
+        .pillar-header { margin-bottom: 1.25rem; border-bottom: 1px solid #E2E8F0; padding-bottom: 0.75rem; }
+        .pillar-title { display: block; color: var(--dark); font-size: 20px; font-weight: 600; text-decoration: none; margin-bottom: 0.25rem; }
         .pillar-title:hover { color: var(--blue); }
-        .pillar-desc { font-size: 14px; color: #718096; margin: 0; }
+        .pillar-desc { font-size: 14px; color: var(--light-gray); margin: 0; }
 
-        .topic-list { display: flex; flex-direction: column; gap: 0.5rem; flex-grow: 1; }
-        .topic-link { display: flex; justify-content: space-between; padding: 0.75rem 1rem; background: var(--bg-gray); border-radius: 8px; color: var(--gray); font-weight: 500; font-size: 16px; transition: all 0.2s; text-decoration: none; }
-        .topic-link:hover { background: var(--blue); color: #fff; transform: translateX(5px); }
-        .arrow { opacity: 0.5; }
+        .topic-list { display: flex; flex-direction: column; gap: 0; } /* 移除間距，改用分隔線 */
+        .topic-link { 
+            display: flex; 
+            justify-content: space-between; 
+            padding: 0.6rem 0; 
+            border-bottom: 1px solid #F1F1F1; 
+            color: var(--gray); 
+            font-size: 15px; 
+            font-weight: 400; 
+            text-decoration: none; 
+            transition: color 0.2s; 
+        }
+        .topic-link:last-child { border-bottom: none; }
+        .topic-link:hover { color: var(--blue); }
+        .arrow { opacity: 0; transition: opacity 0.2s; color: var(--blue); }
+        .topic-link:hover .arrow { opacity: 1; }
 
-        /* Ecosystem & Footer */
-        .eco-section { background: var(--bg-gray); padding: 3rem 2rem; border-radius: 20px; margin-bottom: 6rem; text-align: center; }
+        /* 中間品牌錨點 (Bridge Brand) */
+        .mid-brand-section { display: flex; flex-direction: column; align-items: center; margin-bottom: 3rem; opacity: 0.6; transition: opacity 0.3s; }
+        .mid-brand-section:hover { opacity: 1; }
+        .mid-logo { width: 24px; height: 24px; filter: grayscale(100%); margin-bottom: 0.5rem; }
+        .mid-brand-name { font-size: 12px; font-weight: 600; color: var(--dark); letter-spacing: 0.05em; }
+
+        /* Ecosystem: 極簡灰底 */
+        .eco-section { background: var(--bg-gray); padding: 3rem 2rem; border-radius: 18px; margin-bottom: 4rem; text-align: center; }
         .eco-grid { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); justify-content: center; }
-        .eco-link { color: var(--dark); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; font-size: 14px; font-weight: 600; text-decoration: none; opacity: 0.8; transition: all 0.2s; }
-        .eco-link:hover { color: var(--blue); opacity: 1; transform: translateY(-3px); }
-        .icon-svg { width: 32px; height: 32px; fill: currentColor; }
+        .eco-group-title { font-size: 11px; color: var(--light-gray); margin-bottom: 1.25rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+        .eco-link { color: var(--dark); display: flex; flex-direction: column; align-items: center; gap: 0.6rem; font-size: 13px; font-weight: 500; text-decoration: none; opacity: 0.7; transition: all 0.2s; }
+        .eco-link:hover { opacity: 1; transform: translateY(-1px); }
+        .icon-svg { width: 26px; height: 26px; fill: currentColor; }
 
-        footer { margin-top: 6rem; border-top: 1px solid #E2E8F0; padding: 4rem 1.5rem 3rem; text-align: center; background: #FAFAFA; border-radius: 24px 24px 0 0; }
-        .footer-brand { display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 2rem; opacity: 0.8; transition: opacity 0.2s; text-decoration: none; }
-        .footer-brand:hover { opacity: 1; }
-        .footer-logo { width: 28px; height: 28px; filter: grayscale(100%); opacity: 0.6; }
-        .footer-brand-name { font-weight: 700; color: var(--dark); font-size: 16px; letter-spacing: 0.05em; }
-        
-        .footer-nav { margin-bottom: 2rem; display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem; }
-        .footer-nav a { color: var(--gray); text-decoration: none; font-size: 14px; font-weight: 500; }
-        .footer-nav a:hover { color: var(--blue); }
-        
-        .footer-contact { margin-bottom: 2rem; font-size: 14px; color: #718096; }
-        .footer-contact a { color: var(--blue); text-decoration: none; font-weight: 600; }
-        
-        .copyright { font-size: 12px; color: #CBD5E0; margin-top: 1rem; border-top: 1px dashed #E2E8F0; padding-top: 2rem; line-height: 1.6; }
+        /* Footer */
+        footer { border-top: 1px solid #E2E8F0; padding: 2rem 0; text-align: center; }
+        .footer-nav { margin-bottom: 1.5rem; display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem; }
+        .footer-nav a { color: var(--light-gray); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+        .footer-nav a:hover { color: var(--dark); }
+        .copyright { font-size: 12px; color: #CBD5E0; }
 
         @media (max-width: 600px) {
-            h1 { font-size: 32px; }
+            h1 { font-size: 28px; }
             .brand-box { flex-direction: row; }
-            .logo-img { width: 48px; height: 48px; }
+            .logo-img { width: 40px; height: 40px; }
             .hero-desc { text-align: left; }
         }
     </style>
@@ -141,17 +167,14 @@ const contactEmail = "info@twprobe.com";
         </header>
 
         <section class="hero-section">
-            <h2 class="hero-title">房產佈局的戰略地圖<br>連結 TWProbe 生態系的核心樞紐</h2>
+            <h2 class="hero-title">建構台灣房產的公共知識庫</h2>
             <div class="hero-desc">
                 <p>
-                    歡迎來到 <strong>TWProbe 的數位指揮中心</strong>。這裡不僅是入口，更是您掌握市場全貌的導航儀。
-                </p>
-                <p>
-                    我們將龐大的房產資訊，解構為「交易、開發、投資」三大戰略板塊。透過這張<strong>體系導覽</strong>，您可以避開碎片化的雜訊，快速對接主站的深度分析，或直達九大社群平台掌握即時脈動。
+                    TWProbe 致力於房地產資訊的結構化與透明化。我們整合交易、開發、投資三大領域的數據與法規，提供中立、客觀的市場分析。透過這份體系導覽，讓房產知識成為可及的公共資源。
                 </p>
             </div>
-            <a href={mainSiteUrl} class="main-site-btn">
-                <span>🚀</span> 進入 TWProbe 官網閱讀深度分析
+            <a href={mainSiteUrl} class="main-site-link">
+                前往官網閱讀深度分析 <span class="link-arrow">→</span>
             </a>
         </section>
 
@@ -174,11 +197,16 @@ const contactEmail = "info@twprobe.com";
             ))}
         </main>
 
+        <div class="mid-brand-section">
+            <img src="/logo.png" alt="TWProbe" class="mid-logo" />
+            <span class="mid-brand-name">TWProbe Ecosystem</span>
+        </div>
+
         <section class="eco-section">
             <div class="eco-grid">
                 {ecosystem.map(e => (
                     <div>
-                        <div style="font-size:12px; color:#A0AEC0; margin-bottom:1.5rem; font-weight:700; letter-spacing:0.1em; text-transform: uppercase;">{e.group}</div>
+                        <div class="eco-group-title">{e.group}</div>
                         <div style="display:flex; justify-content:center; gap:2rem;">
                             {e.sites.map(s => (
                                 <a href={s.u} class="eco-link" target="_blank" rel="me noopener noreferrer" title={s.n}>
@@ -204,25 +232,12 @@ const contactEmail = "info@twprobe.com";
         </section>
 
         <footer>
-            <a href={mainSiteUrl} class="footer-brand" title="返回 TWProbe 官網">
-                <img src="/logo.png" alt="TWProbe" class="footer-logo" />
-                <span class="footer-brand-name">TWProbe</span>
-            </a>
-            
             <nav class="footer-nav">
                 {footerLinks.map(f => (
                     <a href={f.u}>{f.name}</a>
                 ))}
             </nav>
-
-            <div class="footer-contact">
-                合作洽詢：<a href={`mailto:${contactEmail}`}>{contactEmail}</a>
-            </div>
-
-            <p class="copyright">
-                © 2026 {brandName}. All rights reserved. <br>
-                Powered by TWProbe Intelligence Lab.
-            </p>
+            <p class="copyright">© 2026 {brandName}. All rights reserved.</p>
         </footer>
     </div>
 </body>
