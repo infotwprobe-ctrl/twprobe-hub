@@ -1,13 +1,12 @@
 ---
 // ==============================================
-// TWProbe Hub - 2026 極簡公共財版
+// TWProbe Hub - 2026 Apple 極簡緊湊版
 // ==============================================
 
 const brandName = "TWProbe Hub";
 const tagline = "專業知識．獨特觀點．數據支撐";
-// SEO Meta: 中立、客觀、結構化
 const seoTitle = "TWProbe 體系導覽 | 台灣房產公共知識庫索引";
-const seoDesc = "TWProbe 致力於房產資訊的透明化與結構化。本頁面為體系導覽索引，將市場資訊梳理為交易持有、開發工程與投資法規三大脈絡，提供中立客觀的數據分析入口。";
+const seoDesc = "TWProbe 體系導覽索引。將台灣房產市場資訊梳理為交易持有、開發工程與投資法規三大脈絡，提供中立客觀的數據分析與決策依據。";
 const mainSiteUrl = "https://www.twprobe.com";
 
 // 三大核心板塊
@@ -15,7 +14,7 @@ const pillars = [
   {
     title: "交易與持有",
     slug: "real-estate-holding",
-    desc: "交易流程與資產管理", // 極簡化描述
+    desc: "交易流程與資產管理",
     topics: ["購屋流程", "房產銷售", "驗屋重點", "租賃指南", "室內裝修", "管理維護"]
   },
   {
@@ -66,14 +65,15 @@ const footerLinks = [
             --gray: #4A5568; 
             --light-gray: #718096;
             --blue: #2B6CB0; 
-            --bg-gray: #F5F5F7; /* Apple 風格的淺灰底 */
-            --bg-hover: #E8E8ED;
+            --bg-gray: #F5F5F7; 
         }
         body { font-family: 'Source Sans Pro', 'Noto Sans TC', sans-serif; color: var(--dark); margin: 0; background: #fff; line-height: 1.6; font-size: 17px; letter-spacing: -0.01em; }
-        .wrapper { max-width: 980px; margin: 0 auto; padding: 4rem 1.5rem; }
+        
+        /* 調整容器最大寬度至 900px，讓內容更緊湊，解決電腦版空洞問題 */
+        .wrapper { max-width: 900px; margin: 0 auto; padding: 4rem 1.5rem; }
 
-        /* Header: 極簡化 */
-        header { display: flex; flex-direction: column; align-items: center; margin-bottom: 4rem; }
+        /* Header */
+        header { display: flex; flex-direction: column; align-items: center; margin-bottom: 3.5rem; }
         .brand-link { text-decoration: none; display: flex; flex-direction: column; align-items: center; transition: opacity 0.2s; }
         .brand-link:hover { opacity: 0.7; }
         .brand-box { display: flex; align-items: center; gap: 0.8rem; }
@@ -81,18 +81,17 @@ const footerLinks = [
         h1 { color: var(--dark); font-size: 32px; font-weight: 600; margin: 0; letter-spacing: -0.02em; }
         .tagline { color: var(--blue); font-size: 13px; font-weight: 500; letter-spacing: 0.12em; margin-top: 0.5rem; text-transform: uppercase; }
 
-        /* 文案區：Apple 風格排版 */
-        .hero-section { text-align: center; max-width: 720px; margin: 0 auto 5rem; }
+        /* 文案區 */
+        .hero-section { text-align: center; max-width: 680px; margin: 0 auto 4rem; }
         .hero-title { color: var(--dark); font-size: 24px; font-weight: 600; margin-bottom: 1rem; line-height: 1.3; }
-        .hero-desc { font-size: 17px; color: var(--light-gray); margin-bottom: 2rem; text-align: justify; text-align-last: center; font-weight: 400; }
+        .hero-desc { font-size: 16px; color: var(--light-gray); margin-bottom: 2rem; text-align: justify; text-align-last: center; font-weight: 400; }
         
-        /* Apple Style Link Button */
         .main-site-link { 
             display: inline-flex; 
             align-items: center; 
             gap: 0.3rem; 
             color: var(--blue); 
-            font-size: 17px; 
+            font-size: 16px; 
             font-weight: 500; 
             text-decoration: none; 
             transition: gap 0.2s; 
@@ -100,44 +99,51 @@ const footerLinks = [
         .main-site-link:hover { text-decoration: underline; gap: 0.5rem; }
         .link-arrow { font-size: 14px; }
 
-        /* 三大板塊：乾淨無框感 */
-        .pillar-grid { display: grid; gap: 3rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); justify-content: center; margin-bottom: 6rem; }
+        /* 三大板塊：Grid 設定 */
+        /* minmax(240px, 1fr) 確保手機單欄，電腦三欄 */
+        .pillar-grid { 
+            display: grid; 
+            gap: 2.5rem; /* 縮小間距讓視覺更緊密 */
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+            justify-content: center; 
+            margin-bottom: 5rem; 
+        }
         .pillar-card { display: flex; flex-direction: column; height: 100%; }
-        .pillar-header { margin-bottom: 1.25rem; border-bottom: 1px solid #E2E8F0; padding-bottom: 0.75rem; }
+        .pillar-header { margin-bottom: 1rem; border-bottom: 2px solid #F1F1F1; padding-bottom: 0.75rem; }
         .pillar-title { display: block; color: var(--dark); font-size: 20px; font-weight: 600; text-decoration: none; margin-bottom: 0.25rem; }
         .pillar-title:hover { color: var(--blue); }
-        .pillar-desc { font-size: 14px; color: var(--light-gray); margin: 0; }
+        .pillar-desc { font-size: 13px; color: var(--light-gray); margin: 0; }
 
-        .topic-list { display: flex; flex-direction: column; gap: 0; } /* 移除間距，改用分隔線 */
+        .topic-list { display: flex; flex-direction: column; }
         .topic-link { 
             display: flex; 
             justify-content: space-between; 
-            padding: 0.6rem 0; 
-            border-bottom: 1px solid #F1F1F1; 
+            padding: 0.65rem 0; 
+            border-bottom: 1px solid #F7F7F7; 
             color: var(--gray); 
             font-size: 15px; 
             font-weight: 400; 
             text-decoration: none; 
-            transition: color 0.2s; 
+            transition: color 0.2s, padding-left 0.2s; 
         }
         .topic-link:last-child { border-bottom: none; }
-        .topic-link:hover { color: var(--blue); }
-        .arrow { opacity: 0; transition: opacity 0.2s; color: var(--blue); }
+        .topic-link:hover { color: var(--blue); padding-left: 4px; } /* 懸停時微微向右移動 */
+        .arrow { opacity: 0; transition: opacity 0.2s; color: var(--blue); font-size: 12px; }
         .topic-link:hover .arrow { opacity: 1; }
 
-        /* 中間品牌錨點 (Bridge Brand) */
-        .mid-brand-section { display: flex; flex-direction: column; align-items: center; margin-bottom: 3rem; opacity: 0.6; transition: opacity 0.3s; }
+        /* 中間品牌錨點 */
+        .mid-brand-section { display: flex; flex-direction: column; align-items: center; margin-bottom: 2.5rem; opacity: 0.6; transition: opacity 0.3s; }
         .mid-brand-section:hover { opacity: 1; }
         .mid-logo { width: 24px; height: 24px; filter: grayscale(100%); margin-bottom: 0.5rem; }
         .mid-brand-name { font-size: 12px; font-weight: 600; color: var(--dark); letter-spacing: 0.05em; }
 
-        /* Ecosystem: 極簡灰底 */
-        .eco-section { background: var(--bg-gray); padding: 3rem 2rem; border-radius: 18px; margin-bottom: 4rem; text-align: center; }
-        .eco-grid { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); justify-content: center; }
-        .eco-group-title { font-size: 11px; color: var(--light-gray); margin-bottom: 1.25rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
-        .eco-link { color: var(--dark); display: flex; flex-direction: column; align-items: center; gap: 0.6rem; font-size: 13px; font-weight: 500; text-decoration: none; opacity: 0.7; transition: all 0.2s; }
+        /* Ecosystem */
+        .eco-section { background: var(--bg-gray); padding: 2.5rem 2rem; border-radius: 16px; margin-bottom: 4rem; text-align: center; }
+        .eco-grid { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); justify-content: center; }
+        .eco-group-title { font-size: 11px; color: var(--light-gray); margin-bottom: 1rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+        .eco-link { color: var(--dark); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; font-size: 13px; font-weight: 500; text-decoration: none; opacity: 0.7; transition: all 0.2s; }
         .eco-link:hover { opacity: 1; transform: translateY(-1px); }
-        .icon-svg { width: 26px; height: 26px; fill: currentColor; }
+        .icon-svg { width: 24px; height: 24px; fill: currentColor; }
 
         /* Footer */
         footer { border-top: 1px solid #E2E8F0; padding: 2rem 0; text-align: center; }
