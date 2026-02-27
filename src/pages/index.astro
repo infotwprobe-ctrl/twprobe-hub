@@ -1,19 +1,19 @@
 ---
 // ==============================================
-// TWProbe Hub - 2026 Final Master (Native Speed Edition)
+// TWProbe Hub - NEXUS Terminal Edition (V3.0)
+// Architecture: 0 External Requests / Pure Tailwind CSS
 // ==============================================
 
 const brandName = "TWProbe";
-// 修正：根據伺服器數據，主站使用無 www 版本以避免轉址
 const mainSiteUrl = "https://twprobe.com";
-// Hub 保持子網域標準
 const hubUrl = "https://hub.twprobe.com/";
 
-// 靜態資源路徑 (皆位於 public/ 資料夾)
+// 靜態資源路徑 (確保位於 public/ 資料夾)
 const ogImage = `${hubUrl}og-social-preview.jpg`;
 const logoPng = `${hubUrl}logo.png`;
 const faviconPng = `${hubUrl}favicon.png`;
 
+// 核心資料庫 (The Vault - 80% 權重)
 const pillars = [
   {
     title: "交易與持有",
@@ -35,10 +35,29 @@ const pillars = [
   },
 ];
 
-const ecosystem = [
-  { group: "PULSE", sites: [{ n: "X", u: "https://x.com/probe54670", icon: "x" }, { n: "Reddit", u: "https://www.reddit.com/r/TWProbe/", icon: "reddit" }, { n: "Quora", u: "https://taiwanpropertylabbytwprobe.quora.com/", icon: "quora" }] },
-  { group: "ECHO", sites: [{ n: "Medium", u: "https://medium.com/@twprobe", icon: "medium" }, { n: "Substack", u: "https://substack.com/@twprobe", icon: "substack" }, { n: "Blogger", u: "https://twprobe.blogspot.com/", icon: "blogger" }] },
-  { group: "VISION", sites: [{ n: "YouTube", u: "https://www.youtube.com/@TWProbe", icon: "youtube" }, { n: "Instagram", u: "https://www.instagram.com/twprobe/", icon: "instagram" }, { n: "Pinterest", u: "https://www.pinterest.com/infotwprobe/", icon: "pinterest" }] }
+// 精銳分發陣列 (The Elite Trinity - 20% 權重)
+const trinity = [
+  { 
+    id: "signal", 
+    code: "SIGNAL", 
+    name: "X (Twitter)", 
+    url: "https://x.com/probe54670", 
+    hoverEffect: "group-hover:text-white group-hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.6)]" 
+  },
+  { 
+    id: "gravity", 
+    code: "GRAVITY", 
+    name: "Reddit", 
+    url: "https://www.reddit.com/r/TWProbe/", 
+    hoverEffect: "group-hover:text-[#FF4500] group-hover:drop-shadow-[0_0_15px_rgba(255,69,0,0.6)]" 
+  },
+  { 
+    id: "prism", 
+    code: "PRISM", 
+    name: "Pinterest", 
+    url: "https://www.pinterest.com/infotwprobe/", 
+    hoverEffect: "group-hover:text-[#E60023] group-hover:drop-shadow-[0_0_15px_rgba(230,0,35,0.6)]" 
+  }
 ];
 
 const footerLinks = [
@@ -51,15 +70,13 @@ const footerLinks = [
 ];
 ---
 
-<html lang="zh-TW">
+<html lang="zh-TW" class="bg-black text-slate-300 font-sans antialiased selection:bg-blue-500/30">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    
-    <title>TWProbe 情報矩陣 | 台灣房產公共知識庫索引</title>
-    <meta name="description" content="探索台灣房產資訊的導覽中心。TWProbe 結構化整合購屋流程、營造工程與法規數據，提供中立且深度的市場分析。">
+    <title>NEXUS Terminal | TWProbe 情報矩陣</title>
+    <meta name="description" content="TWProbe 核心情報終端。結構化整合台灣房產交易、開發與投資三大脈絡。">
     <link rel="canonical" href={hubUrl} />
-
     <link rel="icon" type="image/png" sizes="96x96" href={faviconPng} />
     <link rel="apple-touch-icon" href={faviconPng} />
 
@@ -67,157 +84,85 @@ const footerLinks = [
     <meta property="og:site_name" content="TWProbe" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={hubUrl} />
-    <meta property="og:title" content="TWProbe 情報矩陣 | 房產公共知識庫" />
+    <meta property="og:title" content="NEXUS Terminal | TWProbe 核心情報終端" />
     <meta property="og:description" content="結構化整合台灣房產交易、開發與投資三大脈絡。提供中立、客觀的深度分析。" />
     <meta property="og:image" content={ogImage} />
-    <meta property="og:image:width" content="768" />
-    <meta property="og:image:height" content="385" />
-    <meta property="og:logo" content={logoPng} />
-
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@probe54670" />
-    <meta name="twitter:title" content="TWProbe 情報矩陣" />
-    <meta name="twitter:description" content="一站式掌握台灣房產市場深度情報。" />
-    <meta name="twitter:image" content={ogImage} />
 
     <style>
-        :root { 
-            --dark: #1A202C; 
-            --body-text: #2D3748; /* 加深 */
-            --blue: #2B6CB0; 
-            --border: #E5E5E5; 
-            --item-bg: #FAFAFA;
-            --gray-text: #4A5568; /* 加深通過 Accessibility */
-            --copyright-text: #4A5568; /* 加深通過 Accessibility */
-            
-            /* 現代系統字體堆疊：自動調用裝置內建的最美黑體 */
-            --font-stack: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans TC", "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
-        }
-        
-        body { 
-            font-family: var(--font-stack);
-            color: var(--body-text); 
-            margin: 0; 
-            background: #ffffff; 
-            line-height: 1.7; 
-            font-size: 18px; 
-            letter-spacing: -0.01em; 
-            -webkit-font-smoothing: antialiased; 
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        .wrapper { max-width: 900px; margin: 0 auto; padding: 3.5rem 1.5rem; }
-
-        .compact-header { display: flex; align-items: center; justify-content: center; margin-bottom: 3.5rem; gap: 1.5rem; }
-        .brand-section { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; color: inherit; }
-        .logo-svg { width: 34px; height: 34px; color: var(--blue); }
-        .brand-name { font-size: 24px; font-weight: 800; color: var(--dark); letter-spacing: -0.02em; }
-        .divider { width: 1px; height: 24px; background-color: #CBD5E0; }
-        .mission-text { font-size: 15px; max-width: 480px; line-height: 1.6; margin: 0; }
-
-        .pillar-grid { display: grid; gap: 2.5rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin-bottom: 4.5rem; }
-        .pillar-header { margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.8rem; text-align: center; }
-        .pillar-title { display: block; color: var(--dark); font-size: 20px; font-weight: 700; text-decoration: none; }
-        .pillar-title:hover { color: var(--blue); }
-        .pillar-desc { font-size: 13px; color: var(--gray-text); margin-top: 0.2rem; font-weight: 500; }
-
-        .topic-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
-        .topic-link { display: flex; justify-content: center; align-items: center; padding: 0.65rem; background: var(--item-bg); border-radius: 6px; color: var(--body-text); font-size: 15px; font-weight: 500; text-decoration: none; transition: all 0.2s ease; }
-        .topic-link:hover { background: var(--blue); color: #ffffff; transform: translateY(-1.5px); }
-
-        .eco-section { background: var(--item-bg); padding: 3rem 1.5rem; border-radius: 16px; margin-bottom: 4rem; text-align: center; }
-        .eco-grid { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
-        .eco-group-title { font-size: 11px; color: var(--gray-text); margin-bottom: 1.2rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
-        .eco-icons { display: grid; grid-template-columns: repeat(3, 1fr); max-width: 240px; margin: 0 auto; gap: 1rem; }
-        .eco-link { color: var(--dark); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; font-size: 12px; text-decoration: none; opacity: 0.85; transition: 0.2s; font-weight: 500; }
-        .eco-link:hover { opacity: 1; color: var(--blue); }
-        .icon-svg { width: 22px; height: 22px; fill: currentColor; }
-
-        footer { border-top: 1px solid var(--border); padding: 3.5rem 0; text-align: center; }
-        .footer-nav { 
-            display: grid;
-            grid-template-columns: repeat(3, auto); 
-            justify-content: center;
-            gap: 1.2rem 3.5rem; 
-            margin-bottom: 2.5rem; 
-        }
-        .footer-nav a { color: var(--body-text); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
-        .footer-nav a:hover { color: var(--blue); }
-        .copyright { font-size: 12px; color: var(--copyright-text); }
-
-        @media (max-width: 650px) {
-            body { font-size: 16px; line-height: 1.6; }
-            .compact-header { flex-direction: column; gap: 1rem; text-align: center; }
-            .mission-text { font-size: 14px; }
-            .footer-nav { grid-template-columns: repeat(2, auto); gap: 1.2rem 2rem; }
-        }
+        body { margin: 0; padding: 0; min-height: 100vh; display: flex; flex-direction: column; }
     </style>
 </head>
-<body>
-    <div class="wrapper">
-        <header class="compact-header">
-            <a href={mainSiteUrl} class="brand-section">
-                <svg class="logo-svg" viewBox="0 0 24 24" fill="currentColor">
+
+<body class="bg-black text-slate-300 flex flex-col min-h-screen">
+    <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-blue-900/10 blur-[120px] pointer-events-none z-0"></div>
+
+    <div class="relative z-10 w-full max-w-5xl mx-auto px-6 py-16 flex-1 flex flex-col">
+        
+        <header class="flex flex-col items-center justify-center mb-20 space-y-4">
+            <a href={mainSiteUrl} class="flex items-center gap-3 group">
+                <svg class="w-10 h-10 text-white group-hover:text-blue-400 transition-colors duration-300" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
                 </svg>
-                <span class="brand-name">{brandName}</span>
+                <span class="text-3xl font-extrabold text-white tracking-tight">{brandName}</span>
             </a>
-            <div class="divider"></div>
-            <p class="mission-text">致力於資訊的結構化與透明化。整合交易、開發、投資三大脈絡，提供數據支撐的深度分析。</p>
+            <p class="text-sm text-slate-500 uppercase tracking-[0.2em] font-medium">Intelligence Terminal</p>
         </header>
 
-        <main class="pillar-grid">
+        <main class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24">
             {pillars.map(p => (
-                <article class="pillar-card">
-                    <header class="pillar-header">
-                        <a href={`${mainSiteUrl}/${p.slug}/`} class="pillar-title">{p.title}</a>
-                        <p class="pillar-desc">{p.desc}</p>
-                    </header>
-                    <div class="topic-list">
+                <div class="group flex flex-col bg-white/[0.03] border border-white/10 rounded-2xl p-6 backdrop-blur-md hover:bg-white/[0.06] hover:border-white/20 hover:-translate-y-1 transition-all duration-300 ease-out shadow-lg hover:shadow-2xl hover:shadow-blue-900/20">
+                    <div class="mb-6 border-b border-white/10 pb-4">
+                        <h2 class="text-xl font-bold text-white mb-1 group-hover:text-blue-400 transition-colors">{p.title}</h2>
+                        <p class="text-xs text-slate-400 font-medium tracking-wide">{p.desc}</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 mt-auto">
                         {p.topics.map(t => (
-                            <a href={`${mainSiteUrl}/${p.slug}/`} class="topic-link">{t}</a>
+                            <a href={`${mainSiteUrl}/${p.slug}/`} class="flex items-center justify-center py-2.5 px-2 bg-black/40 border border-white/5 rounded-lg text-sm text-slate-300 font-medium hover:bg-blue-600 hover:text-white hover:border-blue-500 transition-all duration-200">
+                                {t}
+                            </a>
                         ))}
                     </div>
-                </article>
+                </div>
             ))}
         </main>
 
-        <section class="eco-section">
-            <div class="eco-grid">
-                {ecosystem.map(e => (
-                    <div>
-                        <div class="eco-group-title">{e.group}</div>
-                        <div class="eco-icons">
-                            {e.sites.map(s => (
-                                <a href={s.u} class="eco-link" target="_blank" rel="me noopener noreferrer" title={s.n}>
-                                    <svg class="icon-svg" viewBox="0 0 24 24">
-                                        {s.icon === 'x' && <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>}
-                                        {s.icon === 'reddit' && <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.196-.491.96 0 1.741.782 1.741 1.74 0 .96-.78 1.74-1.74 1.74-.961 0-1.74-.78-1.74-1.74 0-.175.029-.344.081-.502-1.353-.984-3.238-1.574-5.32-1.637l1.037-4.88 3.486.732c.046.002.091.004.13.004zM5.27 12.19c0-.959.78-1.741 1.74-1.741.96 0 1.74.782 1.74 1.74 0 .96-.78 1.74-1.74 1.74-.96 0-1.74-.78-1.74-1.74zm11.39 6.848c-1.355 1.355-4.437 1.355-5.792 0-1.355-1.355.087-2.797 1.442-4.152 1.355-1.355 4.437-1.355 5.792 0 1.355 1.355-.087 2.797-1.442 4.152zm-1.69-5.108c-.96 0-1.74-.78-1.74-1.74 0-.96.78-1.741 1.74-1.741.96 0 1.74.781 1.74 1.74 0 .96-.78 1.74-1.74 1.74z"/>}
-                                        {s.icon === 'youtube' && <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>}
-                                        {s.icon === 'medium' && <path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>}
-                                        {s.icon === 'substack' && <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/>}
-                                        {s.icon === 'blogger' && <path d="M21.25 0H2.75C1.23 0 0 1.23 0 2.75v18.5C0 22.77 1.23 24 2.75 24h18.5c1.52 0 2.75-1.23 2.75-2.75V2.75C24 1.23 22.77 0 21.25 0zm-1.5 18h-4.5c-.825 0-1.5-.675-1.5-1.5v-1.5h-4.5c-.825 0-1.5-.675-1.5-1.5v-3c0-.825.675-1.5 1.5-1.5h1.5v-1.5c0-.825.675 1.5-1.5 1.5h4.5c.825 0 1.5.675 1.5 1.5v4.5c0 .825-.675 1.5-1.5 1.5h-1.5v1.5c0 .825.675 1.5-1.5 1.5h1.5v1.5c0 .825-.675 1.5-1.5 1.5z"/>}
-                                        {s.icon === 'quora' && <path d="M11.96 0C5.352 0 0 4.697 0 11.455c0 5.097 2.996 8.566 7.373 9.77-.384-.96-.64-2.132-.64-3.41 0-3.943 2.651-6.18 5.753-6.18 2.65 0 4.69 1.705 4.69 4.368 0 2.77-1.812 5.54-4.796 5.54-1.705 0-2.877-.96-2.877-2.238 0-1.598 1.066-3.09 1.812-4.262.32-.426.426-.96.426-1.385 0-1.066-.853-1.918-2.025-1.918-1.598 0-2.877 1.492-2.877 3.73 0 2.663 1.066 5.54 3.73 6.924C5.011 22.06 2.663 20.355 1.598 17.584c-.426 1.492-.64 2.877-.64 4.05 0 .745.107 1.385.213 1.918C4.158 23.868 7.672 24 11.96 24c6.606 0 11.96-4.697 11.96-11.455C23.92 5.656 18.566 0 11.96 0z"/>}
-                                        {s.icon === 'instagram' && <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.332.014 7.052.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>}
-                                        {s.icon === 'pinterest' && <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.399.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.951-7.252 4.173 0 7.41 2.967 7.41 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.367 18.62 0 12.017 0z"/>}
-                                    </svg>
-                                    <span>{s.n}</span>
-                                </a>
-                            ))}
+        <section class="mt-auto mb-16 flex flex-col items-center">
+            <div class="text-[10px] text-slate-600 uppercase tracking-[0.3em] font-bold mb-8">The Elite Trinity</div>
+            <div class="flex flex-wrap justify-center gap-12 md:gap-24">
+                {trinity.map(t => (
+                    <a href={t.url} target="_blank" rel="me noopener noreferrer" class="group flex flex-col items-center gap-4 outline-none">
+                        <div class={`text-slate-500 transition-all duration-500 ${t.hoverEffect}`}>
+                            <svg class="w-10 h-10 fill-currentColor" viewBox="0 0 24 24">
+                                {t.id === 'signal' && <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>}
+                                {t.id === 'gravity' && <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.196-.491.96 0 1.741.782 1.741 1.74 0 .96-.78 1.74-1.74 1.74-.961 0-1.74-.78-1.74-1.74 0-.175.029-.344.081-.502-1.353-.984-3.238-1.574-5.32-1.637l1.037-4.88 3.486.732c.046.002.091.004.13.004zM5.27 12.19c0-.959.78-1.741 1.74-1.741.96 0 1.74.782 1.74 1.74 0 .96-.78 1.74-1.74 1.74-.96 0-1.74-.78-1.74-1.74zm11.39 6.848c-1.355 1.355-4.437 1.355-5.792 0-1.355-1.355.087-2.797 1.442-4.152 1.355-1.355 4.437-1.355 5.792 0 1.355 1.355-.087 2.797-1.442 4.152zm-1.69-5.108c-.96 0-1.74-.78-1.74-1.74 0-.96.78-1.741 1.74-1.741.96 0 1.74.781 1.74 1.74 0 .96-.78 1.74-1.74 1.74z"/>}
+                                {t.id === 'prism' && <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.399.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.951-7.252 4.173 0 7.41 2.967 7.41 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.367 18.62 0 12.017 0z"/>}
+                            </svg>
                         </div>
-                    </div>
+                        <div class="flex flex-col items-center">
+                            <span class="text-xs font-bold tracking-widest text-slate-400 group-hover:text-white transition-colors duration-300">{t.code}</span>
+                            <span class="text-[10px] text-slate-600 mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">{t.name}</span>
+                        </div>
+                    </a>
                 ))}
             </div>
         </section>
 
-        <footer>
-            <nav class="footer-nav">
+    </div>
+
+    <footer class="relative z-10 border-t border-white/5 py-8 mt-auto">
+        <div class="max-w-5xl mx-auto px-6">
+            <nav class="flex flex-wrap justify-center gap-x-8 gap-y-4 mb-6">
                 {footerLinks.map(f => (
-                    <a href={f.u}>{f.name}</a>
+                    <a href={f.u} class="text-xs font-medium text-slate-500 hover:text-white transition-colors duration-200">{f.name}</a>
                 ))}
             </nav>
-            <p class="copyright">© 2026 {brandName}. All rights reserved.</p>
-        </footer>
-    </div>
+            <p class="text-center text-[10px] text-slate-700 font-medium">
+                © 2026 {brandName}. ALL RIGHTS RESERVED.
+            </p>
+        </div>
+    </footer>
+
 </body>
 </html>
