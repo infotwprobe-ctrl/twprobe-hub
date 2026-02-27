@@ -1,6 +1,13 @@
 {
   "name": "twprobe-hub",
   "type": "module",
-  "scripts": { "dev": "astro dev", "build": "astro build" },
-  "dependencies": { "astro": "latest" }
+  "scripts": { 
+    "dev": "astro dev", 
+    "build": "astro build" 
+  },
+  "dependencies": { 
+    "astro": "latest",
+    "@astrojs/tailwind": "^5.1.0",
+    "tailwindcss": "^3.4.1"
+  }
 }
