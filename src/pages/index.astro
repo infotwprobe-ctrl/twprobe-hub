@@ -1,6 +1,6 @@
 ---
 // ==============================================
-// TWProbe Hub Terminal (V3.1 - Orbital Light Edition)
+// TWProbe Hub Terminal (V3.2 - Spirit Edition)
 // Architecture: 100% Pure CSS / 0 External Requests / Compact Dynamic
 // ==============================================
 
@@ -35,11 +35,11 @@ const pillars = [
   },
 ];
 
-// 精銳分發陣列 (The Elite Trinity)
+// 精銳分發陣列 (The Elite Trinity - 三明治結構)
 const trinity = [
-  { id: "signal", code: "SIGNAL", name: "X (Twitter)", url: "https://x.com/probe54670", color: "#000000", glow: "rgba(0,0,0,0.2)" },
-  { id: "gravity", code: "GRAVITY", name: "Reddit", url: "https://www.reddit.com/r/TWProbe/", color: "#FF4500", glow: "rgba(255,69,0,0.3)" },
-  { id: "prism", code: "PRISM", name: "Pinterest", url: "https://www.pinterest.com/infotwprobe/", color: "#E60023", glow: "rgba(230,0,35,0.3)" }
+  { id: "signal", concept: "SIGNAL", name: "X", url: "https://x.com/probe54670", color: "#000000", glow: "rgba(0,0,0,0.15)" },
+  { id: "gravity", concept: "GRAVITY", name: "Reddit", url: "https://www.reddit.com/r/TWProbe/", color: "#FF4500", glow: "rgba(255,69,0,0.2)" },
+  { id: "prism", concept: "PRISM", name: "Pinterest", url: "https://www.pinterest.com/infotwprobe/", color: "#E60023", glow: "rgba(230,0,35,0.2)" }
 ];
 
 const footerLinks = [
@@ -56,7 +56,7 @@ const footerLinks = [
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>TWProbe Hub Terminal</title>
+    <title>TWProbe 情報矩陣</title>
     <meta name="description" content="TWProbe 核心情報終端。整合台灣房產交易、開發與投資三大脈絡。">
     <link rel="canonical" href={hubUrl} />
     <link rel="icon" type="image/png" sizes="96x96" href={faviconPng} />
@@ -70,7 +70,7 @@ const footerLinks = [
             --text-muted: #64748B;
             --border-light: #E2E8F0;
             --border-hover: #CBD5E1;
-            --accent-blue: #2B6CB0; /* TWProbe 品牌藍 */
+            --accent-blue: #2B6CB0;
             --accent-bg: #EFF6FF;
             
             --font-stack: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -80,15 +80,10 @@ const footerLinks = [
             --shadow-hover: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
         }
 
-        /* 終端機啟動動畫 (Orbital Boot Sequence) */
+        /* 終端機啟動動畫 */
         @keyframes fadeUp {
-            0% { opacity: 0; transform: translateY(20px); }
+            0% { opacity: 0; transform: translateY(15px); }
             100% { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes subtlePulse {
-            0% { box-shadow: 0 0 0 0 rgba(43, 108, 176, 0.2); }
-            70% { box-shadow: 0 0 0 8px rgba(43, 108, 176, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(43, 108, 176, 0); }
         }
 
         body {
@@ -102,13 +97,13 @@ const footerLinks = [
             flex-direction: column;
             align-items: center;
             -webkit-font-smoothing: antialiased;
-            background-image: radial-gradient(circle at 50% 0%, #FFFFFF 0%, transparent 70%); /* 頂部微光 */
+            background-image: radial-gradient(circle at 50% 0%, #FFFFFF 0%, transparent 70%);
         }
 
         .container {
             width: 100%;
-            max-width: 900px; /* Compact: 縮小最大寬度 */
-            padding: 3rem 1.5rem;
+            max-width: 900px;
+            padding: 3.5rem 1.5rem 2rem;
             box-sizing: border-box;
             flex: 1;
             display: flex;
@@ -116,10 +111,10 @@ const footerLinks = [
             animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        /* Header */
+        /* Header 精神圖騰 */
         .header {
             text-align: center;
-            margin-bottom: 3rem; /* Compact: 縮減間距 */
+            margin-bottom: 3.5rem;
         }
         .brand-link {
             display: inline-flex;
@@ -131,41 +126,50 @@ const footerLinks = [
         }
         .brand-link:hover { color: var(--accent-blue); }
         .logo-svg {
-            width: 34px; 
-            height: 34px;
+            width: 38px; 
+            height: 38px;
             fill: var(--accent-blue);
         }
         .brand-name {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 800;
             letter-spacing: -0.03em;
         }
-        .subtitle {
-            font-size: 0.7rem;
+        .spirit-tags {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-top: 1rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            margin-top: 0.8rem;
+            letter-spacing: 0.4em;
             font-weight: 600;
+            padding-left: 0.4em; /* 補償 tracking 偏移 */
+        }
+        .spirit-tags .dot {
+            color: var(--border-hover);
+            font-size: 1rem;
+            line-height: 0;
+            letter-spacing: 0;
         }
 
-        /* 核心資料庫 (The Vault) - Compact 版 */
+        /* 核心資料庫 (The Vault) */
         .pillar-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.25rem; /* Compact: 縮小卡片間距 */
-            margin-bottom: 4rem;
+            gap: 1.25rem;
+            margin-bottom: 5rem;
         }
         .pillar-card {
             background: var(--bg-card);
             border: 1px solid var(--border-light);
             border-radius: 12px;
-            padding: 1.25rem 1.25rem 1.5rem;
+            padding: 1.5rem;
             box-shadow: var(--shadow-card);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            opacity: 0; /* 預設隱藏，交由動畫顯示 */
+            opacity: 0;
         }
-        /* 錯落浮現效果 */
         .pillar-card:nth-child(1) { animation: fadeUp 0.6s 0.1s forwards; }
         .pillar-card:nth-child(2) { animation: fadeUp 0.6s 0.2s forwards; }
         .pillar-card:nth-child(3) { animation: fadeUp 0.6s 0.3s forwards; }
@@ -176,16 +180,23 @@ const footerLinks = [
             box-shadow: var(--shadow-hover);
         }
         .pillar-header {
-            text-align: center; /* 使用者要求：大分類置中 */
+            text-align: center;
             border-bottom: 1px solid var(--border-light);
             padding-bottom: 1rem;
             margin-bottom: 1.25rem;
         }
+        /* 主節點連結特效 */
+        .pillar-title-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            display: inline-block;
+            transition: color 0.3s ease;
+        }
+        .pillar-title-link:hover { color: var(--accent-blue); }
         .pillar-title {
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             font-weight: 800;
             margin: 0 0 0.3rem 0;
-            color: var(--text-dark);
         }
         .pillar-desc {
             font-size: 0.75rem;
@@ -196,7 +207,7 @@ const footerLinks = [
         .topic-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 0.6rem; /* Compact: 縮小按鈕間距 */
+            gap: 0.6rem;
         }
         .topic-link {
             background: var(--bg-body);
@@ -204,7 +215,7 @@ const footerLinks = [
             text-decoration: none;
             font-size: 0.8rem;
             font-weight: 600;
-            padding: 0.5rem;
+            padding: 0.55rem;
             border-radius: 6px;
             text-align: center;
             transition: all 0.2s ease;
@@ -217,84 +228,89 @@ const footerLinks = [
             transform: scale(1.02);
         }
 
-        /* 精銳分發陣列 (The Elite Trinity) */
+        /* 精銳分發陣列 (The Elite Trinity - 三明治結構) */
         .trinity-section {
             margin-top: auto;
             text-align: center;
             padding-bottom: 2rem;
             opacity: 0;
-            animation: fadeUp 0.8s 0.5s forwards; /* 最後浮現 */
-        }
-        .trinity-label {
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            margin-bottom: 1.5rem;
-            font-weight: 700;
+            animation: fadeUp 0.8s 0.4s forwards;
         }
         .trinity-grid {
             display: flex;
             justify-content: center;
-            gap: 3.5rem;
+            gap: 4rem;
             flex-wrap: wrap;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-light);
         }
         .trinity-item {
             display: flex;
             flex-direction: column;
             align-items: center;
             text-decoration: none;
-            color: var(--text-muted);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            padding-top: 1.5rem;
         }
-        .trinity-icon {
-            width: 36px; 
-            height: 36px;
-            fill: currentColor;
-            margin-bottom: 0.75rem;
-            transition: all 0.4s ease;
-        }
-        /* Hover 動態爆發效果 */
-        .trinity-item:hover { 
-            color: var(--hover-color); 
-            transform: translateY(-4px);
-        }
-        .trinity-item:hover .trinity-icon {
-            filter: drop-shadow(0 8px 12px var(--hover-glow));
-            transform: scale(1.1);
-        }
-        .trinity-code {
-            font-size: 0.7rem;
+        /* 上層：意象 */
+        .trinity-concept {
+            font-size: 0.65rem;
             font-weight: 800;
-            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            letter-spacing: 0.15em;
+            margin-bottom: 0.75rem;
             transition: color 0.3s ease;
+        }
+        /* 中層：Icon */
+        .trinity-icon {
+            width: 32px; 
+            height: 32px;
+            fill: var(--text-muted);
+            transition: all 0.4s ease;
+            margin-bottom: 0.5rem;
+        }
+        /* 下層：實體 */
+        .trinity-name {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            transition: color 0.3s ease;
+        }
+
+        /* Hover 聯動爆發效果 */
+        .trinity-item:hover { transform: translateY(-4px); }
+        .trinity-item:hover .trinity-concept { color: var(--hover-color); }
+        .trinity-item:hover .trinity-icon {
+            fill: var(--hover-color);
+            filter: drop-shadow(0 6px 10px var(--hover-glow));
+            transform: scale(1.15);
         }
 
         /* Footer */
         .footer {
             width: 100%;
             border-top: 1px solid var(--border-light);
-            padding: 2rem 0;
+            padding: 2.5rem 0;
             text-align: center;
-            background: var(--bg-card); /* 底部用純白收尾 */
+            background: var(--bg-card);
         }
         .footer-nav {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
             gap: 1.5rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
         }
         .footer-nav a {
             color: var(--text-muted);
             text-decoration: none;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: 500;
             transition: color 0.2s;
         }
         .footer-nav a:hover { color: var(--accent-blue); }
         .copyright {
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             color: #94A3B8;
         }
     </style>
@@ -307,14 +323,18 @@ const footerLinks = [
                 <svg class="logo-svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
                 <span class="brand-name">{brandName}</span>
             </a>
-            <div class="subtitle">Hub Terminal</div>
+            <div class="spirit-tags">
+                <span>數據</span><span class="dot">·</span><span>結構</span><span class="dot">·</span><span>真理</span>
+            </div>
         </header>
 
         <main class="pillar-grid">
             {pillars.map(p => (
                 <div class="pillar-card">
                     <div class="pillar-header">
-                        <h2 class="pillar-title">{p.title}</h2>
+                        <a href={`${mainSiteUrl}/${p.slug}/`} class="pillar-title-link">
+                            <h2 class="pillar-title">{p.title}</h2>
+                        </a>
                         <p class="pillar-desc">{p.desc}</p>
                     </div>
                     <div class="topic-grid">
@@ -327,16 +347,16 @@ const footerLinks = [
         </main>
 
         <section class="trinity-section">
-            <div class="trinity-label">The Elite Trinity</div>
             <div class="trinity-grid">
                 {trinity.map(t => (
                     <a href={t.url} target="_blank" rel="me noopener noreferrer" class="trinity-item" style={`--hover-color: ${t.color}; --hover-glow: ${t.glow};`}>
+                        <span class="trinity-concept">{t.concept}</span>
                         <svg class="trinity-icon" viewBox="0 0 24 24">
                             {t.id === 'signal' && <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>}
                             {t.id === 'gravity' && <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.196-.491.96 0 1.741.782 1.741 1.74 0 .96-.78 1.74-1.74 1.74-.961 0-1.74-.78-1.74-1.74 0-.175.029-.344.081-.502-1.353-.984-3.238-1.574-5.32-1.637l1.037-4.88 3.486.732c.046.002.091.004.13.004zM5.27 12.19c0-.959.78-1.741 1.74-1.741.96 0 1.74.782 1.74 1.74 0 .96-.78 1.74-1.74 1.74-.96 0-1.74-.78-1.74-1.74zm11.39 6.848c-1.355 1.355-4.437 1.355-5.792 0-1.355-1.355.087-2.797 1.442-4.152 1.355-1.355 4.437-1.355 5.792 0 1.355 1.355-.087 2.797-1.442 4.152zm-1.69-5.108c-.96 0-1.74-.78-1.74-1.74 0-.96.78-1.741 1.74-1.741.96 0 1.74.781 1.74 1.74 0 .96-.78 1.74-1.74 1.74z"/>}
                             {t.id === 'prism' && <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.399.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.951-7.252 4.173 0 7.41 2.967 7.41 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.367 18.62 0 12.017 0z"/>}
                         </svg>
-                        <span class="trinity-code">{t.code}</span>
+                        <span class="trinity-name">{t.name}</span>
                     </a>
                 ))}
             </div>
