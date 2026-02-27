@@ -1,19 +1,19 @@
 ---
 // ==============================================
-// TWProbe Hub Terminal (V3.0)
-// Architecture: 0 External Requests / Pure Tailwind CSS
+// TWProbe Hub Terminal (V3.0 - Native CSS Edition)
+// Architecture: 100% Pure CSS / 0 External Requests
 // ==============================================
 
 const brandName = "TWProbe";
 const mainSiteUrl = "https://twprobe.com";
 const hubUrl = "https://hub.twprobe.com/";
 
-// 靜態資源路徑 (確保位於 public/ 資料夾)
+// 靜態資源路徑
 const ogImage = `${hubUrl}og-social-preview.jpg`;
 const logoPng = `${hubUrl}logo.png`;
 const faviconPng = `${hubUrl}favicon.png`;
 
-// 核心資料庫 (The Vault - 80% 權重)
+// 核心資料庫
 const pillars = [
   {
     title: "交易與持有",
@@ -35,29 +35,11 @@ const pillars = [
   },
 ];
 
-// 精銳分發陣列 (The Elite Trinity - 20% 權重)
+// 精銳分發陣列
 const trinity = [
-  { 
-    id: "signal", 
-    code: "SIGNAL", 
-    name: "X (Twitter)", 
-    url: "https://x.com/probe54670", 
-    hoverEffect: "group-hover:text-white group-hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.6)]" 
-  },
-  { 
-    id: "gravity", 
-    code: "GRAVITY", 
-    name: "Reddit", 
-    url: "https://www.reddit.com/r/TWProbe/", 
-    hoverEffect: "group-hover:text-[#FF4500] group-hover:drop-shadow-[0_0_15px_rgba(255,69,0,0.6)]" 
-  },
-  { 
-    id: "prism", 
-    code: "PRISM", 
-    name: "Pinterest", 
-    url: "https://www.pinterest.com/infotwprobe/", 
-    hoverEffect: "group-hover:text-[#E60023] group-hover:drop-shadow-[0_0_15px_rgba(230,0,35,0.6)]" 
-  }
+  { id: "signal", code: "SIGNAL", name: "X (Twitter)", url: "https://x.com/probe54670", color: "#ffffff" },
+  { id: "gravity", code: "GRAVITY", name: "Reddit", url: "https://www.reddit.com/r/TWProbe/", color: "#FF4500" },
+  { id: "prism", code: "PRISM", name: "Pinterest", url: "https://www.pinterest.com/infotwprobe/", color: "#E60023" }
 ];
 
 const footerLinks = [
@@ -70,98 +52,259 @@ const footerLinks = [
 ];
 ---
 
-<html lang="zh-TW" class="bg-black text-slate-300 font-sans antialiased selection:bg-blue-500/30">
+<html lang="zh-TW">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>TWProbe Hub Terminal</title>
-    <meta name="description" content="TWProbe 核心情報終端。結構化整合台灣房產交易、開發與投資三大脈絡。">
+    <meta name="description" content="TWProbe 核心情報終端。">
     <link rel="canonical" href={hubUrl} />
     <link rel="icon" type="image/png" sizes="96x96" href={faviconPng} />
-    <link rel="apple-touch-icon" href={faviconPng} />
-
-    <meta property="og:locale" content="zh-TW" />
-    <meta property="og:site_name" content="TWProbe" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={hubUrl} />
-    <meta property="og:title" content="TWProbe Hub Terminal" />
-    <meta property="og:description" content="結構化整合台灣房產交易、開發與投資三大脈絡。提供中立、客觀的深度分析。" />
-    <meta property="og:image" content={ogImage} />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@probe54670" />
-
+    
     <style>
-        body { margin: 0; padding: 0; min-height: 100vh; display: flex; flex-direction: column; }
+        :root {
+            --bg-color: #000000;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --card-hover-border: rgba(255, 255, 255, 0.3);
+            --accent-blue: #3b82f6;
+            --font-stack: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-stack);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            padding: 4rem 1.5rem;
+            box-sizing: border-box;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header 區域 */
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .brand-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: color 0.3s;
+        }
+        .brand-link:hover { color: var(--accent-blue); }
+        .logo-svg {
+            width: 40px; /* 強制鎖死寬度，解決膨脹問題 */
+            height: 40px;
+            fill: currentColor;
+        }
+        .brand-name {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+        }
+        .subtitle {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-top: 1rem;
+        }
+
+        /* 核心資料庫 (The Vault) */
+        .pillar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 5rem;
+        }
+        .pillar-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .pillar-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--card-hover-border);
+        }
+        .pillar-header {
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .pillar-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0 0 0.25rem 0;
+        }
+        .pillar-desc {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+        .topic-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+        .topic-link {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--card-border);
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        .topic-link:hover {
+            background: var(--accent-blue);
+            color: #fff;
+            border-color: var(--accent-blue);
+        }
+
+        /* 精銳分發陣列 (The Elite Trinity) */
+        .trinity-section {
+            margin-top: auto;
+            text-align: center;
+            padding-bottom: 3rem;
+        }
+        .trinity-label {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+        .trinity-grid {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+        .trinity-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+        }
+        .trinity-icon {
+            width: 44px; /* 強制鎖死寬度 */
+            height: 44px;
+            fill: currentColor;
+            margin-bottom: 1rem;
+            transition: filter 0.3s ease;
+        }
+        .trinity-item:hover { color: var(--hover-color); }
+        .trinity-item:hover .trinity-icon {
+            filter: drop-shadow(0 0 12px var(--hover-color));
+        }
+        .trinity-code {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+        }
+
+        /* Footer */
+        .footer {
+            width: 100%;
+            border-top: 1px solid var(--card-border);
+            padding: 2rem 0;
+            text-align: center;
+        }
+        .footer-nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .footer-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.75rem;
+            transition: color 0.2s;
+        }
+        .footer-nav a:hover { color: var(--text-main); }
+        .copyright {
+            font-size: 0.65rem;
+            color: #475569;
+        }
     </style>
 </head>
+<body>
 
-<body class="bg-black text-slate-300 flex flex-col min-h-screen">
-    <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-blue-900/10 blur-[120px] pointer-events-none z-0"></div>
-
-    <div class="relative z-10 w-full max-w-5xl mx-auto px-6 py-16 flex-1 flex flex-col">
-        
-        <header class="flex flex-col items-center justify-center mb-20 space-y-4">
-            <a href={mainSiteUrl} class="flex items-center gap-3 group">
-                <svg class="w-10 h-10 text-white group-hover:text-blue-400 transition-colors duration-300" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
-                </svg>
-                <span class="text-3xl font-extrabold text-white tracking-tight">{brandName}</span>
+    <div class="container">
+        <header class="header">
+            <a href={mainSiteUrl} class="brand-link">
+                <svg class="logo-svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                <span class="brand-name">{brandName}</span>
             </a>
-            <p class="text-sm text-slate-500 uppercase tracking-[0.2em] font-medium">Hub Terminal</p>
+            <div class="subtitle">Hub Terminal</div>
         </header>
 
-        <main class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24">
+        <main class="pillar-grid">
             {pillars.map(p => (
-                <div class="group flex flex-col bg-white/[0.03] border border-white/10 rounded-2xl p-6 backdrop-blur-md hover:bg-white/[0.06] hover:border-white/20 hover:-translate-y-1 transition-all duration-300 ease-out shadow-lg hover:shadow-2xl hover:shadow-blue-900/20">
-                    <div class="mb-6 border-b border-white/10 pb-4">
-                        <h2 class="text-xl font-bold text-white mb-1 group-hover:text-blue-400 transition-colors">{p.title}</h2>
-                        <p class="text-xs text-slate-400 font-medium tracking-wide">{p.desc}</p>
+                <div class="pillar-card">
+                    <div class="pillar-header">
+                        <h2 class="pillar-title">{p.title}</h2>
+                        <p class="pillar-desc">{p.desc}</p>
                     </div>
-                    <div class="grid grid-cols-2 gap-3 mt-auto">
+                    <div class="topic-grid">
                         {p.topics.map(t => (
-                            <a href={`${mainSiteUrl}/${p.slug}/`} class="flex items-center justify-center py-2.5 px-2 bg-black/40 border border-white/5 rounded-lg text-sm text-slate-300 font-medium hover:bg-blue-600 hover:text-white hover:border-blue-500 transition-all duration-200">
-                                {t}
-                            </a>
+                            <a href={`${mainSiteUrl}/${p.slug}/`} class="topic-link">{t}</a>
                         ))}
                     </div>
                 </div>
             ))}
         </main>
 
-        <section class="mt-auto mb-16 flex flex-col items-center">
-            <div class="text-[10px] text-slate-600 uppercase tracking-[0.3em] font-bold mb-8">The Elite Trinity</div>
-            <div class="flex flex-wrap justify-center gap-12 md:gap-24">
+        <section class="trinity-section">
+            <div class="trinity-label">The Elite Trinity</div>
+            <div class="trinity-grid">
                 {trinity.map(t => (
-                    <a href={t.url} target="_blank" rel="me noopener noreferrer" class="group flex flex-col items-center gap-4 outline-none">
-                        <div class={`text-slate-500 transition-all duration-500 ${t.hoverEffect}`}>
-                            <svg class="w-10 h-10 fill-currentColor" viewBox="0 0 24 24">
-                                {t.id === 'signal' && <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>}
-                                {t.id === 'gravity' && <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.196-.491.96 0 1.741.782 1.741 1.74 0 .96-.78 1.74-1.74 1.74-.961 0-1.74-.78-1.74-1.74 0-.175.029-.344.081-.502-1.353-.984-3.238-1.574-5.32-1.637l1.037-4.88 3.486.732c.046.002.091.004.13.004zM5.27 12.19c0-.959.78-1.741 1.74-1.741.96 0 1.74.782 1.74 1.74 0 .96-.78 1.74-1.74 1.74-.96 0-1.74-.78-1.74-1.74zm11.39 6.848c-1.355 1.355-4.437 1.355-5.792 0-1.355-1.355.087-2.797 1.442-4.152 1.355-1.355 4.437-1.355 5.792 0 1.355 1.355-.087 2.797-1.442 4.152zm-1.69-5.108c-.96 0-1.74-.78-1.74-1.74 0-.96.78-1.741 1.74-1.741.96 0 1.74.781 1.74 1.74 0 .96-.78 1.74-1.74 1.74z"/>}
-                                {t.id === 'prism' && <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.399.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.951-7.252 4.173 0 7.41 2.967 7.41 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.367 18.62 0 12.017 0z"/>}
-                            </svg>
-                        </div>
-                        <div class="flex flex-col items-center">
-                            <span class="text-xs font-bold tracking-widest text-slate-400 group-hover:text-white transition-colors duration-300">{t.code}</span>
-                            <span class="text-[10px] text-slate-600 mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">{t.name}</span>
-                        </div>
+                    <a href={t.url} target="_blank" rel="me noopener noreferrer" class="trinity-item" style={`--hover-color: ${t.color};`}>
+                        <svg class="trinity-icon" viewBox="0 0 24 24">
+                            {t.id === 'signal' && <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>}
+                            {t.id === 'gravity' && <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.196-.491.96 0 1.741.782 1.741 1.74 0 .96-.78 1.74-1.74 1.74-.961 0-1.74-.78-1.74-1.74 0-.175.029-.344.081-.502-1.353-.984-3.238-1.574-5.32-1.637l1.037-4.88 3.486.732c.046.002.091.004.13.004zM5.27 12.19c0-.959.78-1.741 1.74-1.741.96 0 1.74.782 1.74 1.74 0 .96-.78 1.74-1.74 1.74-.96 0-1.74-.78-1.74-1.74zm11.39 6.848c-1.355 1.355-4.437 1.355-5.792 0-1.355-1.355.087-2.797 1.442-4.152 1.355-1.355 4.437-1.355 5.792 0 1.355 1.355-.087 2.797-1.442 4.152zm-1.69-5.108c-.96 0-1.74-.78-1.74-1.74 0-.96.78-1.741 1.74-1.741.96 0 1.74.781 1.74 1.74 0 .96-.78 1.74-1.74 1.74z"/>}
+                            {t.id === 'prism' && <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.399.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.951-7.252 4.173 0 7.41 2.967 7.41 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.367 18.62 0 12.017 0z"/>}
+                        </svg>
+                        <span class="trinity-code">{t.code}</span>
                     </a>
                 ))}
             </div>
         </section>
-
     </div>
 
-    <footer class="relative z-10 border-t border-white/5 py-8 mt-auto">
-        <div class="max-w-5xl mx-auto px-6">
-            <nav class="flex flex-wrap justify-center gap-x-8 gap-y-4 mb-6">
-                {footerLinks.map(f => (
-                    <a href={f.u} class="text-xs font-medium text-slate-500 hover:text-white transition-colors duration-200">{f.name}</a>
-                ))}
-            </nav>
-            <p class="text-center text-[10px] text-slate-700 font-medium">
-                © 2026 {brandName}. ALL RIGHTS RESERVED.
-            </p>
-        </div>
+    <footer class="footer">
+        <nav class="footer-nav">
+            {footerLinks.map(f => (
+                <a href={f.u}>{f.name}</a>
+            ))}
+        </nav>
+        <p class="copyright">© 2026 {brandName}. ALL RIGHTS RESERVED.</p>
     </footer>
 
 </body>
