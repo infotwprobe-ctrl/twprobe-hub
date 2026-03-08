@@ -1,7 +1,8 @@
 ---
 // ==============================================
-// TWProbe Hub Terminal (V4.0 - The Architect Edition)
-// Architecture: 100% Pure CSS / 0 External Requests / Living System
+// TWProbe Hub Terminal (V5.0 - The CORTEX Edition)
+// Architecture: 100% Pure CSS / 0 External Requests / Zero Entropy
+// Protocol: Fire and Forget
 // ==============================================
 
 const brandName = "TWProbe";
@@ -34,22 +35,6 @@ const pillars = [
     topics: ["市場趨勢", "區域發展", "房貸理財", "法規稅務", "投資策略", "商用房產"]
   },
 ];
-
-// 精銳分發陣列 (The Elite Trinity) - 替換 Reddit 為 Medium (MONOLITH)
-const trinity = [
-  { id: "signal", concept: "SIGNAL", name: "X", url: "https://x.com/probe54670", color: "#000000", glow: "rgba(0,0,0,0.15)" },
-  { id: "monolith", concept: "MONOLITH", name: "Medium", url: "https://medium.com/@twprobe", color: "#000000", glow: "rgba(0,0,0,0.15)" },
-  { id: "prism", concept: "PRISM", name: "Pinterest", url: "https://www.pinterest.com/infotwprobe/", color: "#E60023", glow: "rgba(230,0,35,0.2)" }
-];
-
-const footerLinks = [
-    { name: "關於本站", u: "https://twprobe.com/about-twprobe/" },
-    { name: "網站地圖", u: "https://twprobe.com/sitemap/" },
-    { name: "情報矩陣", u: "https://hub.twprobe.com/" },
-    { name: "服務條款", u: "https://twprobe.com/terms-of-service/" },
-    { name: "隱私政策", u: "https://twprobe.com/privacy-policy/" },
-    { name: "免責聲明", u: "https://twprobe.com/disclaimer/" },
-];
 ---
 
 <html lang="zh-TW">
@@ -57,7 +42,7 @@ const footerLinks = [
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>TWProbe 核心情報終端</title>
-    <meta name="description" content="TWProbe 核心情報終端。整合台灣房產交易、開發與投資三大脈絡。">
+    <meta name="description" content="信號散佈於平原，真理封存於此。">
     <link rel="canonical" href={hubUrl} />
     <link rel="icon" type="image/png" sizes="96x96" href={faviconPng} />
     
@@ -108,7 +93,7 @@ const footerLinks = [
         .container {
             width: 100%;
             max-width: 900px;
-            padding: 4rem 1.5rem 2rem;
+            padding: 4rem 1.5rem 3rem;
             box-sizing: border-box;
             flex: 1;
             display: flex;
@@ -158,16 +143,15 @@ const footerLinks = [
             line-height: 0;
             letter-spacing: 0;
         }
-        /* 伺服器呼吸燈特效 (交錯閃爍) */
         .pulse-1 { animation: serverPulse 3s infinite ease-in-out; }
         .pulse-2 { animation: serverPulse 3s infinite ease-in-out; animation-delay: 1.5s; }
 
-        /* 核心資料庫 (The Vault) - 冰霜玻璃材質 */
+        /* 核心資料庫 (The Vault) */
         .pillar-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
-            margin-bottom: 5.5rem;
+            margin-bottom: 2rem;
         }
         .pillar-card {
             background: rgba(255, 255, 255, 0.7);
@@ -239,105 +223,55 @@ const footerLinks = [
             box-shadow: 0 2px 8px rgba(43, 108, 176, 0.1);
         }
 
-        /* 精銳分發陣列 (The Elite Trinity) */
-        .trinity-section {
+        /* 游擊隊暗號 (The Manifesto) */
+        .manifesto-section {
             margin-top: auto;
-            text-align: center;
-            padding-bottom: 2rem;
+            padding-top: 4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             opacity: 0;
             animation: fadeUp 0.8s 0.5s forwards;
         }
-        .trinity-grid {
-            display: flex;
-            justify-content: center;
-            gap: 4.5rem;
-            flex-wrap: wrap;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--border-light);
-            position: relative;
-        }
-        /* 中間的極細引導線 */
-        .trinity-grid::before {
-            content: '';
-            position: absolute;
-            top: -1px;
-            left: 50%;
-            transform: translateX(-50%);
+        .divider {
             width: 40px;
             height: 2px;
             background: var(--text-muted);
             border-radius: 2px;
+            margin-bottom: 2.5rem;
+            opacity: 0.4;
         }
-        
-        .trinity-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            padding-top: 1.5rem;
-        }
-        .trinity-concept {
-            font-size: 0.65rem;
+        .manifesto-text {
+            font-size: 0.85rem;
             font-weight: 800;
             color: var(--text-muted);
-            letter-spacing: 0.2em;
-            margin-bottom: 0.8rem;
-            transition: color 0.3s ease;
+            letter-spacing: 0.25em;
+            margin: 0 0 0.8rem 0;
+            padding-left: 0.25em;
         }
-        .trinity-icon {
-            width: 36px; 
-            height: 36px;
-            fill: var(--text-muted);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            margin-bottom: 0.6rem;
-        }
-        .trinity-name {
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            transition: color 0.3s ease;
-            opacity: 0.6;
-        }
-
-        /* Hover 爆發 */
-        .trinity-item:hover { transform: translateY(-5px); }
-        .trinity-item:hover .trinity-concept { color: var(--hover-color); }
-        .trinity-item:hover .trinity-name { opacity: 1; color: var(--hover-color); }
-        .trinity-item:hover .trinity-icon {
-            fill: var(--hover-color);
-            filter: drop-shadow(0 8px 16px var(--hover-glow));
-            transform: scale(1.2);
-        }
-
-        /* Footer */
-        .footer {
-            width: 100%;
-            border-top: 1px solid var(--border-light);
-            padding: 2.5rem 0;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(8px);
-        }
-        .footer-nav {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            margin-bottom: 1.25rem;
-        }
-        .footer-nav a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.8rem;
+        .manifesto-eng {
+            font-size: 0.65rem;
             font-weight: 600;
-            transition: color 0.2s;
-        }
-        .footer-nav a:hover { color: var(--accent-blue); }
-        .copyright {
-            font-size: 0.7rem;
             color: #94A3B8;
-            font-weight: 500;
+            letter-spacing: 0.1em;
+            margin: 0;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        }
+
+        /* RWD: iPad 直立模式強制收束 (Zero Entropy Grid) */
+        @media (max-width: 860px) {
+            .pillar-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+        @media (max-width: 480px) {
+            .container { padding: 3rem 1.2rem 2rem; }
+            .brand-name { font-size: 1.8rem; }
+            .manifesto-text { font-size: 0.75rem; }
+            .manifesto-eng { font-size: 0.55rem; }
         }
     </style>
 </head>
@@ -372,32 +306,12 @@ const footerLinks = [
             ))}
         </main>
 
-        <section class="trinity-section">
-            <div class="trinity-grid">
-                {trinity.map(t => (
-                    <a href={t.url} target="_blank" rel="me noopener noreferrer" class="trinity-item" style={`--hover-color: ${t.color}; --hover-glow: ${t.glow};`}>
-                        <span class="trinity-concept">{t.concept}</span>
-                        <svg class="trinity-icon" viewBox="0 0 24 24">
-                            {t.id === 'signal' && <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>}
-                            {/* 替換為 Medium 官方 SVG 路徑 */}
-                            {t.id === 'monolith' && <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42c1.87 0 3.38 2.88 3.38 6.42M24 12c0 3.11-.53 5.62-1.18 5.62-.66 0-1.18-2.51-1.18-5.62s.52-5.62 1.18-5.62c.65 0 1.18 2.51 1.18 5.62"/>}
-                            {t.id === 'prism' && <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.399.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.951-7.252 4.173 0 7.41 2.967 7.41 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.367 18.62 0 12.017 0z"/>}
-                        </svg>
-                        <span class="trinity-name">{t.name}</span>
-                    </a>
-                ))}
-            </div>
+        <section class="manifesto-section">
+            <div class="divider"></div>
+            <p class="manifesto-text">信號散佈於平原，真理封存於此。</p>
+            <p class="manifesto-eng">Signals are scattered across the plains. Truth is sealed here.</p>
         </section>
     </div>
-
-    <footer class="footer">
-        <nav class="footer-nav">
-            {footerLinks.map(f => (
-                <a href={f.u}>{f.name}</a>
-            ))}
-        </nav>
-        <p class="copyright">© 2026 {brandName}. ALL RIGHTS RESERVED.</p>
-    </footer>
 
 </body>
 </html>
