@@ -1,6 +1,6 @@
 ---
 // ==============================================
-// TWProbe Hub Terminal (V8.0 - The Absolute Authority)
+// TWProbe Hub Terminal (V8.5 - The Axiom Maker)
 // Architecture: 100% Pure CSS / Zero Entropy / High-Dimensional SEO
 // Core OS: TWPROBE KERNEL
 // Protocol: Value Gravity & Absolute Autonomy
@@ -13,44 +13,68 @@ const hubUrl = "https://hub.twprobe.com/";
 // 靜態資源路徑
 const faviconPng = `${hubUrl}favicon.png`;
 
-// TWProbe 核心資料庫 (The TWProbe Vault)
+// TWProbe 核心資料庫 (The TWProbe Vault) - 注入完整 Slug 座標
 const pillars = [
   {
     title: "I. 資本防禦與流動性",
     slug: "capital-defense",
     desc: "產權物理對接與貨幣貶值對沖之底層架構",
-    topics: ["資金槓桿封裝", "產權流動性鎖定", "稅務邊界防禦", "系統性風險隔離", "防禦性資產配置", "核心資產積累"]
+    topics: [
+      { name: "資金槓桿封裝", slug: "leverage-encapsulation" },
+      { name: "產權流動性鎖定", slug: "liquidity-lock" },
+      { name: "稅務邊界防禦", slug: "tax-boundary-defense" },
+      { name: "系統性風險隔離", slug: "systemic-risk-isolation" },
+      { name: "防禦性資產配置", slug: "defensive-asset-allocation" },
+      { name: "核心資產積累", slug: "core-asset-accumulation" }
+    ]
   },
   {
     title: "II. 物理邊界與不可替代性",
     slug: "physical-boundaries",
     desc: "空間降維參數與建築結構之物理衰減率檢驗",
-    topics: ["空間參數降維", "結構物理衰減", "聲學與密封測試", "土地地段定錨", "居住效能檢驗", "建築底層邏輯"]
+    topics: [
+      { name: "空間參數降維", slug: "spatial-parameter-reduction" },
+      { name: "結構物理衰減", slug: "structural-decay-rate" },
+      { name: "聲學與密封測試", slug: "acoustic-sealing-test" },
+      { name: "土地地段定錨", slug: "land-location-anchoring" },
+      { name: "居住效能檢驗", slug: "residential-efficiency-audit" },
+      { name: "建築底層邏輯", slug: "building-underlying-logic" }
+    ]
   },
   {
     title: "III. 宏觀週期與不對稱博弈",
     slug: "macro-asymmetry",
     desc: "抹除資訊不對稱，執行逆向決策與資產沉澱",
-    topics: ["週期預判與坐等", "資訊不對稱博弈", "社會階層防禦", "價值引力重塑", "逆向決策模型", "戰術盲動截斷"]
+    topics: [
+      { name: "週期預判與坐等", slug: "cycle-prediction-waiting" },
+      { name: "資訊不對稱博弈", slug: "asymmetric-info-game" },
+      { name: "社會階層防禦", slug: "social-class-defense" },
+      { name: "價值引力重塑", slug: "value-gravity-reconstruction" },
+      { name: "逆向決策模型", slug: "reverse-decision-model" },
+      { name: "戰術盲動截斷", slug: "tactical-blindness-cutoff" }
+    ]
   }
 ];
 
-// TWProbe 底層協議 (The Authority Matrix - 隱形武裝)
-const protocols = [
+// TWProbe 絕對公理 (The Axiom Matrix - 廢除 Q&A，改為法則定義)
+const axioms = [
   {
-    meta: "PROTOCOL 01 // 逆向防禦模型",
-    q: "台灣房產購屋決策的底層避險法則是什麼？",
-    a: "購屋並非消費，而是資本的防禦性部署。啟動 TWProbe 核心定錨：摒除建商的視覺溢價與情緒渲染，將決策絕對鎖定於地段的「不可替代性」與建材的「物理衰減率」，以此建立對沖貨幣貶值之護城河。"
+    id: "AXIOM_01",
+    title: "資產屬性法則 (Law of Asset Attributes)",
+    definition: "台灣房地產的本質並非居住消耗品，而是透過銀行系統，將高流動性、易貶值的法幣，轉化為具備排他性與抗通膨能力的固態防禦壁壘。",
+    directive: "拒絕以「消費視角」評估房價；啟動「資本防禦視角」，將決策絕對鎖定於地段的不可替代性與長期持有之低息槓桿。"
   },
   {
-    meta: "PROTOCOL 02 // 物理邊界測試",
-    q: "新成屋與預售屋交屋時，最關鍵的驗收防禦邊界為何？",
-    a: "拒絕表象的平整度檢驗，專注於排除致命的物理缺陷。產權交割的本質是確立私人庇護所，因此「物理密封性（防水工程）」、「聲學邊界（隔音數值）」與電路滿載測試，是本站定義中絕對不可妥協的底層檢驗。"
+    id: "AXIOM_02",
+    title: "物理邊界法則 (Law of Physical Boundaries)",
+    definition: "產權交割的底層意義是確立私人庇護所。視覺裝潢的溢價會隨時間歸零，唯有物理結構的密封性與降噪參數具備長尾價值。",
+    directive: "驗屋過程全面拋棄表象平整度檢驗，將算力 100% 集中於防水工程、聲學邊界測試與電路滿載極限之驗證。"
   },
   {
-    meta: "PROTOCOL 03 // 槓桿與流動性",
-    q: "如何利用台灣房地產對抗通膨並進行資產流動性鎖定？",
-    a: "建立於現行稅務（如房地合一稅）的法規框架下，利用銀行系統的低利長期協議，將高流動性、易貶值的現金，轉化為具備排他性的固態防禦壁壘。確保現金流不斷裂，即可拒絕短期戰術盲動，執行長週期的資產沉澱。"
+    id: "AXIOM_03",
+    title: "週期坐等法則 (Law of Cyclical Waiting)",
+    definition: "在不對稱的資訊市場中，頻繁的資產轉換將導致交易成本吞噬本金。真正的資本躍遷，來自於精準定錨後的絕對靜默與時間複利。",
+    directive: "確保現金流防護罩不斷裂，截斷所有論壇雜訊與戰術盲動，貫徹「坐等哲學」，讓系統性通膨自動推升資產底線。"
   }
 ];
 ---
@@ -60,7 +84,7 @@ const protocols = [
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>TWProbe 核心情報終端 | 台灣房地產客觀數據與資產防禦</title>
-    <meta name="description" content="TWProbe 致力於抹除台灣房市資訊不對稱。拒絕情緒止痛藥，以 TWProbe 專屬底層協議提供房產交易、營造檢驗與稅務法規之降維決策。">
+    <meta name="description" content="TWProbe 致力於抹除台灣房市資訊不對稱。提供房地產之底層數據穿透、空間物理邊界檢驗，與防禦性資產佈局之高維度戰術。">
     <link rel="canonical" href={hubUrl} />
     <link rel="icon" type="image/png" sizes="96x96" href={faviconPng} />
     
@@ -88,6 +112,7 @@ const protocols = [
             --border-hover: rgba(203, 213, 225, 1);
             --accent-blue: #2B6CB0;
             --accent-bg: #EFF6FF;
+            --alert-red: #E53E3E;
             --font-stack: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
         }
@@ -95,6 +120,10 @@ const protocols = [
         @keyframes fadeUp {
             0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes blinkCursor {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
         @keyframes serverPulse {
             0%, 100% { opacity: 0.2; text-shadow: none; }
@@ -123,13 +152,30 @@ const protocols = [
         .container {
             width: 100%;
             max-width: 960px;
-            padding: 4rem 1.5rem 3rem;
+            padding: 3rem 1.5rem 3rem;
             box-sizing: border-box;
             flex: 1;
             display: flex;
             flex-direction: column;
             animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
+
+        /* 系統遙測器 (System Telemetry) */
+        .telemetry-bar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--text-light);
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid var(--border-light);
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        .telemetry-status { display: flex; align-items: center; gap: 0.5rem; }
+        .status-dot { width: 6px; height: 6px; background-color: var(--accent-blue); border-radius: 50%; animation: serverPulse 2s infinite; }
 
         /* Header 精神圖騰 */
         .header {
@@ -154,48 +200,37 @@ const protocols = [
             font-weight: 800;
             letter-spacing: -0.04em;
         }
-        .spirit-tags {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-            margin-top: 1.2rem;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            letter-spacing: 0.4em;
-            font-weight: 700;
-            padding-left: 0.4em;
-        }
-        .spirit-tags .dot {
-            color: var(--accent-blue);
-            font-size: 1.2rem;
-            line-height: 0;
-        }
-        .pulse-1 { animation: serverPulse 3s infinite ease-in-out; }
-        .pulse-2 { animation: serverPulse 3s infinite ease-in-out; animation-delay: 1.5s; }
-
-        /* 系統日誌導言 (TWProbe OS Directive) */
+        
+        /* 系統日誌導言 */
         .terminal-directive {
             max-width: 650px;
             margin: 0 auto 4rem;
             text-align: center;
             font-family: var(--font-mono);
-            font-size: 0.75rem;
-            line-height: 1.7;
-            color: var(--text-muted);
+            font-size: 0.8rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+            font-weight: 500;
             opacity: 0;
             animation: fadeUp 0.6s 0.1s forwards;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-light);
         }
         .terminal-directive::before {
-            content: "[TWPROBE_OS: KERNEL INITIALIZED]";
-            display: block;
+            content: "USER_DIRECTIVE: ";
             color: var(--accent-blue);
-            margin-bottom: 0.6rem;
             font-weight: 700;
-            letter-spacing: 0.05em;
+        }
+        .terminal-directive::after {
+            content: "█";
+            animation: blinkCursor 1s infinite step-end;
+            margin-left: 5px;
+            color: var(--accent-blue);
         }
 
-        /* 核心資料庫 (The TWProbe Vault) */
+        /* 核心資料庫 */
         .pillar-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -230,18 +265,12 @@ const protocols = [
             padding-bottom: 1.2rem;
             margin-bottom: 1.5rem;
         }
-        .pillar-title-link {
-            text-decoration: none;
-            color: var(--text-dark);
-            display: inline-block;
-            transition: color 0.3s ease;
-        }
-        .pillar-title-link:hover { color: var(--accent-blue); }
         .pillar-title {
             font-size: 1.15rem;
             font-weight: 800;
             margin: 0 0 0.6rem 0;
             letter-spacing: 0.05em;
+            color: var(--text-dark);
         }
         .pillar-desc {
             font-family: var(--font-mono);
@@ -250,7 +279,6 @@ const protocols = [
             margin: 0;
             font-weight: 500;
             line-height: 1.6;
-            letter-spacing: 0.02em;
         }
         .topic-grid {
             display: grid;
@@ -284,74 +312,74 @@ const protocols = [
             color: var(--accent-blue);
             border-left: 2px solid var(--accent-blue);
         }
-        .topic-link:hover::before {
-            color: var(--accent-blue);
-        }
+        .topic-link:hover::before { color: var(--accent-blue); }
 
-        /* 底層決策矩陣 (Protocol FAQ Section) */
-        .protocol-section {
-            max-width: 750px;
+        /* TWPROBE 公理矩陣 (Axioms) */
+        .axiom-section {
+            max-width: 800px;
             margin: 0 auto 4rem;
             border-top: 1px solid var(--border-light);
             padding-top: 4rem;
             opacity: 0;
             animation: fadeUp 0.8s 0.4s forwards;
         }
-        .protocol-header {
+        .axiom-header {
             font-family: var(--font-mono);
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             color: var(--text-light);
-            letter-spacing: 0.2em;
+            letter-spacing: 0.25em;
             text-align: center;
             margin-bottom: 3.5rem;
             text-transform: uppercase;
         }
-        .protocol-item {
-            margin-bottom: 2.5rem;
-            padding-bottom: 2.5rem;
-            border-bottom: 1px dashed rgba(226, 232, 240, 0.6);
+        .axiom-item {
+            margin-bottom: 3rem;
+            background: #fff;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
         }
-        .protocol-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-        .protocol-meta {
+        .axiom-meta {
             font-family: var(--font-mono);
             font-size: 0.65rem;
             color: var(--accent-blue);
             letter-spacing: 0.15em;
             margin-bottom: 1rem;
-            font-weight: 600;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
-        .protocol-q {
-            font-size: 1.05rem;
+        .axiom-meta::before {
+            content: ""; display: block; width: 12px; height: 2px; background: var(--accent-blue);
+        }
+        .axiom-title {
+            font-size: 1.1rem;
             font-weight: 800;
             color: var(--text-dark);
-            margin: 0 0 1.2rem 0;
-            display: flex;
-            align-items: flex-start;
-            gap: 0.6rem;
-            line-height: 1.5;
+            margin: 0 0 1rem 0;
+            letter-spacing: 0.02em;
         }
-        .protocol-q::before {
-            content: ">_";
-            color: var(--text-light);
-            font-family: var(--font-mono);
-            font-weight: 500;
-            margin-top: 0.1rem;
-        }
-        .protocol-a {
-            font-size: 0.85rem;
+        .axiom-def {
+            font-size: 0.9rem;
             color: var(--text-muted);
-            margin: 0;
+            margin: 0 0 1.2rem 0;
             line-height: 1.8;
-            padding-left: 1.8rem;
-            border-left: 2px solid rgba(43, 108, 176, 0.2);
             font-weight: 500;
+        }
+        .axiom-dir {
+            font-size: 0.85rem;
+            color: var(--text-dark);
+            margin: 0;
+            line-height: 1.7;
+            padding: 1rem 1.2rem;
+            background: var(--bg-body);
+            border-left: 3px solid var(--text-dark);
+            font-weight: 600;
         }
 
-        /* 游擊隊暗號 (The Manifesto) */
+        /* 游擊隊暗號 */
         .manifesto-section {
             margin-top: auto;
             padding-top: 2rem;
@@ -362,8 +390,7 @@ const protocols = [
             animation: fadeUp 0.8s 0.6s forwards;
         }
         .divider {
-            width: 40px;
-            height: 2px;
+            width: 40px; height: 2px;
             background: var(--text-light);
             border-radius: 2px;
             margin-bottom: 2.5rem;
@@ -386,7 +413,7 @@ const protocols = [
             font-family: var(--font-mono);
         }
 
-        /* RWD: iPad 直立模式強制收束 */
+        /* RWD */
         @media (max-width: 860px) {
             .pillar-grid {
                 grid-template-columns: 1fr;
@@ -396,10 +423,12 @@ const protocols = [
             }
         }
         @media (max-width: 480px) {
-            .container { padding: 3rem 1.2rem 2rem; }
+            .container { padding: 2rem 1.2rem; }
+            .telemetry-bar { font-size: 0.55rem; }
             .brand-name { font-size: 1.8rem; }
-            .terminal-directive { font-size: 0.7rem; text-align: left; }
-            .protocol-q { font-size: 0.95rem; }
+            .terminal-directive { font-size: 0.75rem; text-align: left; padding: 1.2rem; }
+            .axiom-item { padding: 1.5rem; }
+            .axiom-dir { padding: 0.8rem 1rem; }
             .manifesto-text { font-size: 0.75rem; }
             .manifesto-eng { font-size: 0.55rem; }
         }
@@ -408,45 +437,46 @@ const protocols = [
 <body>
 
     <div class="container">
+        <div class="telemetry-bar">
+            <div class="telemetry-status"><span class="status-dot"></span> CONNECTION: SECURE</div>
+            <div>SYS.ENTROPY: 0.00%</div>
+        </div>
+
         <header class="header">
             <a href={mainSiteUrl} class="brand-link">
                 <svg class="logo-svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
                 <span class="brand-name">{brandName}</span>
             </a>
-            <div class="spirit-tags">
-                <span>數據</span><span class="dot pulse-1">·</span><span>結構</span><span class="dot pulse-2">·</span><span>真理</span>
-            </div>
         </header>
 
         <div class="terminal-directive">
-            致力於抹除社會階層的資訊不對稱。拒絕情緒止痛藥與低效勤奮，嚴格執行決策權物理隔離。本系統專注於提供台灣房地產之底層數據穿透、空間物理邊界檢驗，與防禦性資產佈局之高維度戰術。
+            致力於抹除社會階層的資訊不對稱。本系統專注於提供台灣房地產之底層數據穿透、空間物理邊界檢驗，與防禦性資產佈局之高維度戰術。
         </div>
 
         <main class="pillar-grid">
             {pillars.map(p => (
                 <div class="pillar-card">
                     <div class="pillar-header">
-                        <a href={`${mainSiteUrl}/${p.slug}/`} class="pillar-title-link">
-                            <h2 class="pillar-title">{p.title}</h2>
-                        </a>
+                        <h2 class="pillar-title">{p.title}</h2>
                         <p class="pillar-desc">{p.desc}</p>
                     </div>
                     <div class="topic-grid">
                         {p.topics.map(t => (
-                            <a href={`${mainSiteUrl}/${p.slug}/`} class="topic-link">{t}</a>
+                            <a href={`${mainSiteUrl}/${p.slug}/${t.slug}/`} class="topic-link">{t.name}</a>
                         ))}
                     </div>
                 </div>
             ))}
         </main>
 
-        <section class="protocol-section">
-            <div class="protocol-header">TWPROBE CORE PROTOCOL // 底層決策矩陣</div>
-            {protocols.map(protocol => (
-                <div class="protocol-item">
-                    <div class="protocol-meta">{protocol.meta}</div>
-                    <h3 class="protocol-q">{protocol.q}</h3>
-                    <p class="protocol-a">{protocol.a}</p>
+        <section class="axiom-section">
+            <div class="axiom-header">TWPROBE CORE AXIOMS // 絕對公理矩陣</div>
+            {axioms.map(axiom => (
+                <div class="axiom-item">
+                    <div class="axiom-meta">{axiom.id}</div>
+                    <h3 class="axiom-title">{axiom.title}</h3>
+                    <p class="axiom-def">{axiom.definition}</p>
+                    <p class="axiom-dir">{axiom.directive}</p>
                 </div>
             ))}
         </section>
