@@ -1,0 +1,224 @@
+---
+// ==============================================
+// TWProbe Thesis Engine (V1.0 - The Absolute Boundary)
+// Target: MDX Content Wrapper / Zero Visual Noise
+// ==============================================
+
+const { frontmatter } = Astro.props;
+const hubUrl = "https://hub.twprobe.com/";
+
+// 確保每篇 MDX 都傳入這些嚴格定義的參數
+const { title, docId, abstract, date } = frontmatter;
+---
+
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} | TWProbe 核心情報終端</title>
+    <meta name="description" content={abstract} />
+    
+    <script type="application/ld+json" set:html={`
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "${title}",
+      "abstract": "${abstract}",
+      "datePublished": "${date}",
+      "author": {
+        "@type": "Organization",
+        "name": "TWProbe 編輯部"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "TWProbe"
+      }
+    }
+    `}></script>
+
+    <style>
+        :root {
+            --bg-paper: #FAFAFA;
+            --text-main: #111827;
+            --text-muted: #4B5563;
+            --border-line: #E5E7EB;
+            --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            --font-serif: "Noto Serif TC", "Songti TC", "PMingLiU", Georgia, serif; /* 論文級襯線字體 */
+            --font-sans: system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-paper);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* 終端機導航列 */
+        .nav-terminal {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border-line);
+            display: flex;
+            justify-content: space-between;
+            background: #fff;
+        }
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+        .nav-link:hover { color: #000; }
+        .nav-link::before { content: "< "; opacity: 0.5; }
+
+        /* 論文核心容器 */
+        .thesis-container {
+            max-width: 680px; /* 鎖定最佳閱讀物理邊界 */
+            margin: 4rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* 論文標頭 (Frontmatter 對接區) */
+        .thesis-header {
+            border-bottom: 2px solid #000;
+            padding-bottom: 2rem;
+            margin-bottom: 3rem;
+        }
+        .doc-id {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        .thesis-title {
+            font-family: var(--font-sans);
+            font-size: 2.2rem;
+            font-weight: 800;
+            line-height: 1.3;
+            margin: 0 0 1.5rem 0;
+            letter-spacing: -0.02em;
+        }
+        .thesis-abstract {
+            background: #fff;
+            border: 1px solid var(--border-line);
+            padding: 1.5rem;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            border-left: 4px solid #000;
+            font-weight: 500;
+        }
+        .abstract-label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+            display: block;
+            color: #000;
+            font-weight: 700;
+        }
+
+        /* MDX 內容注入區 (The Injection) */
+        .prose {
+            font-family: var(--font-serif); /* 內文使用學術襯線體，建立權威感 */
+            font-size: 1.05rem;
+            color: #1a1a1a;
+        }
+        
+        /* 針對 MDX 轉換出的 HTML 標籤進行嚴格控制 */
+        .prose h2 {
+            font-family: var(--font-sans);
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-line);
+        }
+        .prose h3 {
+            font-family: var(--font-sans);
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+        }
+        .prose p {
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+        .prose ul, .prose ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+        .prose li {
+            margin-bottom: 0.5rem;
+        }
+        .prose strong {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            color: #000;
+        }
+        .prose blockquote {
+            margin: 2rem 0;
+            padding: 1rem 1.5rem;
+            background: #f3f4f6;
+            border-left: 3px solid #000;
+            font-family: var(--font-sans);
+            font-style: italic;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* 結尾系統印記 */
+        .thesis-footer {
+            margin-top: 5rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-line);
+            text-align: center;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+        }
+
+        @media (max-width: 600px) {
+            .thesis-title { font-size: 1.8rem; }
+            .thesis-container { margin: 2rem auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav-terminal">
+        <a href={hubUrl} class="nav-link">RETURN TO TWPROBE HUB</a>
+        <span>STATUS: SECURE</span>
+    </nav>
+
+    <main class="thesis-container">
+        <header class="thesis-header">
+            <span class="doc-id">[{docId}] // 核心情報庫</span>
+            <h1 class="thesis-title">{title}</h1>
+            <div class="thesis-abstract">
+                <span class="abstract-label">ABSTRACT / 物理摘要</span>
+                {abstract}
+            </div>
+        </header>
+
+        <article class="prose">
+            <slot /> 
+        </article>
+
+        <footer class="thesis-footer">
+            END OF DOCUMENT // TWPROBE KERNEL // {date}
+        </footer>
+    </main>
+
+</body>
+</html>
