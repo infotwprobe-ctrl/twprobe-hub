@@ -2,7 +2,7 @@
 // ==============================================
 // TWProbe Hub Terminal (V8.5 - The Axiom Maker)
 // Architecture: 100% Pure CSS / Zero Entropy / High-Dimensional SEO
-// Core OS: TWPROBE KERNEL
+// Core OS: CORTEX 3.0 SYNCHRONIZED
 // ==============================================
 
 const brandName = "TWProbe";
@@ -38,15 +38,15 @@ const pillars = [
   },
   {
     title: "III. 宏觀週期與不對稱博弈",
-    slug: "macro-asymmetry",
+    slug: "macro-cycles",
     desc: "抹除資訊不對稱，執行逆向決策與資產沉澱",
     topics: [
-      { name: "週期預判與坐等", slug: "cycle-prediction-waiting" },
-      { name: "資訊不對稱博弈", slug: "asymmetric-info-game" },
-      { name: "社會階層防禦", slug: "social-class-defense" },
-      { name: "價值引力重塑", slug: "value-gravity-reconstruction" },
+      { name: "週期預判與坐等", slug: "cycle-anticipation" },
+      { name: "資訊不對稱博弈", slug: "information-asymmetric-game" },
+      { name: "社會階層防禦", slug: "social-stratification-defense" },
+      { name: "價值引力重塑", slug: "value-gravity-reshaping" },
       { name: "逆向決策模型", slug: "reverse-decision-model" },
-      { name: "戰術盲動截斷", slug: "tactical-blindness-cutoff" }
+      { name: "戰術盲動截斷", slug: "tactical-action-cutoff" }
     ]
   }
 ];
@@ -187,7 +187,17 @@ const axioms = [
         .pillar-title-link:hover { color: var(--accent-blue); }
         .pillar-title { font-size: 1.15rem; font-weight: 800; margin: 0 0 0.6rem 0; letter-spacing: 0.05em; }
         .pillar-desc { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-muted); margin: 0; font-weight: 500; line-height: 1.6; }
-        .topic-grid { display: grid; grid-template-columns: 1fr; gap: 0.5rem; margin-top: auto; }
+        
+        /* 核心校準：加入 width: max-content 與 margin-inline: auto 實現絕對置中 */
+        .topic-grid { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 0.5rem; 
+            margin-top: auto; 
+            width: max-content; 
+            margin-inline: auto; 
+        }
+        
         .topic-link {
             background: transparent; color: var(--text-dark); text-decoration: none;
             font-size: 0.8rem; font-weight: 600; padding: 0.6rem 1rem; border-radius: 6px;
