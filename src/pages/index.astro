@@ -3,17 +3,12 @@
 // TWProbe Hub Terminal (V8.5 - The Axiom Maker)
 // Architecture: 100% Pure CSS / Zero Entropy / High-Dimensional SEO
 // Core OS: TWPROBE KERNEL
-// Protocol: Value Gravity & Absolute Autonomy
 // ==============================================
 
 const brandName = "TWProbe";
 const mainSiteUrl = "https://twprobe.com";
-const hubUrl = "https://hub.twprobe.com/";
 
-// 靜態資源路徑
-const faviconPng = `${hubUrl}favicon.png`;
-
-// TWProbe 核心資料庫 (The TWProbe Vault) - 注入完整 Slug 座標
+// TWProbe 核心資料庫 (The TWProbe Vault)
 const pillars = [
   {
     title: "I. 資本防禦與流動性",
@@ -56,7 +51,7 @@ const pillars = [
   }
 ];
 
-// TWProbe 絕對公理 (The Axiom Matrix - 廢除 Q&A，改為法則定義)
+// TWProbe 絕對公理 (The Axiom Matrix)
 const axioms = [
   {
     id: "AXIOM_01",
@@ -85,15 +80,13 @@ const axioms = [
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>TWProbe 核心情報終端 | 台灣房地產客觀數據與資產防禦</title>
     <meta name="description" content="TWProbe 致力於抹除台灣房市資訊不對稱。提供房地產之底層數據穿透、空間物理邊界檢驗，與防禦性資產佈局之高維度戰術。">
-    <link rel="canonical" href={hubUrl} />
-    <link rel="icon" type="image/png" sizes="96x96" href={faviconPng} />
     
     <script type="application/ld+json" set:html={`
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "TWProbe 核心情報終端",
-      "url": "${hubUrl}",
+      "url": "https://hub.twprobe.com/",
       "description": "台灣房地產客觀數據與資產防禦決策之絕對權威庫",
       "publisher": {
         "@type": "Organization",
@@ -109,10 +102,8 @@ const axioms = [
             --text-muted: #64748B;
             --text-light: #94A3B8;
             --border-light: rgba(226, 232, 240, 0.8);
-            --border-hover: rgba(203, 213, 225, 1);
             --accent-blue: #2B6CB0;
             --accent-bg: #EFF6FF;
-            --alert-red: #E53E3E;
             --font-stack: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
         }
@@ -131,15 +122,12 @@ const axioms = [
         }
 
         body {
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             background-color: var(--bg-body);
             color: var(--text-dark);
             font-family: var(--font-stack);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            display: flex; flex-direction: column; align-items: center;
             -webkit-font-smoothing: antialiased;
             background-image: 
                 radial-gradient(circle at 50% 0%, #FFFFFF 0%, transparent 80%),
@@ -150,287 +138,85 @@ const axioms = [
         }
 
         .container {
-            width: 100%;
-            max-width: 960px;
-            padding: 3rem 1.5rem 3rem;
-            box-sizing: border-box;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
+            width: 100%; max-width: 960px; padding: 3rem 1.5rem 3rem;
+            box-sizing: border-box; flex: 1; display: flex; flex-direction: column;
             animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        /* 系統遙測器 (System Telemetry) */
         .telemetry-bar {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
-            color: var(--text-light);
-            padding-bottom: 0.8rem;
-            border-bottom: 1px solid var(--border-light);
-            margin-bottom: 3rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
+            width: 100%; display: flex; justify-content: space-between;
+            font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-light);
+            padding-bottom: 0.8rem; border-bottom: 1px solid var(--border-light);
+            margin-bottom: 3rem; text-transform: uppercase; letter-spacing: 0.1em;
         }
         .telemetry-status { display: flex; align-items: center; gap: 0.5rem; }
         .status-dot { width: 6px; height: 6px; background-color: var(--accent-blue); border-radius: 50%; animation: serverPulse 2s infinite; }
 
-        /* Header 精神圖騰 */
-        .header {
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
-        .brand-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            text-decoration: none;
-            color: var(--text-dark);
-            transition: color 0.3s;
-        }
+        .header { text-align: center; margin-bottom: 2.5rem; }
+        .brand-link { display: inline-flex; align-items: center; gap: 0.6rem; text-decoration: none; color: var(--text-dark); transition: color 0.3s; }
         .brand-link:hover { color: var(--accent-blue); }
-        .logo-svg {
-            width: 42px; height: 42px;
-            fill: var(--accent-blue);
-        }
-        .brand-name {
-            font-size: 2.2rem;
-            font-weight: 800;
-            letter-spacing: -0.04em;
-        }
+        .logo-svg { width: 42px; height: 42px; fill: var(--accent-blue); }
+        .brand-name { font-size: 2.2rem; font-weight: 800; letter-spacing: -0.04em; }
         
-        /* 系統日誌導言 */
         .terminal-directive {
-            max-width: 650px;
-            margin: 0 auto 4rem;
-            text-align: center;
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            line-height: 1.8;
-            color: var(--text-dark);
-            font-weight: 500;
-            opacity: 0;
-            animation: fadeUp 0.6s 0.1s forwards;
-            background: rgba(255, 255, 255, 0.5);
-            padding: 1.5rem;
-            border-radius: 8px;
-            border: 1px solid var(--border-light);
+            max-width: 650px; margin: 0 auto 4rem; text-align: center;
+            font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.8;
+            color: var(--text-dark); font-weight: 500; opacity: 0;
+            animation: fadeUp 0.6s 0.1s forwards; background: rgba(255, 255, 255, 0.5);
+            padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-light);
         }
-        .terminal-directive::before {
-            content: "USER_DIRECTIVE: ";
-            color: var(--accent-blue);
-            font-weight: 700;
-        }
-        .terminal-directive::after {
-            content: "█";
-            animation: blinkCursor 1s infinite step-end;
-            margin-left: 5px;
-            color: var(--accent-blue);
-        }
+        .terminal-directive::before { content: "USER_DIRECTIVE: "; color: var(--accent-blue); font-weight: 700; }
+        .terminal-directive::after { content: "█"; animation: blinkCursor 1s infinite step-end; margin-left: 5px; color: var(--accent-blue); }
 
-        /* 核心資料庫 */
-        .pillar-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin-bottom: 5rem;
-        }
+        .pillar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 5rem; }
         .pillar-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 1);
-            border-radius: 14px;
-            padding: 1.8rem 1.5rem;
+            background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 1); border-radius: 14px; padding: 1.8rem 1.5rem;
             box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03), inset 0 0 0 1px rgba(255,255,255,0.5);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            opacity: 0;
-            display: flex;
-            flex-direction: column;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0; display: flex; flex-direction: column;
         }
         .pillar-card:nth-child(1) { animation: fadeUp 0.6s 0.15s forwards; }
         .pillar-card:nth-child(2) { animation: fadeUp 0.6s 0.25s forwards; }
         .pillar-card:nth-child(3) { animation: fadeUp 0.6s 0.35s forwards; }
-        
         .pillar-card:hover {
-            transform: translateY(-6px);
-            background: rgba(255, 255, 255, 0.95);
+            transform: translateY(-6px); background: rgba(255, 255, 255, 0.95);
             box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.08), inset 0 0 0 1px rgba(255,255,255,1);
         }
-        .pillar-header {
-            text-align: center;
-            border-bottom: 1px solid var(--border-light);
-            padding-bottom: 1.2rem;
-            margin-bottom: 1.5rem;
-        }
-        .pillar-title {
-            font-size: 1.15rem;
-            font-weight: 800;
-            margin: 0 0 0.6rem 0;
-            letter-spacing: 0.05em;
-            color: var(--text-dark);
-        }
-        .pillar-desc {
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            margin: 0;
-            font-weight: 500;
-            line-height: 1.6;
-        }
-        .topic-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 0.5rem;
-            margin-top: auto;
-        }
+        .pillar-header { text-align: center; border-bottom: 1px solid var(--border-light); padding-bottom: 1.2rem; margin-bottom: 1.5rem; }
+        .pillar-title-link { text-decoration: none; color: var(--text-dark); display: inline-block; transition: color 0.3s ease; }
+        .pillar-title-link:hover { color: var(--accent-blue); }
+        .pillar-title { font-size: 1.15rem; font-weight: 800; margin: 0 0 0.6rem 0; letter-spacing: 0.05em; }
+        .pillar-desc { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-muted); margin: 0; font-weight: 500; line-height: 1.6; }
+        .topic-grid { display: grid; grid-template-columns: 1fr; gap: 0.5rem; margin-top: auto; }
         .topic-link {
-            background: transparent;
-            color: var(--text-dark);
-            text-decoration: none;
-            font-size: 0.8rem;
-            font-weight: 600;
-            padding: 0.6rem 1rem;
-            border-radius: 6px;
-            text-align: left;
-            transition: all 0.25s ease;
-            border-left: 2px solid transparent;
-            display: flex;
-            align-items: center;
+            background: transparent; color: var(--text-dark); text-decoration: none;
+            font-size: 0.8rem; font-weight: 600; padding: 0.6rem 1rem; border-radius: 6px;
+            text-align: left; transition: all 0.25s ease; border-left: 2px solid transparent;
+            display: flex; align-items: center;
         }
-        .topic-link::before {
-            content: "▸";
-            color: var(--text-light);
-            margin-right: 0.6rem;
-            font-size: 0.9rem;
-            transition: color 0.25s;
-        }
-        .topic-link:hover {
-            background: var(--accent-bg);
-            color: var(--accent-blue);
-            border-left: 2px solid var(--accent-blue);
-        }
+        .topic-link::before { content: "▸"; color: var(--text-light); margin-right: 0.6rem; font-size: 0.9rem; transition: color 0.25s; }
+        .topic-link:hover { background: var(--accent-bg); color: var(--accent-blue); border-left: 2px solid var(--accent-blue); }
         .topic-link:hover::before { color: var(--accent-blue); }
 
-        /* TWPROBE 公理矩陣 (Axioms) */
-        .axiom-section {
-            max-width: 800px;
-            margin: 0 auto 4rem;
-            border-top: 1px solid var(--border-light);
-            padding-top: 4rem;
-            opacity: 0;
-            animation: fadeUp 0.8s 0.4s forwards;
-        }
-        .axiom-header {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            color: var(--text-light);
-            letter-spacing: 0.25em;
-            text-align: center;
-            margin-bottom: 3.5rem;
-            text-transform: uppercase;
-        }
-        .axiom-item {
-            margin-bottom: 3rem;
-            background: #fff;
-            border: 1px solid var(--border-light);
-            border-radius: 8px;
-            padding: 2rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
-        }
-        .axiom-meta {
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
-            color: var(--accent-blue);
-            letter-spacing: 0.15em;
-            margin-bottom: 1rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .axiom-meta::before {
-            content: ""; display: block; width: 12px; height: 2px; background: var(--accent-blue);
-        }
-        .axiom-title {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: var(--text-dark);
-            margin: 0 0 1rem 0;
-            letter-spacing: 0.02em;
-        }
-        .axiom-def {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin: 0 0 1.2rem 0;
-            line-height: 1.8;
-            font-weight: 500;
-        }
-        .axiom-dir {
-            font-size: 0.85rem;
-            color: var(--text-dark);
-            margin: 0;
-            line-height: 1.7;
-            padding: 1rem 1.2rem;
-            background: var(--bg-body);
-            border-left: 3px solid var(--text-dark);
-            font-weight: 600;
-        }
+        .axiom-section { max-width: 800px; margin: 0 auto 4rem; border-top: 1px solid var(--border-light); padding-top: 4rem; opacity: 0; animation: fadeUp 0.8s 0.4s forwards; }
+        .axiom-header { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-light); letter-spacing: 0.25em; text-align: center; margin-bottom: 3.5rem; text-transform: uppercase; }
+        .axiom-item { margin-bottom: 3rem; background: #fff; border: 1px solid var(--border-light); border-radius: 8px; padding: 2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
+        .axiom-meta { font-family: var(--font-mono); font-size: 0.65rem; color: var(--accent-blue); letter-spacing: 0.15em; margin-bottom: 1rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem; }
+        .axiom-meta::before { content: ""; display: block; width: 12px; height: 2px; background: var(--accent-blue); }
+        .axiom-title { font-size: 1.1rem; font-weight: 800; color: var(--text-dark); margin: 0 0 1rem 0; letter-spacing: 0.02em; }
+        .axiom-def { font-size: 0.9rem; color: var(--text-muted); margin: 0 0 1.2rem 0; line-height: 1.8; font-weight: 500; }
+        .axiom-dir { font-size: 0.85rem; color: var(--text-dark); margin: 0; line-height: 1.7; padding: 1rem 1.2rem; background: var(--bg-body); border-left: 3px solid var(--text-dark); font-weight: 600; }
 
-        /* 游擊隊暗號 */
-        .manifesto-section {
-            margin-top: auto;
-            padding-top: 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            opacity: 0;
-            animation: fadeUp 0.8s 0.6s forwards;
-        }
-        .divider {
-            width: 40px; height: 2px;
-            background: var(--text-light);
-            border-radius: 2px;
-            margin-bottom: 2.5rem;
-            opacity: 0.3;
-        }
-        .manifesto-text {
-            font-size: 0.85rem;
-            font-weight: 800;
-            color: var(--text-muted);
-            letter-spacing: 0.25em;
-            margin: 0 0 0.8rem 0;
-            padding-left: 0.25em;
-        }
-        .manifesto-eng {
-            font-size: 0.65rem;
-            font-weight: 600;
-            color: var(--text-light);
-            letter-spacing: 0.1em;
-            margin: 0;
-            font-family: var(--font-mono);
-        }
+        .manifesto-section { margin-top: auto; padding-top: 2rem; display: flex; flex-direction: column; align-items: center; opacity: 0; animation: fadeUp 0.8s 0.6s forwards; }
+        .divider { width: 40px; height: 2px; background: var(--text-light); border-radius: 2px; margin-bottom: 2.5rem; opacity: 0.3; }
+        .manifesto-text { font-size: 0.85rem; font-weight: 800; color: var(--text-muted); letter-spacing: 0.25em; margin: 0 0 0.8rem 0; padding-left: 0.25em; }
+        .manifesto-eng { font-size: 0.65rem; font-weight: 600; color: var(--text-light); letter-spacing: 0.1em; margin: 0; font-family: var(--font-mono); }
 
-        /* RWD */
-        @media (max-width: 860px) {
-            .pillar-grid {
-                grid-template-columns: 1fr;
-                max-width: 450px;
-                margin-left: auto;
-                margin-right: auto;
-            }
-        }
+        @media (max-width: 860px) { .pillar-grid { grid-template-columns: 1fr; max-width: 450px; margin-left: auto; margin-right: auto; } }
         @media (max-width: 480px) {
-            .container { padding: 2rem 1.2rem; }
-            .telemetry-bar { font-size: 0.55rem; }
-            .brand-name { font-size: 1.8rem; }
-            .terminal-directive { font-size: 0.75rem; text-align: left; padding: 1.2rem; }
-            .axiom-item { padding: 1.5rem; }
-            .axiom-dir { padding: 0.8rem 1rem; }
-            .manifesto-text { font-size: 0.75rem; }
-            .manifesto-eng { font-size: 0.55rem; }
+            .container { padding: 2rem 1.2rem; } .telemetry-bar { font-size: 0.55rem; } .brand-name { font-size: 1.8rem; }
+            .terminal-directive { font-size: 0.75rem; text-align: left; padding: 1.2rem; } .axiom-item { padding: 1.5rem; }
+            .axiom-dir { padding: 0.8rem 1rem; } .manifesto-text { font-size: 0.75rem; } .manifesto-eng { font-size: 0.55rem; }
         }
     </style>
 </head>
@@ -457,12 +243,14 @@ const axioms = [
             {pillars.map(p => (
                 <div class="pillar-card">
                     <div class="pillar-header">
-                        <h2 class="pillar-title">{p.title}</h2>
+                        <a href={`/${p.slug}/`} class="pillar-title-link">
+                            <h2 class="pillar-title">{p.title}</h2>
+                        </a>
                         <p class="pillar-desc">{p.desc}</p>
                     </div>
                     <div class="topic-grid">
                         {p.topics.map(t => (
-                            <a href={`${mainSiteUrl}/${p.slug}/${t.slug}/`} class="topic-link">{t.name}</a>
+                            <a href={`/${p.slug}/${t.slug}/`} class="topic-link">{t.name}</a>
                         ))}
                     </div>
                 </div>
