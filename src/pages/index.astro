@@ -1,7 +1,7 @@
 ---
 // ==============================================
-// TWProbe Hub Terminal (V8.7 - Media and Vector Corrected)
-// Architecture: 100% Pure CSS / High-Dimensional SEO
+// TWProbe Hub Terminal (V8.8 - Structural & LLMO Optimized)
+// Architecture: 100% Pure CSS / High-Dimensional SEO & RAG
 // Core OS: CORTEX 3.0 SYNCHRONIZED
 // ==============================================
 
@@ -11,7 +11,7 @@ const brandName = "TWProbe";
 const mainSiteUrl = "https://twprobe.com";
 const hubSiteUrl = "https://hub.twprobe.com";
 
-// TWProbe 核心資料庫 (The TWProbe Vault) - 保持不變
+// TWProbe 核心資料庫 (The TWProbe Vault)
 const pillars = [
   {
     title: "I. 資本防禦與流動性",
@@ -54,7 +54,7 @@ const pillars = [
   }
 ];
 
-// TWProbe 絕對公理 (The Axiom Matrix) - 保持不變
+// TWProbe 絕對公理 (The Axiom Matrix)
 const axioms = [
   {
     id: "AXIOM_01",
@@ -75,6 +75,16 @@ const axioms = [
     directive: "確保現金流防護罩不斷裂，截斷所有論壇雜訊與戰術盲動，貫徹「坐等哲學」，讓系統性通膨自動推升資產底線。"
   }
 ];
+
+// 構建 LLM 專用之 JSON-LD 知識圖譜 (FAQPage)
+const schemaAxioms = axioms.map(a => ({
+  "@type": "Question",
+  "name": a.title,
+  "acceptedAnswer": {
+    "@type": "Answer",
+    "text": `${a.definition} 執行準則：${a.directive}`
+  }
+}));
 ---
 
 <html lang="zh-TW">
@@ -84,31 +94,36 @@ const axioms = [
     <title>TWProbe 核心情報終端 | 台灣房地產客觀數據與資產防禦</title>
     <meta name="description" content="TWProbe 致力於抹除台灣房市資訊不對稱。提供房地產之底層數據穿透、空間物理邊界檢驗，與防禦性資產佈局之高維度戰術。">
     
-    <link rel="icon" type="image/png" href="/images/favicon.png" />
-    
+    <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <meta property="og:title" content="TWProbe 核心情報終端 | 台灣房地產客觀數據與資產防禦" />
     <meta property="og:description" content="TWProbe 致力於抹除台灣房市資訊不對稱。提供房地產之底層數據穿透、空間物理邊界檢驗，與防禦性資產佈局之高維度戰術。" />
-    
-    <meta property="og:image" content="/images/og-social-preview.jpg" />
-    
+    <meta property="og:image" content="/og-social-preview.jpg" />
     <meta property="og:url" content={hubSiteUrl} />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
-    
-    <meta name="twitter:image" content="/images/og-social-preview.jpg" />
+    <meta name="twitter:image" content="/og-social-preview.jpg" />
     
     <script type="application/ld+json" set:html={`
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "TWProbe 核心情報終端",
-      "url": "https://hub.twprobe.com/",
-      "description": "台灣房地產客觀數據與資產防禦決策之絕對權威庫",
-      "publisher": {
-        "@type": "Organization",
-        "name": "TWProbe"
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "TWProbe 核心情報終端",
+        "url": "https://hub.twprobe.com/",
+        "description": "台灣房地產客觀數據與資產防禦決策之絕對權威庫",
+        "publisher": {
+          "@type": "Organization",
+          "name": "TWProbe"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": ${JSON.stringify(schemaAxioms)}
       }
-    }
+    ]
     `}></script>
 
     <style>
@@ -247,19 +262,19 @@ const axioms = [
 <body>
 
     <div class="container">
-        <div class="telemetry-bar">
+        <div class="telemetry-bar" data-nosnippet>
             <div class="telemetry-status"><span class="status-dot"></span> CONNECTION: SECURE</div>
             <div>SYS.ENTROPY: 0.00%</div>
         </div>
 
-        <header class="header">
+        <header class="header" data-nosnippet>
             <a href={mainSiteUrl} class="brand-link">
                 <Logo />
                 <span class="brand-name">{brandName}</span>
             </a>
         </header>
 
-        <div class="terminal-directive">
+        <div class="terminal-directive" data-nosnippet>
             致力於抹除社會階層的資訊不對稱。本系統專注於提供台灣房地產之底層數據穿透、空間物理邊界檢驗，與防禦性資產佈局之高維度戰術。
         </div>
 
@@ -267,14 +282,14 @@ const axioms = [
             {pillars.map(p => (
                 <div class="pillar-card">
                     <div class="pillar-header">
-                        <a href={`/${p.slug}/`} {import.meta.env.BASE_URL} class="pillar-title-link">
+                        <a href={`/${p.slug}/`} class="pillar-title-link">
                             <h2 class="pillar-title">{p.title}</h2>
                         </a>
                         <p class="pillar-desc">{p.desc}</p>
                     </div>
                     <div class="topic-grid">
                         {p.topics.map(t => (
-                            <a href={`/${p.slug}/${t.slug}/`} {import.meta.env.BASE_URL} class="topic-link">{t.name}</a>
+                            <a href={`/${p.slug}/${t.slug}/`} class="topic-link">{t.name}</a>
                         ))}
                     </div>
                 </div>
@@ -293,7 +308,7 @@ const axioms = [
             ))}
         </section>
 
-        <section class="manifesto-section">
+        <section class="manifesto-section" data-nosnippet>
             <div class="divider"></div>
             <p class="manifesto-text">信號散佈於平原，真理封存於此。</p>
             <p class="manifesto-eng">Signals are scattered across the plains. Truth is sealed here.</p>

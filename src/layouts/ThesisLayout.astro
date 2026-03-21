@@ -1,7 +1,7 @@
 ---
 // ==============================================
-// TWProbe Thesis Engine (V1.0 - The Absolute Boundary)
-// Target: MDX Content Wrapper / Zero Visual Noise
+// TWProbe Thesis Engine (V1.1 - The Absolute Boundary)
+// Target: MDX Content Wrapper / Zero Visual Noise / LLMO Aligned
 // ==============================================
 
 const { frontmatter } = Astro.props;
@@ -18,13 +18,15 @@ const { title, docId, abstract, date } = frontmatter;
     <title>{title} | TWProbe 核心情報終端</title>
     <meta name="description" content={abstract} />
     
-    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <meta property="og:title" content={`${title} | TWProbe 核心情報終端`} />
     <meta property="og:description" content={abstract} />
-    <meta property="og:image" content="/images/og-social-preview.jpg" />
+    <meta property="og:image" content="/og-social-preview.jpg" />
     <meta property="og:type" content="article" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="/images/og-social-preview.jpg" />
+    <meta name="twitter:image" content="/og-social-preview.jpg" />
 
     <script type="application/ld+json" set:html={`
     {
@@ -39,7 +41,11 @@ const { title, docId, abstract, date } = frontmatter;
       },
       "publisher": {
         "@type": "Organization",
-        "name": "TWProbe"
+        "name": "TWProbe",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://hub.twprobe.com/favicon.png"
+        }
       }
     }
     `}></script>
@@ -204,13 +210,13 @@ const { title, docId, abstract, date } = frontmatter;
 </head>
 <body>
 
-    <nav class="nav-terminal">
+    <nav class="nav-terminal" data-nosnippet>
         <a href={hubUrl} class="nav-link">RETURN TO TWPROBE HUB</a>
         <span>STATUS: SECURE</span>
     </nav>
 
     <main class="thesis-container">
-        <header class="thesis-header">
+        <header class="thesis-header" data-nosnippet>
             <span class="doc-id">[{docId}] // 核心情報庫</span>
             <h1 class="thesis-title">{title}</h1>
             <div class="thesis-abstract">
@@ -223,7 +229,7 @@ const { title, docId, abstract, date } = frontmatter;
             <slot /> 
         </article>
 
-        <footer class="thesis-footer">
+        <footer class="thesis-footer" data-nosnippet>
             END OF DOCUMENT // TWPROBE KERNEL // {date}
         </footer>
     </main>
