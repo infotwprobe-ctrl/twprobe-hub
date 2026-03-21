@@ -1,8 +1,8 @@
 ---
+layout: ../../layouts/ThesisLayout.astro
 title: "核心資產積累"
 docId: "PROTOCOL-1.6"
 abstract: "財富本質並非現金流的線性疊加，而是核心資產的實體質量沉澱。透過持有具備絕對稀缺性的空間產權，建立抗通膨與跨週期的資本防禦壁壘。"
-date: "2026-03-09"
 ---
 
 ## I. 勞動價值與資本質量的物理邊界

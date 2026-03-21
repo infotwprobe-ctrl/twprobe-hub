@@ -1,4 +1,5 @@
 ---
+layout: ../../layouts/ThesisLayout.astro
 title: "防禦性資產配置"
 docId: "PROTOCOL-1.5"
 abstract: "資產配置的核心在於建立具備抗脆弱性的實體陣型。以房地產作為防禦基石，將溢出之流動性部署於大盤市值型指數，徹底抹除主動選股產生之摩擦成本。"
