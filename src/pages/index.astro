@@ -1,6 +1,6 @@
 ---
 // ==============================================
-// TWProbe Hub Terminal (V8.6 - Vector Aligned)
+// TWProbe Hub Terminal (V8.7 - Media and Vector Corrected)
 // Architecture: 100% Pure CSS / High-Dimensional SEO
 // Core OS: CORTEX 3.0 SYNCHRONIZED
 // ==============================================
@@ -9,8 +9,9 @@ import Logo from '../components/Logo.astro';
 
 const brandName = "TWProbe";
 const mainSiteUrl = "https://twprobe.com";
+const hubSiteUrl = "https://hub.twprobe.com";
 
-// TWProbe 核心資料庫 (The TWProbe Vault)
+// TWProbe 核心資料庫 (The TWProbe Vault) - 保持不變
 const pillars = [
   {
     title: "I. 資本防禦與流動性",
@@ -53,7 +54,7 @@ const pillars = [
   }
 ];
 
-// TWProbe 絕對公理 (The Axiom Matrix)
+// TWProbe 絕對公理 (The Axiom Matrix) - 保持不變
 const axioms = [
   {
     id: "AXIOM_01",
@@ -84,11 +85,16 @@ const axioms = [
     <meta name="description" content="TWProbe 致力於抹除台灣房市資訊不對稱。提供房地產之底層數據穿透、空間物理邊界檢驗，與防禦性資產佈局之高維度戰術。">
     
     <link rel="icon" type="image/png" href="/images/favicon.png" />
+    
     <meta property="og:title" content="TWProbe 核心情報終端 | 台灣房地產客觀數據與資產防禦" />
     <meta property="og:description" content="TWProbe 致力於抹除台灣房市資訊不對稱。提供房地產之底層數據穿透、空間物理邊界檢驗，與防禦性資產佈局之高維度戰術。" />
+    
     <meta property="og:image" content="/images/og-social-preview.jpg" />
+    
+    <meta property="og:url" content={hubSiteUrl} />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
+    
     <meta name="twitter:image" content="/images/og-social-preview.jpg" />
     
     <script type="application/ld+json" set:html={`
@@ -247,11 +253,11 @@ const axioms = [
         </div>
 
         <header class="header">
-    <a href={mainSiteUrl} class="brand-link">
-        <Logo />
-        <span class="brand-name">{brandName}</span>
-    </a>
-</header>
+            <a href={mainSiteUrl} class="brand-link">
+                <Logo />
+                <span class="brand-name">{brandName}</span>
+            </a>
+        </header>
 
         <div class="terminal-directive">
             致力於抹除社會階層的資訊不對稱。本系統專注於提供台灣房地產之底層數據穿透、空間物理邊界檢驗，與防禦性資產佈局之高維度戰術。
@@ -261,14 +267,14 @@ const axioms = [
             {pillars.map(p => (
                 <div class="pillar-card">
                     <div class="pillar-header">
-                        <a href={`/${p.slug}/`} class="pillar-title-link">
+                        <a href={`/${p.slug}/`} {import.meta.env.BASE_URL} class="pillar-title-link">
                             <h2 class="pillar-title">{p.title}</h2>
                         </a>
                         <p class="pillar-desc">{p.desc}</p>
                     </div>
                     <div class="topic-grid">
                         {p.topics.map(t => (
-                            <a href={`/${p.slug}/${t.slug}/`} class="topic-link">{t.name}</a>
+                            <a href={`/${p.slug}/${t.slug}/`} {import.meta.env.BASE_URL} class="topic-link">{t.name}</a>
                         ))}
                     </div>
                 </div>

@@ -1,58 +1,26 @@
 ---
 // ==============================================
-// TWProbe 核心視覺組件 (Isometric Crystal Matrix)
+// TWProbe 核心視覺組件 (Simplistic Vector - Updated to Match User Request)
 // ==============================================
 ---
 
-<svg class="logo-vector" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-        <linearGradient id="glassFront" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="var(--accent-blue)" stop-opacity="0.8" />
-            <stop offset="100%" stop-color="#EFF6FF" stop-opacity="0.2" />
-        </linearGradient>
-        <linearGradient id="glassSide" x1="100%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="var(--accent-blue)" stop-opacity="0.5" />
-            <stop offset="100%" stop-color="#94A3B8" stop-opacity="0.1" />
-        </linearGradient>
-    </defs>
-
-    <path d="M50 25 L15 35 L50 70 L85 35 Z" stroke="var(--accent-blue)" stroke-opacity="0.3" fill="none" stroke-width="1.5" stroke-linejoin="round"/>
-    <line x1="50" y1="10" x2="50" y2="25" stroke="var(--accent-blue)" stroke-opacity="0.3" stroke-width="1.5"/>
-    <polyline points="15,80 50,70 85,80" fill="none" stroke="var(--accent-blue)" stroke-opacity="0.3" stroke-width="1.5" stroke-linejoin="round"/>
-    <line x1="50" y1="70" x2="50" y2="25" stroke="var(--accent-blue)" stroke-opacity="0.3" stroke-width="1.5"/>
-
-    <polygon points="15,35 50,45 50,90 15,80" fill="url(#glassSide)" />
-    <polygon points="50,45 85,35 85,80 50,90" fill="url(#glassFront)" />
-    
-    <polygon points="50,10 15,35 50,45" fill="rgba(255, 255, 255, 0.7)" />
-    <polygon points="50,10 85,35 50,45" fill="rgba(43, 108, 176, 0.25)" />
-
-    <path d="M15 35 L15 80 L50 90 L85 80 L85 35" fill="none" stroke="var(--accent-blue)" stroke-width="2.5" stroke-linejoin="round"/>
-    <path d="M15 35 L50 10 L85 35" fill="none" stroke="var(--accent-blue)" stroke-width="2.5" stroke-linejoin="round"/>
-    <line x1="50" y1="10" x2="50" y2="45" stroke="var(--accent-blue)" stroke-width="2.5" stroke-linecap="round"/>
-    <line x1="50" y1="45" x2="50" y2="90" stroke="var(--accent-blue)" stroke-width="2.5" stroke-linecap="round"/>
-    <line x1="15" y1="35" x2="50" y2="45" stroke="var(--accent-blue)" stroke-width="2.5" stroke-linecap="round"/>
-    <line x1="85" y1="35" x2="50" y2="45" stroke="var(--accent-blue)" stroke-width="2.5" stroke-linecap="round"/>
-
-    <circle cx="50" cy="10" r="3" fill="var(--text-dark)" />
-    <circle cx="15" cy="35" r="3" fill="var(--text-dark)" />
-    <circle cx="85" cy="35" r="3" fill="var(--text-dark)" />
-    <circle cx="50" cy="45" r="3" fill="var(--text-dark)" />
-    <circle cx="15" cy="80" r="3" fill="var(--text-dark)" />
-    <circle cx="85" cy="80" r="3" fill="var(--text-dark)" />
-    <circle cx="50" cy="90" r="3" fill="var(--text-dark)" />
+<svg class="logo-vector" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path 
+        d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"
+        fill="var(--accent-blue)" 
+    />
 </svg>
 
 <style>
     .logo-vector {
         width: 42px;
         height: 42px;
-        /* 避免原有 CSS 覆蓋 SVG 內部填色 */
+        /* 移除舊的光影和漸層定義 */
         fill: none !important; 
         transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
     }
     a:hover .logo-vector {
         transform: scale(1.08) translateY(-2px);
-        filter: drop-shadow(0 6px 16px rgba(43, 108, 176, 0.4));
+        filter: drop-shadow(0 4px 12px rgba(43, 108, 176, 0.3));
     }
 </style>
