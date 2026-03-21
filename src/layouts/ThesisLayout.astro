@@ -18,6 +18,14 @@ const { title, docId, abstract, date } = frontmatter;
     <title>{title} | TWProbe 核心情報終端</title>
     <meta name="description" content={abstract} />
     
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <meta property="og:title" content={`${title} | TWProbe 核心情報終端`} />
+    <meta property="og:description" content={abstract} />
+    <meta property="og:image" content="/images/og-social-preview.jpg" />
+    <meta property="og:type" content="article" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="/images/og-social-preview.jpg" />
+
     <script type="application/ld+json" set:html={`
     {
       "@context": "https://schema.org",
@@ -43,7 +51,7 @@ const { title, docId, abstract, date } = frontmatter;
             --text-muted: #4B5563;
             --border-line: #E5E7EB;
             --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-            --font-serif: "Noto Serif TC", "Songti TC", "PMingLiU", Georgia, serif; /* 論文級襯線字體 */
+            --font-serif: "Noto Serif TC", "Songti TC", "PMingLiU", Georgia, serif;
             --font-sans: system-ui, -apple-system, sans-serif;
         }
 
@@ -78,7 +86,7 @@ const { title, docId, abstract, date } = frontmatter;
 
         /* 論文核心容器 */
         .thesis-container {
-            max-width: 680px; /* 鎖定最佳閱讀物理邊界 */
+            max-width: 680px;
             margin: 4rem auto;
             padding: 0 1.5rem;
         }
@@ -127,7 +135,7 @@ const { title, docId, abstract, date } = frontmatter;
 
         /* MDX 內容注入區 (The Injection) */
         .prose {
-            font-family: var(--font-serif); /* 內文使用學術襯線體，建立權威感 */
+            font-family: var(--font-serif);
             font-size: 1.05rem;
             color: #1a1a1a;
         }

@@ -1,9 +1,11 @@
 ---
 // ==============================================
-// TWProbe Hub Terminal (V8.5 - The Axiom Maker)
-// Architecture: 100% Pure CSS / Zero Entropy / High-Dimensional SEO
+// TWProbe Hub Terminal (V8.6 - Vector Aligned)
+// Architecture: 100% Pure CSS / High-Dimensional SEO
 // Core OS: CORTEX 3.0 SYNCHRONIZED
 // ==============================================
+
+import Logo from '../components/Logo.astro';
 
 const brandName = "TWProbe";
 const mainSiteUrl = "https://twprobe.com";
@@ -81,6 +83,14 @@ const axioms = [
     <title>TWProbe 核心情報終端 | 台灣房地產客觀數據與資產防禦</title>
     <meta name="description" content="TWProbe 致力於抹除台灣房市資訊不對稱。提供房地產之底層數據穿透、空間物理邊界檢驗，與防禦性資產佈局之高維度戰術。">
     
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <meta property="og:title" content="TWProbe 核心情報終端 | 台灣房地產客觀數據與資產防禦" />
+    <meta property="og:description" content="TWProbe 致力於抹除台灣房市資訊不對稱。提供房地產之底層數據穿透、空間物理邊界檢驗，與防禦性資產佈局之高維度戰術。" />
+    <meta property="og:image" content="/images/og-social-preview.jpg" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="/images/og-social-preview.jpg" />
+    
     <script type="application/ld+json" set:html={`
     {
       "@context": "https://schema.org",
@@ -155,7 +165,6 @@ const axioms = [
         .header { text-align: center; margin-bottom: 2.5rem; }
         .brand-link { display: inline-flex; align-items: center; gap: 0.6rem; text-decoration: none; color: var(--text-dark); transition: color 0.3s; }
         .brand-link:hover { color: var(--accent-blue); }
-        .logo-svg { width: 42px; height: 42px; fill: var(--accent-blue); }
         .brand-name { font-size: 2.2rem; font-weight: 800; letter-spacing: -0.04em; }
         
         .terminal-directive {
@@ -188,7 +197,6 @@ const axioms = [
         .pillar-title { font-size: 1.15rem; font-weight: 800; margin: 0 0 0.6rem 0; letter-spacing: 0.05em; }
         .pillar-desc { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-muted); margin: 0; font-weight: 500; line-height: 1.6; }
         
-        /* 核心校準：加入 width: max-content 與 margin-inline: auto 實現絕對置中 */
         .topic-grid { 
             display: grid; 
             grid-template-columns: 1fr; 
@@ -240,7 +248,7 @@ const axioms = [
 
         <header class="header">
             <a href={mainSiteUrl} class="brand-link">
-                <svg class="logo-svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                <Logo />
                 <span class="brand-name">{brandName}</span>
             </a>
         </header>

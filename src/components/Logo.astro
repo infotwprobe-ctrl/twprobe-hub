@@ -1,0 +1,24 @@
+---
+// ==============================================
+// TWProbe 核心視覺組件 (Zero Latency Vector)
+// ==============================================
+---
+
+<svg class="logo-vector" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 2L2 12h3v8h14v-8h3L12 2z" stroke="var(--accent-blue)" fill="rgba(43, 108, 176, 0.08)"/>
+    <path d="M12 2v20" stroke="var(--accent-blue)" opacity="0.3"/>
+    <path d="M2 12h20" stroke="var(--accent-blue)" opacity="0.3"/>
+    <circle cx="12" cy="12" r="2" fill="var(--accent-blue)"/>
+</svg>
+
+<style>
+    .logo-vector {
+        width: 42px;
+        height: 42px;
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+    }
+    a:hover .logo-vector {
+        transform: scale(1.08) translateY(-2px);
+        filter: drop-shadow(0 4px 12px rgba(43, 108, 176, 0.3));
+    }
+</style>
