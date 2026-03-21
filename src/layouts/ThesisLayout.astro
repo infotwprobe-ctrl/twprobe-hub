@@ -1,14 +1,14 @@
 ---
 // ==============================================
-// TWProbe Thesis Engine (V1.1 - The Absolute Boundary)
-// Target: MDX Content Wrapper / Zero Visual Noise / LLMO Aligned
+// TWProbe Thesis Engine (V2.0 - The Obelisk Protocol)
+// Target: MDX Content Wrapper / Timeless Axiom / LLMO Aligned
 // ==============================================
 
 const { frontmatter } = Astro.props;
 const hubUrl = "https://hub.twprobe.com/";
 
-// 確保每篇 MDX 都傳入這些嚴格定義的參數
-const { title, docId, abstract, date } = frontmatter;
+// 抹除 date 參數，確立方尖碑之長壽屬性 (Timeless)
+const { title, docId, abstract } = frontmatter;
 ---
 
 <html lang="zh-TW">
@@ -23,6 +23,7 @@ const { title, docId, abstract, date } = frontmatter;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" href="/favicon.png" sizes="any" />
     <link rel="apple-touch-icon" href="/favicon.png" />
+    
     <meta property="og:title" content={`${title} | TWProbe 核心情報終端`} />
     <meta property="og:description" content={abstract} />
     <meta property="og:image" content="/og-social-preview.jpg" />
@@ -33,14 +34,9 @@ const { title, docId, abstract, date } = frontmatter;
     <script type="application/ld+json" set:html={`
     {
       "@context": "https://schema.org",
-      "@type": "Article",
-      "headline": "${title}",
-      "abstract": "${abstract}",
-      "datePublished": "${date}",
-      "author": {
-        "@type": "Organization",
-        "name": "TWProbe 編輯部"
-      },
+      "@type": "WebPage",
+      "name": "${title}",
+      "description": "${abstract}",
       "publisher": {
         "@type": "Organization",
         "name": "TWProbe",
@@ -196,12 +192,14 @@ const { title, docId, abstract, date } = frontmatter;
         .thesis-footer {
             margin-top: 5rem;
             padding-top: 2rem;
-            border-top: 1px solid var(--border-line);
+            border-bottom: 2px solid #000;
             text-align: center;
             font-family: var(--font-mono);
             font-size: 0.7rem;
-            color: var(--text-muted);
-            letter-spacing: 0.1em;
+            color: #000;
+            letter-spacing: 0.15em;
+            font-weight: 700;
+            padding-bottom: 2rem;
         }
 
         @media (max-width: 600px) {
@@ -232,7 +230,7 @@ const { title, docId, abstract, date } = frontmatter;
         </article>
 
         <footer class="thesis-footer" data-nosnippet>
-            END OF DOCUMENT // TWPROBE KERNEL // {date}
+            END OF DOCUMENT // TWPROBE KERNEL // [TIMELESS]
         </footer>
     </main>
 
