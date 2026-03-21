@@ -48,7 +48,6 @@ const { title, docId, abstract } = frontmatter;
     }
     `}></script>
 
-    <style>
     <style is:global>
         :root {
             --bg-paper: #FAFAFA;
@@ -58,6 +57,7 @@ const { title, docId, abstract } = frontmatter;
             --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
             --font-serif: "Noto Serif TC", "Songti TC", "PMingLiU", Georgia, serif;
             --font-sans: system-ui, -apple-system, sans-serif;
+            --accent-blue: #2563EB;
         }
 
         body {
@@ -70,119 +70,74 @@ const { title, docId, abstract } = frontmatter;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* 終端機導航列 */
-        .nav-terminal {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            padding: 1rem 2rem;
-            border-bottom: 1px solid var(--border-line);
-            display: flex;
-            justify-content: space-between;
-            background: #fff;
-        }
-        .nav-link {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.2s;
-        }
+        /* 終端機導航列與標頭維持原樣... */
+        .nav-terminal { /* ...略... */ font-family: var(--font-mono); font-size: 0.75rem; padding: 1rem 2rem; border-bottom: 1px solid var(--border-line); display: flex; justify-content: space-between; background: #fff; }
+        .nav-link { color: var(--text-muted); text-decoration: none; font-weight: 600; transition: color 0.2s; }
         .nav-link:hover { color: #000; }
         .nav-link::before { content: "< "; opacity: 0.5; }
+        .thesis-container { max-width: 680px; margin: 4rem auto; padding: 0 1.5rem; }
+        .thesis-header { border-bottom: 2px solid #000; padding-bottom: 2rem; margin-bottom: 3rem; }
+        .doc-id { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); letter-spacing: 0.1em; margin-bottom: 1rem; display: block; }
+        .thesis-title { font-family: var(--font-sans); font-size: 2.2rem; font-weight: 800; line-height: 1.3; margin: 0 0 1.5rem 0; letter-spacing: -0.02em; }
+        .thesis-abstract { background: #fff; border: 1px solid var(--border-line); padding: 1.5rem; font-size: 0.95rem; color: var(--text-muted); border-left: 4px solid #000; font-weight: 500; }
+        .abstract-label { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; display: block; color: #000; font-weight: 700; }
 
-        /* 論文核心容器 */
-        .thesis-container {
-            max-width: 680px;
-            margin: 4rem auto;
-            padding: 0 1.5rem;
-        }
-
-        /* 論文標頭 (Frontmatter 對接區) */
-        .thesis-header {
-            border-bottom: 2px solid #000;
-            padding-bottom: 2rem;
-            margin-bottom: 3rem;
-        }
-        .doc-id {
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            letter-spacing: 0.1em;
-            margin-bottom: 1rem;
-            display: block;
-        }
-        .thesis-title {
-            font-family: var(--font-sans);
-            font-size: 2.2rem;
-            font-weight: 800;
-            line-height: 1.3;
-            margin: 0 0 1.5rem 0;
-            letter-spacing: -0.02em;
-        }
-        .thesis-abstract {
-            background: #fff;
-            border: 1px solid var(--border-line);
-            padding: 1.5rem;
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            border-left: 4px solid #000;
-            font-weight: 500;
-        }
-        .abstract-label {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.5rem;
-            display: block;
-            color: #000;
-            font-weight: 700;
-        }
-
-        /* MDX 內容注入區 (The Injection) */
+        /* ==============================================
+           MDX 內容注入區 (強制物理防禦層) 
+           加入 !important 阻斷 Tailwind 等框架的歸零攻擊
+           ============================================== */
         .prose {
             font-family: var(--font-serif);
             font-size: 1.05rem;
             color: #1a1a1a;
         }
         
-        /* 針對 MDX 轉換出的 HTML 標籤進行嚴格控制 */
+        .prose p {
+            margin-top: 1.5rem !important;
+            margin-bottom: 1.5rem !important;
+            line-height: 1.8 !important;
+            text-align: justify;
+        }
+
         .prose h2 {
             font-family: var(--font-sans);
             font-size: 1.4rem;
             font-weight: 800;
-            margin-top: 3rem;
-            margin-bottom: 1rem;
+            margin-top: 3.5rem !important;
+            margin-bottom: 1.5rem !important;
             padding-bottom: 0.5rem;
             border-bottom: 1px solid var(--border-line);
         }
+
         .prose h3 {
             font-family: var(--font-sans);
             font-size: 1.15rem;
             font-weight: 700;
-            margin-top: 2rem;
-            margin-bottom: 0.8rem;
+            margin-top: 2.5rem !important;
+            margin-bottom: 1rem !important;
         }
-        .prose p {
-            margin-bottom: 1.5rem;
-            text-align: justify;
-        }
+
         .prose ul, .prose ol {
-            margin-bottom: 1.5rem;
-            padding-left: 1.5rem;
+            margin-top: 1.5rem !important;
+            margin-bottom: 1.5rem !important;
+            padding-left: 1.5rem !important;
         }
+
         .prose li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.5rem !important;
         }
+
         .prose strong {
             font-family: var(--font-sans);
             font-weight: 700;
             color: #000;
         }
+
         .prose blockquote {
-            margin: 2rem 0;
-            padding: 1rem 1.5rem;
-            background: #f3f4f6;
-            border-left: 3px solid #000;
+            margin: 2.5rem 0 !important;
+            padding: 1.5rem !important;
+            background: #f3f4f6 !important;
+            border-left: 4px solid #000 !important;
             font-family: var(--font-sans);
             font-style: italic;
             font-size: 0.95rem;
@@ -190,18 +145,7 @@ const { title, docId, abstract } = frontmatter;
         }
 
         /* 結尾系統印記 */
-        .thesis-footer {
-            margin-top: 5rem;
-            padding-top: 2rem;
-            border-bottom: 2px solid #000;
-            text-align: center;
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            color: #000;
-            letter-spacing: 0.15em;
-            font-weight: 700;
-            padding-bottom: 2rem;
-        }
+        .thesis-footer { margin-top: 5rem; padding-top: 2rem; border-bottom: 2px solid #000; text-align: center; font-family: var(--font-mono); font-size: 0.7rem; color: #000; letter-spacing: 0.15em; font-weight: 700; padding-bottom: 2rem; }
 
         @media (max-width: 600px) {
             .thesis-title { font-size: 1.8rem; }
