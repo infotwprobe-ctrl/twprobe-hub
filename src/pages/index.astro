@@ -1,14 +1,36 @@
 ---
 // ==============================================
-// TWProbe Hub - Main Index Terminal
-// Target: Automated Routing / WebSite Schema / Zero Friction
+// TWProbe Hub - Main Index Terminal (V6.0 LIGHT-MATRIX)
+// Target: Academic UI / Equal Height Cards / Soft Contrast
 // ==============================================
 
-// 1. 啟動物理掃描：自動抓取 pages 底下所有的 .md 檔案
-// 這行代碼是自動化的靈魂，它會爬取所有子資料夾中的文章
 const allPosts = await Astro.glob("./**/*.md");
 
-// 2. 首頁全域物理常數
+const pillars = allPosts
+  .filter((post) => post.frontmatter.docId?.startsWith("PILLAR"))
+  .sort((a, b) =>
+    String(a.frontmatter.docId).localeCompare(String(b.frontmatter.docId)),
+  );
+
+const protocols = allPosts
+  .filter((post) => post.frontmatter.docId?.startsWith("PROTOCOL"))
+  .sort((a, b) =>
+    String(a.frontmatter.docId).localeCompare(String(b.frontmatter.docId)),
+  );
+
+const topology = pillars.map((pillar) => {
+  const pillarDigit = parseInt(
+    pillar.frontmatter.docId.split("-")[1],
+    10,
+  ).toString();
+  return {
+    pillar: pillar,
+    children: protocols.filter((p) =>
+      p.frontmatter.docId.split("-")[1]?.startsWith(`${pillarDigit}.`),
+    ),
+  };
+});
+
 const siteTitle = "TWProbe 核心情報終端 | 實體資產與宏觀週期";
 const siteDescription =
   "剝離情緒溢價，直探底層邏輯。探討在宏觀週期與貨幣政策下，如何透過台灣實體房地產建構資本防禦矩陣。";
@@ -16,45 +38,20 @@ const canonicalURL = new URL(
   Astro.url.pathname,
   Astro.site || "https://hub.twprobe.com",
 );
-
-// 3. 注入全站等級 JSON-LD (引導 AI 與 Google 爬蟲)
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: "TWProbe Hub",
-  url: "https://hub.twprobe.com/",
-  description: siteDescription,
-  publisher: {
-    "@type": "Organization",
-    name: "TWProbe",
-  },
-};
 ---
 
-<html lang="zh-TW">
+<html lang="zh-TW" class="scroll-smooth">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{siteTitle}</title>
     <meta name="description" content={siteDescription} />
-    <link rel="canonical" href={canonicalURL} />
-
-    <meta property="og:title" content={siteTitle} />
-    <meta property="og:description" content={siteDescription} />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonicalURL} />
-
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" href="/favicon.png" sizes="any" />
-
-    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
-
     <style is:global>
       :root {
-        --bg-paper: #fafafa;
-        --text-main: #111827;
-        --text-muted: #4b5563;
-        --border-line: #e5e7eb;
+        --bg-paper: #f8fafc; /* 更柔和的底色 */
+        --text-main: #334155;
+        --twprobe-blue: #2563eb;
         --font-mono:
           ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
           "Liberation Mono", monospace;
@@ -69,64 +66,115 @@ const schema = {
       }
     </style>
   </head>
-  <body class="min-h-screen flex flex-col">
+  <body
+    class="min-h-screen flex flex-col selection:bg-blue-100 selection:text-blue-900"
+  >
     <nav
-      class="border-b border-gray-200 bg-white px-6 py-4 flex justify-between items-center font-mono text-xs tracking-widest text-gray-500 uppercase"
+      class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur-md px-6 py-4 flex justify-between items-center shadow-sm"
     >
-      <span>TWPROBE // KERNEL</span>
-      <span class="text-green-600 font-bold">SYSTEM ONLINE</span>
+      <a
+        href="https://twprobe.com"
+        class="flex items-center gap-3 group no-underline"
+      >
+        <svg
+          class="h-8 w-8 text-blue-600 group-hover:scale-105 transition-transform duration-300"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <path d="M12 2L1 12H4V21H10V15H14V21H20V12H23L12 2Z"></path>
+        </svg>
+        <span class="text-2xl font-extrabold text-slate-800 tracking-tight"
+          >TWProbe</span
+        >
+      </a>
+      <div
+        class="flex items-center gap-2 font-mono text-[10px] tracking-widest uppercase text-slate-400 hidden sm:flex"
+      >
+        <span class="h-2 w-2 rounded-full bg-green-500"></span>
+        <span>SYSTEM ONLINE</span>
+      </div>
     </nav>
 
-    <main class="flex-grow max-w-4xl mx-auto w-full px-6 py-16">
-      <header class="mb-16 border-b-2 border-black pb-12">
-        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
+    <main class="flex-grow w-full max-w-[1400px] mx-auto px-6 py-16 md:py-20">
+      <header class="mb-20 max-w-4xl">
+        <div
+          class="font-mono text-sm font-bold tracking-widest uppercase text-blue-600 mb-6 flex items-center gap-4"
+        >
+          <div class="h-px bg-blue-600 w-12"></div>
+          SYSTEM ARCHITECTURE
+        </div>
+        <h1
+          class="text-5xl md:text-6xl font-extrabold tracking-tight mb-8 leading-tight text-slate-800"
+        >
           核心情報終端
         </h1>
-        <p class="text-lg text-gray-600 max-w-2xl leading-relaxed">
-          剝離市場的情緒溢價，下探事物的底層物理常數。這座節點專注於宏觀週期推演、資本防禦矩陣，以及台灣實體資產的絕對邊界。
+        <p class="text-xl text-slate-500 font-medium leading-relaxed">
+          剝離市場情緒溢價，下探事物的底層物理常數。<br
+            class="hidden md:block"
+          />
+          這座節點專注於宏觀週期推演、資本防禦矩陣，以及台灣實體資產的絕對邊界。
         </p>
       </header>
 
-      <section>
-        <div
-          class="flex items-center mb-8 font-mono text-sm font-bold tracking-widest uppercase"
-        >
-          <span class="w-2 h-2 bg-black mr-3"></span>
-          INDEX / 實體論述索引
-        </div>
-
-        <div class="grid gap-6">
-          {
-            allPosts.map((post) => (
+      <section class="grid grid-cols-1 xl:grid-cols-3 gap-8 md:gap-12">
+        {
+          topology.map((group) => (
+            <div class="flex flex-col gap-5 h-full">
               <a
-                href={post.url}
-                class="group block bg-white border border-gray-200 p-6 hover:border-black transition-colors duration-200"
+                href={group.pillar.url}
+                class="group relative bg-white border-t-4 border-t-blue-600 border border-slate-200 p-8 rounded-b-xl shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-300 flex flex-col h-[320px]"
               >
-                <div class="flex flex-col md:flex-row md:items-baseline gap-2 mb-3">
-                  <span class="font-mono text-xs text-gray-400 tracking-wider">
-                    {post.frontmatter.docId || "TWP-DOC"}
-                  </span>
-                  <h2 class="text-xl font-bold group-hover:text-blue-600 transition-colors">
-                    {post.frontmatter.title}
-                  </h2>
-                </div>
-                <p class="text-gray-600 text-sm leading-relaxed">
-                  {post.frontmatter.abstract}
+                <span class="font-mono text-xs font-bold text-blue-600 tracking-widest mb-3 block">
+                  {group.pillar.frontmatter.docId}
+                </span>
+                <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight mb-4 group-hover:text-blue-600 transition-colors">
+                  {group.pillar.frontmatter.title}
+                </h2>
+                <p class="text-slate-600 text-sm leading-relaxed line-clamp-4 mb-6">
+                  {group.pillar.frontmatter.abstract}
                 </p>
-                <div class="mt-4 font-mono text-xs text-gray-400 group-hover:text-black transition-colors flex items-center">
-                  INITIALIZE SEQUENCE <span class="ml-2">→</span>
+                <div class="mt-auto font-mono text-[10px] font-bold text-slate-400 flex items-center gap-2 group-hover:text-blue-600 transition-colors">
+                  ACCESS PILLAR{" "}
+                  <span class="group-hover:translate-x-1 transition-transform">
+                    →
+                  </span>
                 </div>
               </a>
-            ))
-          }
-        </div>
+
+              {group.children.length > 0 && (
+                <div class="flex flex-col gap-4 flex-grow">
+                  {group.children.map((post) => (
+                    <a
+                      href={post.url}
+                      class="group bg-white border border-slate-200 rounded-xl p-6 hover:border-blue-400 hover:shadow-md transition-all duration-300 flex flex-col h-full justify-between"
+                    >
+                      <div>
+                        <div class="flex items-center gap-3 mb-3">
+                          <span class="font-mono text-[10px] font-bold text-slate-500 tracking-widest bg-slate-100 px-2 py-1 rounded">
+                            {post.frontmatter.docId}
+                          </span>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800 leading-snug mb-3 group-hover:text-blue-600 transition-colors">
+                          {post.frontmatter.title}
+                        </h3>
+                        <p class="text-sm text-slate-500 leading-relaxed line-clamp-3">
+                          {post.frontmatter.abstract}
+                        </p>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))
+        }
       </section>
     </main>
 
-    <footer
-      class="border-t border-gray-200 bg-white py-8 text-center font-mono text-xs text-gray-400 tracking-widest"
-    >
-      © {new Date().getFullYear()} TWPROBE. ALL SYSTEMS NOMINAL.
+    <footer class="border-t border-slate-200 bg-white py-12 mt-20 text-center">
+      <span class="font-mono text-xs text-slate-400 tracking-widest">
+        © {new Date().getFullYear()} TWPROBE. ALL SYSTEMS NOMINAL.
+      </span>
     </footer>
   </body>
 </html>

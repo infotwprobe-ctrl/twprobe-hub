@@ -6,6 +6,7 @@
     "build": "astro build"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.2",
     "@astrojs/tailwind": "^6.0.2",
     "astro": "latest",
     "tailwindcss": "^3.4.1"

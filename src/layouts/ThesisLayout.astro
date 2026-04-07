@@ -1,183 +1,198 @@
 ---
 // ==============================================
-// TWProbe Thesis Engine (V2.0 - The Obelisk Protocol)
-// Target: MDX Content Wrapper / Timeless Axiom / LLMO Aligned
+// TWProbe Hub - Thesis Layout (V6.0 + Deep SEO)
+// Target: Academic Typography / Crawler Trapping / JSON-LD
 // ==============================================
-
 const { frontmatter } = Astro.props;
-const hubUrl = "https://hub.twprobe.com/";
 
-// 抹除 date 參數，確立方尖碑之長壽屬性 (Timeless)
-const { title, docId, abstract } = frontmatter;
+// 1. 抓取所有文章並進行「拓撲邏輯排序」
+const allPosts = await Astro.glob("../pages/**/*.md");
+
+const sortedPosts = allPosts.sort((a, b) => {
+    const idA = a.frontmatter.docId || "";
+    const idB = b.frontmatter.docId || "";
+    const getNum = (id) => {
+        if (id.startsWith("PILLAR")) return parseFloat(id.split("-")[1]);
+        if (id.startsWith("PROTOCOL")) return parseFloat(id.split("-")[1]);
+        return 999;
+    };
+    return getNum(idA) - getNum(idB);
+});
+
+// 2. 算力分配：定位當前文章，並推算上一篇與下一篇
+const currentIndex = sortedPosts.findIndex(
+    (post) => post.url === Astro.url.pathname,
+);
+const prevPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
+const nextPost =
+    currentIndex < sortedPosts.length - 1
+        ? sortedPosts[currentIndex + 1]
+        : null;
+
+// 3. 爬蟲誘捕矩陣：隨機抓取 3 篇不重複的文章作為關聯閱讀
+const relatedPosts = sortedPosts
+    .filter((p) => p.url !== Astro.url.pathname)
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 3);
 ---
 
 <html lang="zh-TW">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title} | TWProbe 核心情報終端</title>
-    <meta name="description" content={abstract} />
-    
-    <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{frontmatter.title} | TWProbe</title>
+        <meta name="description" content={frontmatter.abstract} />
+        <link rel="icon" type="image/png" href="/favicon.png" sizes="any" />
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" type="image/png" href="/favicon.png" sizes="any" />
-    <link rel="apple-touch-icon" href="/favicon.png" />
-    
-    <meta property="og:title" content={`${title} | TWProbe 核心情報終端`} />
-    <meta property="og:description" content={abstract} />
-    <meta property="og:image" content="/og-social-preview.jpg" />
-    <meta property="og:type" content="article" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="/og-social-preview.jpg" />
+        <script
+            type="application/ld+json"
+            set:html={JSON.stringify({
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "BreadcrumbList",
+                        itemListElement: [
+                            {
+                                "@type": "ListItem",
+                                position: 1,
+                                name: "KERNEL",
+                                item: "https://hub.twprobe.com",
+                            },
+                            {
+                                "@type": "ListItem",
+                                position: 2,
+                                name: frontmatter.docId,
+                                item: `https://hub.twprobe.com${Astro.url.pathname}`,
+                            },
+                        ],
+                    },
+                    {
+                        "@type": "Article",
+                        headline: frontmatter.title,
+                        description: frontmatter.abstract,
+                        author: { "@type": "Organization", name: "TWProbe" },
+                        publisher: { "@type": "Organization", name: "TWProbe" },
+                        mainEntityOfPage: {
+                            "@type": "WebPage",
+                            "@id": `https://hub.twprobe.com${Astro.url.pathname}`,
+                        },
+                    },
+                ],
+            })}
+        />
+    </head>
+    <body
+        class="bg-[#F8FAFC] text-slate-800 font-sans min-h-screen flex flex-col selection:bg-blue-100 selection:text-blue-900"
+    >
+        <nav
+            class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur-md px-6 py-4 flex justify-between items-center shadow-sm"
+        >
+            <a href="/" class="flex items-center gap-3 group no-underline">
+                <svg
+                    class="h-6 w-6 text-blue-600 group-hover:-translate-x-1 transition-transform"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                <span
+                    class="font-bold text-slate-600 text-sm tracking-widest uppercase"
+                    >RETURN TO KERNEL</span
+                >
+            </a>
+        </nav>
 
-    <script type="application/ld+json" set:html={`
-    {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": "${title}",
-      "description": "${abstract}",
-      "publisher": {
-        "@type": "Organization",
-        "name": "TWProbe",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://hub.twprobe.com/favicon.png"
-        }
-      }
-    }
-    `}></script>
+        <main class="flex-grow w-full max-w-3xl mx-auto px-6 py-16">
+            <article
+                class="prose prose-slate prose-lg max-w-none prose-headings:font-extrabold prose-a:text-blue-600"
+            >
+                <span
+                    class="font-mono text-sm font-bold text-blue-600 tracking-widest block mb-2"
+                >
+                    {frontmatter.docId}
+                </span>
+                <h1 class="text-4xl md:text-5xl tracking-tight mb-8">
+                    {frontmatter.title}
+                </h1>
 
-    <style is:global>
-        :root {
-            --bg-paper: #FAFAFA;
-            --text-main: #111827;
-            --text-muted: #4B5563;
-            --border-line: #E5E7EB;
-            --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-            --font-serif: "Noto Serif TC", "Songti TC", "PMingLiU", Georgia, serif;
-            --font-sans: system-ui, -apple-system, sans-serif;
-            --accent-blue: #2563EB;
-        }
+                <slot />
+            </article>
 
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-paper);
-            color: var(--text-main);
-            font-family: var(--font-sans);
-            line-height: 1.8;
-            -webkit-font-smoothing: antialiased;
-        }
+            <hr class="my-16 border-slate-200" />
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {
+                    prevPost ? (
+                        <a
+                            href={prevPost.url}
+                            class="group p-6 bg-white border border-slate-200 rounded-xl hover:border-blue-400 hover:shadow-md transition-all flex flex-col text-left no-underline"
+                        >
+                            <span class="text-xs font-mono text-slate-400 tracking-widest mb-2 group-hover:text-blue-600">
+                                ← PREVIOUS
+                            </span>
+                            <span class="font-bold text-slate-800 line-clamp-2">
+                                {prevPost.frontmatter.title}
+                            </span>
+                        </a>
+                    ) : (
+                        <div />
+                    )
+                }
 
-        /* 終端機導航列與標頭維持原樣... */
-        .nav-terminal { /* ...略... */ font-family: var(--font-mono); font-size: 0.75rem; padding: 1rem 2rem; border-bottom: 1px solid var(--border-line); display: flex; justify-content: space-between; background: #fff; }
-        .nav-link { color: var(--text-muted); text-decoration: none; font-weight: 600; transition: color 0.2s; }
-        .nav-link:hover { color: #000; }
-        .nav-link::before { content: "< "; opacity: 0.5; }
-        .thesis-container { max-width: 680px; margin: 4rem auto; padding: 0 1.5rem; }
-        .thesis-header { border-bottom: 2px solid #000; padding-bottom: 2rem; margin-bottom: 3rem; }
-        .doc-id { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); letter-spacing: 0.1em; margin-bottom: 1rem; display: block; }
-        .thesis-title { font-family: var(--font-sans); font-size: 2.2rem; font-weight: 800; line-height: 1.3; margin: 0 0 1.5rem 0; letter-spacing: -0.02em; }
-        .thesis-abstract { background: #fff; border: 1px solid var(--border-line); padding: 1.5rem; font-size: 0.95rem; color: var(--text-muted); border-left: 4px solid #000; font-weight: 500; }
-        .abstract-label { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; display: block; color: #000; font-weight: 700; }
-
-        /* ==============================================
-           MDX 內容注入區 (強制物理防禦層) 
-           加入 !important 阻斷 Tailwind 等框架的歸零攻擊
-           ============================================== */
-        .prose {
-            font-family: var(--font-serif);
-            font-size: 1.05rem;
-            color: #1a1a1a;
-        }
-        
-        .prose p {
-            margin-top: 1.5rem !important;
-            margin-bottom: 1.5rem !important;
-            line-height: 1.8 !important;
-            text-align: justify;
-        }
-
-        .prose h2 {
-            font-family: var(--font-sans);
-            font-size: 1.4rem;
-            font-weight: 800;
-            margin-top: 3.5rem !important;
-            margin-bottom: 1.5rem !important;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid var(--border-line);
-        }
-
-        .prose h3 {
-            font-family: var(--font-sans);
-            font-size: 1.15rem;
-            font-weight: 700;
-            margin-top: 2.5rem !important;
-            margin-bottom: 1rem !important;
-        }
-
-        .prose ul, .prose ol {
-            margin-top: 1.5rem !important;
-            margin-bottom: 1.5rem !important;
-            padding-left: 1.5rem !important;
-        }
-
-        .prose li {
-            margin-bottom: 0.5rem !important;
-        }
-
-        .prose strong {
-            font-family: var(--font-sans);
-            font-weight: 700;
-            color: #000;
-        }
-
-        .prose blockquote {
-            margin: 2.5rem 0 !important;
-            padding: 1.5rem !important;
-            background: #f3f4f6 !important;
-            border-left: 4px solid #000 !important;
-            font-family: var(--font-sans);
-            font-style: italic;
-            font-size: 0.95rem;
-            color: var(--text-muted);
-        }
-
-        /* 結尾系統印記 */
-        .thesis-footer { margin-top: 5rem; padding-top: 2rem; border-bottom: 2px solid #000; text-align: center; font-family: var(--font-mono); font-size: 0.7rem; color: #000; letter-spacing: 0.15em; font-weight: 700; padding-bottom: 2rem; }
-
-        @media (max-width: 600px) {
-            .thesis-title { font-size: 1.8rem; }
-            .thesis-container { margin: 2rem auto; }
-        }
-    </style>
-</head>
-<body>
-
-    <nav class="nav-terminal" data-nosnippet>
-        <a href={hubUrl} class="nav-link">RETURN TO TWPROBE HUB</a>
-        <span>STATUS: SECURE</span>
-    </nav>
-
-    <main class="thesis-container">
-        <header class="thesis-header" data-nosnippet>
-            <span class="doc-id">[{docId}] // 核心情報庫</span>
-            <h1 class="thesis-title">{title}</h1>
-            <div class="thesis-abstract">
-                <span class="abstract-label">ABSTRACT / 物理摘要</span>
-                {abstract}
+                {
+                    nextPost && (
+                        <a
+                            href={nextPost.url}
+                            class="group p-6 bg-white border border-slate-200 rounded-xl hover:border-blue-400 hover:shadow-md transition-all flex flex-col text-right no-underline"
+                        >
+                            <span class="text-xs font-mono text-slate-400 tracking-widest mb-2 group-hover:text-blue-600">
+                                NEXT →
+                            </span>
+                            <span class="font-bold text-slate-800 line-clamp-2">
+                                {nextPost.frontmatter.title}
+                            </span>
+                        </a>
+                    )
+                }
             </div>
-        </header>
 
-        <article class="prose">
-            <slot /> 
-        </article>
+            <div class="mt-12 pt-12 border-t border-slate-200">
+                <div
+                    class="font-mono text-xs font-bold tracking-widest text-slate-400 mb-6 uppercase flex items-center"
+                >
+                    <span class="w-2 h-2 bg-blue-600 mr-3 block"></span>
+                    Topological Extension / 矩陣延伸解析
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    {
+                        relatedPosts.map((related) => (
+                            <a
+                                href={related.url}
+                                class="block p-5 bg-white border border-slate-200 rounded-lg hover:border-blue-400 hover:shadow-md transition-all no-underline"
+                            >
+                                <span class="font-mono text-[10px] text-slate-400 block mb-2 font-bold tracking-widest">
+                                    {related.frontmatter.docId}
+                                </span>
+                                <h4 class="font-bold text-slate-800 text-sm leading-snug">
+                                    {related.frontmatter.title}
+                                </h4>
+                            </a>
+                        ))
+                    }
+                </div>
+            </div>
+        </main>
 
-        <footer class="thesis-footer" data-nosnippet>
-            END OF DOCUMENT // TWPROBE KERNEL // [TIMELESS]
+        <footer
+            class="border-t border-slate-200 bg-white py-12 mt-12 text-center"
+        >
+            <span class="font-mono text-xs text-slate-400 tracking-widest">
+                © {new Date().getFullYear()} TWPROBE. ALL SYSTEMS NOMINAL.
+            </span>
         </footer>
-    </main>
-
-</body>
+    </body>
 </html>
