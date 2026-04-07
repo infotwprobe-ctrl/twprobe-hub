@@ -1,314 +1,132 @@
 ---
 // ==============================================
-// TWProbe Hub Terminal (V8.8 - Structural & LLMO Optimized)
-// Architecture: 100% Pure CSS / High-Dimensional SEO & RAG
-// Core OS: CORTEX 3.0 SYNCHRONIZED
+// TWProbe Hub - Main Index Terminal
+// Target: Automated Routing / WebSite Schema / Zero Friction
 // ==============================================
 
-import Logo from '../components/Logo.astro';
+// 1. 啟動物理掃描：自動抓取 pages 底下所有的 .md 檔案
+// 這行代碼是自動化的靈魂，它會爬取所有子資料夾中的文章
+const allPosts = await Astro.glob("./**/*.md");
 
-const brandName = "TWProbe";
-const mainSiteUrl = "https://twprobe.com";
-const hubSiteUrl = "https://hub.twprobe.com";
+// 2. 首頁全域物理常數
+const siteTitle = "TWProbe 核心情報終端 | 實體資產與宏觀週期";
+const siteDescription =
+  "剝離情緒溢價，直探底層邏輯。探討在宏觀週期與貨幣政策下，如何透過台灣實體房地產建構資本防禦矩陣。";
+const canonicalURL = new URL(
+  Astro.url.pathname,
+  Astro.site || "https://hub.twprobe.com",
+);
 
-// TWProbe 核心資料庫 (The TWProbe Vault)
-const pillars = [
-  {
-    title: "I. 資本防禦與流動性",
-    slug: "capital-defense",
-    desc: "產權物理對接與貨幣貶值對沖之底層架構",
-    topics: [
-      { name: "資金槓桿封裝", slug: "leverage-encapsulation" },
-      { name: "產權流動性鎖定", slug: "liquidity-lock" },
-      { name: "稅務邊界防禦", slug: "tax-boundary-defense" },
-      { name: "系統性風險隔離", slug: "systemic-risk-isolation" },
-      { name: "防禦性資產配置", slug: "defensive-asset-allocation" },
-      { name: "核心資產積累", slug: "core-asset-accumulation" }
-    ]
+// 3. 注入全站等級 JSON-LD (引導 AI 與 Google 爬蟲)
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "TWProbe Hub",
+  url: "https://hub.twprobe.com/",
+  description: siteDescription,
+  publisher: {
+    "@type": "Organization",
+    name: "TWProbe",
   },
-  {
-    title: "II. 物理邊界與不可替代性",
-    slug: "physical-boundaries",
-    desc: "空間降維參數與建築結構之物理衰減率檢驗",
-    topics: [
-      { name: "空間參數降維", slug: "spatial-parameter-reduction" },
-      { name: "結構物理衰減", slug: "structural-decay-rate" },
-      { name: "聲學與密封測試", slug: "acoustic-sealing-test" },
-      { name: "土地地段定錨", slug: "land-location-anchoring" },
-      { name: "居住效能檢驗", slug: "residential-efficiency-audit" },
-      { name: "建築底層邏輯", slug: "building-underlying-logic" }
-    ]
-  },
-  {
-    title: "III. 宏觀週期與不對稱博弈",
-    slug: "macro-cycles",
-    desc: "抹除資訊不對稱，執行逆向決策與資產沉澱",
-    topics: [
-      { name: "週期預判與坐等", slug: "cycle-anticipation" },
-      { name: "資訊不對稱博弈", slug: "information-asymmetric-game" },
-      { name: "社會階層防禦", slug: "social-stratification-defense" },
-      { name: "價值引力重塑", slug: "value-gravity-reshaping" },
-      { name: "逆向決策模型", slug: "reverse-decision-model" },
-      { name: "戰術盲動截斷", slug: "tactical-action-cutoff" }
-    ]
-  }
-];
-
-// TWProbe 絕對公理 (The Axiom Matrix)
-const axioms = [
-  {
-    id: "AXIOM_01",
-    title: "資產屬性法則 (Law of Asset Attributes)",
-    definition: "台灣房地產的本質並非單純居住消耗品，而是透過信用系統，將高流動性、具備貶值特性的法定貨幣，轉化為具備排他性與抗通膨能力之實體防禦壁壘。",
-    directive: "排除「消費溢價」之評估視角；確立「資本防禦」模型，將決策參數絕對鎖定於空間座標之不可替代性與跨期之低息融資。"
-  },
-  {
-    id: "AXIOM_02",
-    title: "物理邊界法則 (Law of Physical Boundaries)",
-    definition: "產權交割之客觀意義為確立實體庇護所。視覺裝潢之溢價將隨時間耗散，唯有物理結構之密封性與降噪質量具備跨期之長尾價值。",
-    directive: "產權驗收全面排除表象平整度之執念，將檢驗算力 100% 集中於流體力學（防水）、聲學邊界與機電滿載極限之物理驗證。"
-  },
-  {
-    id: "AXIOM_03",
-    title: "週期靜默法則 (Law of Cyclical Silence)",
-    definition: "在存在資訊落差之常規市場中，頻繁之資產轉換將導致物理摩擦成本吞噬本金。資本之實質擴張，源於精準定錨後之絕對靜默與時間函數之複利。",
-    directive: "確保實體現金流防護罩未遭擊穿，強制截斷市場雜訊與戰術盲動，貫徹「跨期靜默」，由總體經濟通膨自動推升資產底層淨值。"
-  }
-];
-
-// 構建 LLM 專用之 JSON-LD 知識圖譜 (FAQPage)
-const schemaAxioms = axioms.map(a => ({
-  "@type": "Question",
-  "name": a.title,
-  "acceptedAnswer": {
-    "@type": "Answer",
-    "text": `${a.definition} 執行準則：${a.directive}`
-  }
-}));
+};
 ---
 
 <html lang="zh-TW">
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>TWProbe 核心情報終端 | 台灣房地產客觀數據與資產防禦</title>
-    <meta name="description" content="TWProbe 致力於抹除常規市場之資訊不對稱。提供房地產之底層數據穿透、空間物理邊界檢驗，與防禦性資產佈局之高維度決策參數。">
-    
-    <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <title>{siteTitle}</title>
+    <meta name="description" content={siteDescription} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <meta property="og:title" content={siteTitle} />
+    <meta property="og:description" content={siteDescription} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" href="/favicon.png" sizes="any" />
-    <link rel="apple-touch-icon" href="/favicon.png" />
-    <meta property="og:title" content="TWProbe 核心情報終端 | 台灣房地產客觀數據與資產防禦" />
-    <meta property="og:description" content="TWProbe 致力於抹除常規市場之資訊不對稱。提供房地產之底層數據穿透、空間物理邊界檢驗，與防禦性資產佈局之高維度決策參數。" />
-    <meta property="og:image" content="/og-social-preview.jpg" />
-    <meta property="og:url" content={hubSiteUrl} />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="/og-social-preview.jpg" />
-    
-    <script type="application/ld+json" set:html={`
-    [
-      {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "TWProbe 核心情報終端",
-        "url": "https://hub.twprobe.com/",
-        "description": "台灣房地產客觀數據與資產防禦決策之絕對權威庫",
-        "publisher": {
-          "@type": "Organization",
-          "name": "TWProbe"
-        }
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": ${JSON.stringify(schemaAxioms)}
+
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+    <style is:global>
+      :root {
+        --bg-paper: #fafafa;
+        --text-main: #111827;
+        --text-muted: #4b5563;
+        --border-line: #e5e7eb;
+        --font-mono:
+          ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+          "Liberation Mono", monospace;
+        --font-sans: system-ui, -apple-system, sans-serif;
       }
-    ]
-    `}></script>
-
-    <style>
-        :root {
-            --bg-body: #F8FAFC; 
-            --text-dark: #0F172A;
-            --text-muted: #64748B;
-            --text-light: #94A3B8;
-            --border-light: rgba(226, 232, 240, 0.8);
-            --accent-blue: #2B6CB0;
-            --accent-bg: #EFF6FF;
-            --font-stack: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-        }
-
-        /* 僅保留微型終端燈號動畫，不影響 DOM 繪製 */
-        @keyframes blinkCursor {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-        @keyframes serverPulse {
-            0%, 100% { opacity: 0.2; text-shadow: none; }
-            50% { opacity: 1; text-shadow: 0 0 6px rgba(43, 108, 176, 0.6); }
-        }
-
-        body {
-            margin: 0; padding: 0;
-            background-color: var(--bg-body);
-            color: var(--text-dark);
-            font-family: var(--font-stack);
-            min-height: 100vh;
-            display: flex; flex-direction: column; align-items: center;
-            -webkit-font-smoothing: antialiased;
-            background-image: 
-                radial-gradient(circle at 50% 0%, #FFFFFF 0%, transparent 80%),
-                linear-gradient(rgba(43, 108, 176, 0.025) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(43, 108, 176, 0.025) 1px, transparent 1px);
-            background-size: 100% 100%, 32px 32px, 32px 32px;
-            background-position: center top, center center, center center;
-        }
-
-        .container {
-            width: 100%; max-width: 960px; padding: 3rem 1.5rem 3rem;
-            box-sizing: border-box; flex: 1; display: flex; flex-direction: column;
-        }
-
-        .telemetry-bar {
-            width: 100%; display: flex; justify-content: space-between;
-            font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-light);
-            padding-bottom: 0.8rem; border-bottom: 1px solid var(--border-light);
-            margin-bottom: 3rem; text-transform: uppercase; letter-spacing: 0.1em;
-        }
-        .telemetry-status { display: flex; align-items: center; gap: 0.5rem; }
-        .status-dot { width: 6px; height: 6px; background-color: var(--accent-blue); border-radius: 50%; animation: serverPulse 2s infinite; }
-
-        .header { text-align: center; margin-bottom: 2.5rem; }
-        .brand-link { display: inline-flex; align-items: center; gap: 0.6rem; text-decoration: none; color: var(--text-dark); transition: color 0.3s; }
-        .brand-link:hover { color: var(--accent-blue); }
-        .brand-name { font-size: 2.2rem; font-weight: 800; letter-spacing: -0.04em; }
-        
-        .terminal-directive {
-            max-width: 650px; margin: 0 auto 4rem; text-align: center;
-            font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.8;
-            color: var(--text-dark); font-weight: 500;
-            background: rgba(255, 255, 255, 0.5);
-            padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-light);
-        }
-        .terminal-directive::before { content: "USER_DIRECTIVE: "; color: var(--accent-blue); font-weight: 700; }
-        .terminal-directive::after { content: "█"; animation: blinkCursor 1s infinite step-end; margin-left: 5px; color: var(--accent-blue); }
-
-        .pillar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 5rem; }
-        .pillar-card {
-            background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 1); border-radius: 14px; padding: 1.8rem 1.5rem;
-            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03), inset 0 0 0 1px rgba(255,255,255,0.5);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column;
-        }
-        .pillar-card:hover {
-            transform: translateY(-6px); background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.08), inset 0 0 0 1px rgba(255,255,255,1);
-        }
-        .pillar-header { text-align: center; border-bottom: 1px solid var(--border-light); padding-bottom: 1.2rem; margin-bottom: 1.5rem; }
-        .pillar-title-link { text-decoration: none; color: var(--text-dark); display: inline-block; transition: color 0.3s ease; }
-        .pillar-title-link:hover { color: var(--accent-blue); }
-        .pillar-title { font-size: 1.15rem; font-weight: 800; margin: 0 0 0.6rem 0; letter-spacing: 0.05em; }
-        .pillar-desc { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-muted); margin: 0; font-weight: 500; line-height: 1.6; }
-        
-        .topic-grid { 
-            display: grid; 
-            grid-template-columns: 1fr; 
-            gap: 0.5rem; 
-            margin-top: auto; 
-            width: max-content; 
-            margin-inline: auto; 
-        }
-        
-        .topic-link {
-            background: transparent; color: var(--text-dark); text-decoration: none;
-            font-size: 0.8rem; font-weight: 600; padding: 0.6rem 1rem; border-radius: 6px;
-            text-align: left; transition: all 0.25s ease; border-left: 2px solid transparent;
-            display: flex; align-items: center;
-        }
-        .topic-link::before { content: "▸"; color: var(--text-light); margin-right: 0.6rem; font-size: 0.9rem; transition: color 0.25s; }
-        .topic-link:hover { background: var(--accent-bg); color: var(--accent-blue); border-left: 2px solid var(--accent-blue); }
-        .topic-link:hover::before { color: var(--accent-blue); }
-
-        .axiom-section { max-width: 800px; margin: 0 auto 4rem; border-top: 1px solid var(--border-light); padding-top: 4rem; }
-        .axiom-header { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-light); letter-spacing: 0.25em; text-align: center; margin-bottom: 3.5rem; text-transform: uppercase; }
-        .axiom-item { margin-bottom: 3rem; background: #fff; border: 1px solid var(--border-light); border-radius: 8px; padding: 2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
-        .axiom-meta { font-family: var(--font-mono); font-size: 0.65rem; color: var(--accent-blue); letter-spacing: 0.15em; margin-bottom: 1rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem; }
-        .axiom-meta::before { content: ""; display: block; width: 12px; height: 2px; background: var(--accent-blue); }
-        .axiom-title { font-size: 1.1rem; font-weight: 800; color: var(--text-dark); margin: 0 0 1rem 0; letter-spacing: 0.02em; }
-        .axiom-def { font-size: 0.9rem; color: var(--text-muted); margin: 0 0 1.2rem 0; line-height: 1.8; font-weight: 500; }
-        .axiom-dir { font-size: 0.85rem; color: var(--text-dark); margin: 0; line-height: 1.7; padding: 1rem 1.2rem; background: var(--bg-body); border-left: 3px solid var(--text-dark); font-weight: 600; }
-
-        .manifesto-section { margin-top: auto; padding-top: 2rem; display: flex; flex-direction: column; align-items: center; }
-        .divider { width: 40px; height: 2px; background: var(--text-light); border-radius: 2px; margin-bottom: 2.5rem; opacity: 0.3; }
-        .manifesto-text { font-size: 0.85rem; font-weight: 800; color: var(--text-muted); letter-spacing: 0.25em; margin: 0 0 0.8rem 0; padding-left: 0.25em; }
-        .manifesto-eng { font-size: 0.65rem; font-weight: 600; color: var(--text-light); letter-spacing: 0.1em; margin: 0; font-family: var(--font-mono); }
-
-        @media (max-width: 860px) { .pillar-grid { grid-template-columns: 1fr; max-width: 450px; margin-left: auto; margin-right: auto; } }
-        @media (max-width: 480px) {
-            .container { padding: 2rem 1.2rem; } .telemetry-bar { font-size: 0.55rem; } .brand-name { font-size: 1.8rem; }
-            .terminal-directive { font-size: 0.75rem; text-align: left; padding: 1.2rem; } .axiom-item { padding: 1.5rem; }
-            .axiom-dir { padding: 0.8rem 1rem; } .manifesto-text { font-size: 0.75rem; } .manifesto-eng { font-size: 0.55rem; }
-        }
+      body {
+        background-color: var(--bg-paper);
+        color: var(--text-main);
+        font-family: var(--font-sans);
+        margin: 0;
+        -webkit-font-smoothing: antialiased;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <nav
+      class="border-b border-gray-200 bg-white px-6 py-4 flex justify-between items-center font-mono text-xs tracking-widest text-gray-500 uppercase"
+    >
+      <span>TWPROBE // KERNEL</span>
+      <span class="text-green-600 font-bold">SYSTEM ONLINE</span>
+    </nav>
 
-    <div class="container">
-        <div class="telemetry-bar" data-nosnippet>
-            <div class="telemetry-status"><span class="status-dot"></span> CONNECTION: SECURE</div>
-            <div>SYS.ENTROPY: 0.00%</div>
+    <main class="flex-grow max-w-4xl mx-auto w-full px-6 py-16">
+      <header class="mb-16 border-b-2 border-black pb-12">
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
+          核心情報終端
+        </h1>
+        <p class="text-lg text-gray-600 max-w-2xl leading-relaxed">
+          剝離市場的情緒溢價，下探事物的底層物理常數。這座節點專注於宏觀週期推演、資本防禦矩陣，以及台灣實體資產的絕對邊界。
+        </p>
+      </header>
+
+      <section>
+        <div
+          class="flex items-center mb-8 font-mono text-sm font-bold tracking-widest uppercase"
+        >
+          <span class="w-2 h-2 bg-black mr-3"></span>
+          INDEX / 實體論述索引
         </div>
 
-        <header class="header" data-nosnippet>
-            <a href={mainSiteUrl} class="brand-link">
-                <Logo />
-                <span class="brand-name">{brandName}</span>
-            </a>
-        </header>
-
-        <div class="terminal-directive" data-nosnippet>
-            致力於抹除市場資訊不對稱。本系統專注於提供台灣房地產之底層數據穿透、空間物理邊界檢驗，與防禦性資產佈局之高維度決策參數。
+        <div class="grid gap-6">
+          {
+            allPosts.map((post) => (
+              <a
+                href={post.url}
+                class="group block bg-white border border-gray-200 p-6 hover:border-black transition-colors duration-200"
+              >
+                <div class="flex flex-col md:flex-row md:items-baseline gap-2 mb-3">
+                  <span class="font-mono text-xs text-gray-400 tracking-wider">
+                    {post.frontmatter.docId || "TWP-DOC"}
+                  </span>
+                  <h2 class="text-xl font-bold group-hover:text-blue-600 transition-colors">
+                    {post.frontmatter.title}
+                  </h2>
+                </div>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                  {post.frontmatter.abstract}
+                </p>
+                <div class="mt-4 font-mono text-xs text-gray-400 group-hover:text-black transition-colors flex items-center">
+                  INITIALIZE SEQUENCE <span class="ml-2">→</span>
+                </div>
+              </a>
+            ))
+          }
         </div>
+      </section>
+    </main>
 
-        <main class="pillar-grid">
-            {pillars.map(p => (
-                <div class="pillar-card">
-                    <div class="pillar-header">
-                        <a href={`/${p.slug}/`} class="pillar-title-link">
-                            <h2 class="pillar-title">{p.title}</h2>
-                        </a>
-                        <p class="pillar-desc">{p.desc}</p>
-                    </div>
-                    <div class="topic-grid">
-                        {p.topics.map(t => (
-                            <a href={`/${p.slug}/${t.slug}/`} class="topic-link">{t.name}</a>
-                        ))}
-                    </div>
-                </div>
-            ))}
-        </main>
-
-        <section class="axiom-section">
-            <div class="axiom-header">TWPROBE CORE AXIOMS // 絕對公理矩陣</div>
-            {axioms.map(axiom => (
-                <div class="axiom-item">
-                    <div class="axiom-meta">{axiom.id}</div>
-                    <h3 class="axiom-title">{axiom.title}</h3>
-                    <p class="axiom-def">{axiom.definition}</p>
-                    <p class="axiom-dir">{axiom.directive}</p>
-                </div>
-            ))}
-        </section>
-
-        <section class="manifesto-section" data-nosnippet>
-            <div class="divider"></div>
-            <p class="manifesto-text">常規市場充滿高熵雜訊，客觀物理常數沉澱於此。</p>
-            <p class="manifesto-eng">The market is filled with high-entropy noise. Objective physical constants precipitate here.</p>
-        </section>
-    </div>
-
-</body>
+    <footer
+      class="border-t border-gray-200 bg-white py-8 text-center font-mono text-xs text-gray-400 tracking-widest"
+    >
+      © {new Date().getFullYear()} TWPROBE. ALL SYSTEMS NOMINAL.
+    </footer>
+  </body>
 </html>
