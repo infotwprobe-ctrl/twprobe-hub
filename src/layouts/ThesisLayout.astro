@@ -34,15 +34,40 @@ const relatedPosts = sortedPosts
     .filter((p) => p.url !== Astro.url.pathname)
     .sort(() => Math.random() - 0.5)
     .slice(0, 3);
+
+const canonicalURL = new URL(
+    Astro.url.pathname,
+    Astro.site || "https://hub.twprobe.com"
+);
+const ogImage = frontmatter.image 
+    ? new URL(frontmatter.image, canonicalURL).toString()
+    : new URL("/favicon.png", canonicalURL).toString();
+
+const pageTitle = `${frontmatter.title} | TWProbe`;
+const pageDescription = frontmatter.abstract;
 ---
 
-<html lang="zh-TW">
+<html lang="zh-TW" class="scroll-smooth">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>{frontmatter.title} | TWProbe</title>
-        <meta name="description" content={frontmatter.abstract} />
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
         <link rel="icon" type="image/png" href="/favicon.png" sizes="any" />
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={canonicalURL} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <meta property="og:image" content={ogImage} />
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content={canonicalURL} />
+        <meta property="twitter:title" content={pageTitle} />
+        <meta property="twitter:description" content={pageDescription} />
+        <meta property="twitter:image" content={ogImage} />
 
         <script
             type="application/ld+json"
@@ -62,7 +87,7 @@ const relatedPosts = sortedPosts
                                 "@type": "ListItem",
                                 position: 2,
                                 name: frontmatter.docId,
-                                item: `https://hub.twprobe.com${Astro.url.pathname}`,
+                                item: canonicalURL.toString(),
                             },
                         ],
                     },
@@ -70,11 +95,25 @@ const relatedPosts = sortedPosts
                         "@type": "Article",
                         headline: frontmatter.title,
                         description: frontmatter.abstract,
-                        author: { "@type": "Organization", name: "TWProbe" },
-                        publisher: { "@type": "Organization", name: "TWProbe" },
+                        image: [ogImage],
+                        datePublished: frontmatter.date || new Date().toISOString().split('T')[0],
+                        dateModified: frontmatter.updatedDate || frontmatter.date || new Date().toISOString().split('T')[0],
+                        author: { 
+                            "@type": "Organization", 
+                            "name": "TWProbe",
+                            "url": "https://twprobe.com" 
+                        },
+                        publisher: { 
+                            "@type": "Organization", 
+                            "name": "TWProbe",
+                            "logo": {
+                                "@type": "ImageObject",
+                                "url": new URL("/favicon.png", canonicalURL).toString()
+                            }
+                        },
                         mainEntityOfPage: {
                             "@type": "WebPage",
-                            "@id": `https://hub.twprobe.com${Astro.url.pathname}`,
+                            "@id": canonicalURL.toString(),
                         },
                     },
                 ],
@@ -84,6 +123,10 @@ const relatedPosts = sortedPosts
     <body
         class="bg-[#F8FAFC] text-slate-800 font-sans min-h-screen flex flex-col selection:bg-blue-100 selection:text-blue-900"
     >
+        <!-- 閱讀進度條 -->
+        <div class="fixed top-0 left-0 w-full h-1 bg-transparent z-[60]">
+            <div id="reading-progress" class="h-full bg-blue-600 w-0 transition-all duration-150 ease-out"></div>
+        </div>
         <nav
             class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur-md px-6 py-4 flex justify-between items-center shadow-sm"
         >
@@ -122,6 +165,26 @@ const relatedPosts = sortedPosts
 
                 <slot />
             </article>
+
+            <!-- 深度導流 CTA (Call To Action) -->
+            <div class="my-16 bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 md:p-10 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden relative">
+                <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay"></div>
+                <div class="relative z-10 flex-grow">
+                    <span class="font-mono text-xs text-blue-400 font-bold tracking-widest uppercase mb-3 block">TWPROBE SUBSYSTEM</span>
+                    <h3 class="text-2xl md:text-3xl font-extrabold tracking-tight mb-3">想要更深入的市場實戰分析？</h3>
+                    <p class="text-slate-300 leading-relaxed max-w-xl">
+                        此處為核心情報終端節點。造訪 TWProbe 官方網站，解鎖更多實體資產與宏觀週期的進階研報。
+                    </p>
+                </div>
+                <div class="relative z-10 whitespace-nowrap w-full md:w-auto">
+                    <a href="https://twprobe.com" target="_blank" rel="noopener noreferrer" class="group flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-xl font-bold transition-all shadow-lg hover:shadow-blue-500/25 no-underline w-full md:w-auto">
+                        <span>造訪主站</span>
+                        <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
 
             <hr class="my-16 border-slate-200" />
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -194,5 +257,28 @@ const relatedPosts = sortedPosts
                 © {new Date().getFullYear()} TWPROBE. ALL SYSTEMS NOMINAL.
             </span>
         </footer>
+
+        <script>
+            // Reading Progress Bar
+            const updateProgress = () => {
+                const article = document.querySelector('article');
+                const progressBar = document.getElementById('reading-progress');
+                if (article && progressBar) {
+                    const articleTop = article.offsetTop;
+                    const articleHeight = article.offsetHeight;
+                    const windowHeight = window.innerHeight;
+                    const scrollY = window.scrollY;
+
+                    let progress = 0;
+                    if (scrollY > articleTop) {
+                        progress = ((scrollY - articleTop) / (articleHeight - windowHeight)) * 100;
+                    }
+                    progressBar.style.width = `${Math.min(Math.max(progress, 0), 100)}%`;
+                }
+            };
+            window.addEventListener('scroll', updateProgress);
+            window.addEventListener('resize', updateProgress);
+            updateProgress();
+        </script>
     </body>
 </html>

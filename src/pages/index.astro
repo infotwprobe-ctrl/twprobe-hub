@@ -38,6 +38,7 @@ const canonicalURL = new URL(
   Astro.url.pathname,
   Astro.site || "https://hub.twprobe.com",
 );
+const defaultOgImage = new URL("/favicon.png", canonicalURL).toString();
 ---
 
 <html lang="zh-TW" class="scroll-smooth">
@@ -47,6 +48,39 @@ const canonicalURL = new URL(
     <title>{siteTitle}</title>
     <meta name="description" content={siteDescription} />
     <link rel="icon" type="image/png" href="/favicon.png" sizes="any" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={siteTitle} />
+    <meta property="og:description" content={siteDescription} />
+    <meta property="og:image" content={defaultOgImage} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={siteTitle} />
+    <meta property="twitter:description" content={siteDescription} />
+    <meta property="twitter:image" content={defaultOgImage} />
+
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "TWProbe 核心情報終端",
+        "url": canonicalURL.toString(),
+        "description": siteDescription,
+        "publisher": {
+          "@type": "Organization",
+          "name": "TWProbe",
+          "logo": {
+            "@type": "ImageObject",
+            "url": defaultOgImage
+          }
+        }
+      })}
+    />
     <style is:global>
       :root {
         --bg-paper: #f8fafc; /* 更柔和的底色 */
@@ -87,11 +121,21 @@ const canonicalURL = new URL(
           >TWProbe</span
         >
       </a>
-      <div
-        class="flex items-center gap-2 font-mono text-[10px] tracking-widest uppercase text-slate-400 hidden sm:flex"
-      >
-        <span class="h-2 w-2 rounded-full bg-green-500"></span>
-        <span>SYSTEM ONLINE</span>
+      <div class="flex items-center gap-6">
+        <div
+          class="flex items-center gap-2 font-mono text-[10px] tracking-widest uppercase text-slate-400 hidden sm:flex"
+        >
+          <span class="h-2 w-2 rounded-full bg-green-500"></span>
+          <span>SYSTEM ONLINE</span>
+        </div>
+        <a 
+          href="https://twprobe.com" 
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hidden sm:inline-flex items-center justify-center px-4 py-2 text-xs font-bold font-mono tracking-widest text-white bg-blue-600 hover:bg-blue-700 hover:scale-[1.02] active:scale-95 rounded-md transition-all shadow-sm ring-1 ring-blue-700/50 no-underline"
+        >
+          造訪主站 ↗
+        </a>
       </div>
     </nav>
 
