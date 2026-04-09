@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://hub.twprobe.com/sitemap.xml

@@ -3,7 +3,9 @@
 // TWProbe Hub - Thesis Layout (V6.0 + Deep SEO)
 // Target: Academic Typography / Crawler Trapping / JSON-LD
 // ==============================================
-const { frontmatter } = Astro.props;
+
+import ThemeToggle from '../components/ThemeToggle.astro';
+const { frontmatter, headings } = Astro.props;
 
 // 1. 抓取所有文章並進行「拓撲邏輯排序」
 const allPosts = await Astro.glob("../pages/**/*.md");
@@ -29,19 +31,31 @@ const nextPost =
         ? sortedPosts[currentIndex + 1]
         : null;
 
-// 3. 爬蟲誘捕矩陣：隨機抓取 3 篇不重複的文章作為關聯閱讀
+// 3. 爬蟲誘捕矩陣：語義化擴充閱讀 (同屬性優先)
 const relatedPosts = sortedPosts
     .filter((p) => p.url !== Astro.url.pathname)
-    .sort(() => Math.random() - 0.5)
+    .map(p => {
+        let score = 0;
+        const pId = p.frontmatter.docId || "";
+        const cId = frontmatter.docId || "";
+        if (pId.split('-')[0] === cId.split('-')[0]) score += 1;
+        const getPillarNum = (id) => id.split('-')[1]?.split('.')[0] || "X";
+        if (getPillarNum(pId) === getPillarNum(cId)) score += 5;
+        score += Math.random();
+        return { post: p, score };
+    })
+    .sort((a, b) => b.score - a.score)
+    .map(x => x.post)
     .slice(0, 3);
 
 const canonicalURL = new URL(
     Astro.url.pathname,
     Astro.site || "https://hub.twprobe.com"
 );
+const ogImagePath = `/og${Astro.url.pathname.replace(/\/$/, "")}.png`;
 const ogImage = frontmatter.image 
     ? new URL(frontmatter.image, canonicalURL).toString()
-    : new URL("/favicon.png", canonicalURL).toString();
+    : new URL(ogImagePath, canonicalURL).toString();
 
 const pageTitle = `${frontmatter.title} | TWProbe`;
 const pageDescription = frontmatter.abstract;
@@ -115,24 +129,44 @@ const pageDescription = frontmatter.abstract;
                             "@type": "WebPage",
                             "@id": canonicalURL.toString(),
                         },
+                        inLanguage: "zh-TW",
+                        keywords: `${frontmatter.docId}, TWProbe, 宏觀週期, 資本防禦`,
                     },
                 ],
             })}
         />
+        <script is:inline>
+            // Prevention of Flash of Unstyled Content (FOUC)
+            if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        </script>
     </head>
     <body
-        class="bg-[#F8FAFC] text-slate-800 font-sans min-h-screen flex flex-col selection:bg-blue-100 selection:text-blue-900"
+        class="bg-paper dark:bg-slate-950 text-slate-800 dark:text-slate-300 font-sans min-h-screen flex flex-col selection:bg-blue-100 selection:text-blue-900 dark:selection:text-blue-200 transition-colors duration-300 relative overflow-x-hidden"
     >
+        <!-- Background Matrix Grid -->
+        <div class="fixed inset-0 z-[-1] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03] dark:opacity-[0.05] mix-blend-overlay"></div>
+
+        <!-- Floating Action Button (FAB) -->
+        <a href="https://twprobe.com" target="_blank" rel="noopener noreferrer" class="fixed right-6 bottom-6 md:right-10 md:bottom-10 z-[70] bg-blue-600/90 hover:bg-blue-500 dark:bg-twprobe-blue/90 hover:scale-[1.03] backdrop-blur-md text-white px-5 py-3 md:px-6 md:py-4 rounded-full shadow-[0_4px_20px_rgba(37,99,235,0.4)] dark:shadow-[0_4px_20px_rgba(37,99,235,0.2)] transition-all duration-300 flex items-center gap-3 no-underline animate-fade-in-up" title="存取完整資料庫">
+            <span class="font-bold tracking-widest text-xs md:text-sm">MASTER NODE</span>
+            <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+        </a>
         <!-- 閱讀進度條 -->
         <div class="fixed top-0 left-0 w-full h-1 bg-transparent z-[60]">
-            <div id="reading-progress" class="h-full bg-blue-600 w-0 transition-all duration-150 ease-out"></div>
+            <div id="reading-progress" class="h-full bg-blue-600 dark:bg-twprobe-blue w-0 transition-all duration-150 ease-out"></div>
         </div>
         <nav
-            class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur-md px-6 py-4 flex justify-between items-center shadow-sm"
+            class="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-800/80 bg-white/90 dark:bg-slate-950/80 backdrop-blur-md px-6 py-4 flex justify-between items-center shadow-sm"
         >
             <a href="/" class="flex items-center gap-3 group no-underline">
                 <svg
-                    class="h-6 w-6 text-blue-600 group-hover:-translate-x-1 transition-transform"
+                    class="h-6 w-6 text-blue-600 dark:text-twprobe-blue group-hover:-translate-x-1 transition-transform"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -144,60 +178,67 @@ const pageDescription = frontmatter.abstract;
                         d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                 </svg>
                 <span
-                    class="font-bold text-slate-600 text-sm tracking-widest uppercase"
+                    class="font-bold text-slate-600 dark:text-slate-300 text-sm tracking-widest uppercase"
                     >RETURN TO KERNEL</span
                 >
             </a>
+            <ThemeToggle />
         </nav>
 
-        <main class="flex-grow w-full max-w-3xl mx-auto px-6 py-16">
+        <div class="flex-grow w-full max-w-[1200px] mx-auto px-6 py-16 flex flex-col lg:flex-row gap-12 items-start relative">
+            <main class="w-full max-w-3xl flex-grow mx-auto lg:mx-0">
             <article
-                class="prose prose-slate prose-lg max-w-none prose-headings:font-extrabold prose-a:text-blue-600"
+                class="prose prose-slate dark:prose-invert prose-lg max-w-none prose-headings:font-extrabold prose-a:text-blue-600 dark:prose-a:text-blue-400"
             >
                 <span
-                    class="font-mono text-sm font-bold text-blue-600 tracking-widest block mb-2"
+                    class="font-mono text-sm font-bold text-blue-600 dark:text-twprobe-blue tracking-widest block mb-2"
                 >
                     {frontmatter.docId}
                 </span>
-                <h1 class="text-4xl md:text-5xl tracking-tight mb-8">
+                <h1 class="text-4xl md:text-5xl tracking-tight mb-8 dark:text-slate-100">
                     {frontmatter.title}
                 </h1>
 
                 <slot />
             </article>
 
-            <!-- 深度導流 CTA (Call To Action) -->
-            <div class="my-16 bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 md:p-10 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden relative">
-                <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay"></div>
+            <!-- 深度導流 CTA (Call To Action) 極致升級 -->
+            <div class="my-20 bg-gradient-to-br from-slate-800 to-slate-900 dark:from-slate-900 dark:to-black rounded-2xl p-10 md:p-12 text-white shadow-2xl dark:shadow-[0_0_40px_rgba(37,99,235,0.1)] dark:ring-1 dark:ring-slate-800 flex flex-col md:flex-row items-center justify-between gap-8 overflow-hidden relative group">
+                <div class="absolute -inset-x-0 -inset-y-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay group-hover:scale-105 transition-transform duration-700"></div>
+                <div class="absolute w-64 h-64 bg-twprobe-blue/20 rounded-full blur-3xl -top-10 -right-10 pointer-events-none group-hover:bg-twprobe-blue/30 transition-colors duration-500"></div>
+
                 <div class="relative z-10 flex-grow">
-                    <span class="font-mono text-xs text-blue-400 font-bold tracking-widest uppercase mb-3 block">TWPROBE SUBSYSTEM</span>
-                    <h3 class="text-2xl md:text-3xl font-extrabold tracking-tight mb-3">想要更深入的市場實戰分析？</h3>
-                    <p class="text-slate-300 leading-relaxed max-w-xl">
-                        此處為核心情報終端節點。造訪 TWProbe 官方網站，解鎖更多實體資產與宏觀週期的進階研報。
+                    <span class="font-mono text-xs md:text-sm text-blue-400 dark:text-twprobe-blue font-bold tracking-widest uppercase mb-4 flex items-center gap-3">
+                        <span class="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)] animate-pulse"></span>
+                        TWPROBE MASTER SUBSYSTEM
+                    </span>
+                    <h3 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4 text-white">想要解鎖本體智庫的所有模塊？</h3>
+                    <p class="text-slate-300 dark:text-slate-400 leading-relaxed text-lg max-w-2xl">
+                        此處僅為公開情報的邊緣讀取節點。造訪 TWProbe 官方主站，取得深度資本防禦矩陣與宏觀週期研報。
                     </p>
                 </div>
-                <div class="relative z-10 whitespace-nowrap w-full md:w-auto">
-                    <a href="https://twprobe.com" target="_blank" rel="noopener noreferrer" class="group flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-xl font-bold transition-all shadow-lg hover:shadow-blue-500/25 no-underline w-full md:w-auto">
-                        <span>造訪主站</span>
-                        <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <div class="relative z-10 whitespace-nowrap w-full md:w-auto mt-4 md:mt-0">
+                    <a href="https://twprobe.com" target="_blank" rel="noopener noreferrer" class="group flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-500 dark:bg-twprobe-blue dark:hover:bg-blue-500 text-white px-8 md:px-10 py-4 md:py-5 rounded-xl font-bold text-lg transition-all shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:shadow-[0_0_30px_rgba(37,99,235,0.6)] no-underline w-full md:w-auto">
+                        <span>啟動連接程序</span>
+                        <svg class="w-6 h-6 group-hover:translate-x-1.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                         </svg>
                     </a>
                 </div>
             </div>
 
-            <hr class="my-16 border-slate-200" />
+            <hr class="my-16 border-slate-200 dark:border-slate-800/80" />
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {
                     prevPost ? (
                         <a
                             href={prevPost.url}
-                            class="group p-6 bg-white border border-slate-200 rounded-xl hover:border-blue-400 hover:shadow-md transition-all flex flex-col text-left no-underline"
+                            class="group p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl hover:border-blue-400 dark:hover:border-slate-600 hover:shadow-md dark:shadow-none transition-all flex flex-col text-left no-underline"
                         >
-                            <span class="text-xs font-mono text-slate-400 tracking-widest mb-2 group-hover:text-blue-600">
+                            <span class="text-xs font-mono text-slate-400 dark:text-slate-500 tracking-widest mb-2 group-hover:text-blue-600 dark:group-hover:text-twprobe-blue">
                                 ← PREVIOUS
                             </span>
-                            <span class="font-bold text-slate-800 line-clamp-2">
+                            <span class="font-bold text-slate-800 dark:text-slate-200 line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                                 {prevPost.frontmatter.title}
                             </span>
                         </a>
@@ -210,12 +251,12 @@ const pageDescription = frontmatter.abstract;
                     nextPost && (
                         <a
                             href={nextPost.url}
-                            class="group p-6 bg-white border border-slate-200 rounded-xl hover:border-blue-400 hover:shadow-md transition-all flex flex-col text-right no-underline"
+                            class="group p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl hover:border-blue-400 dark:hover:border-slate-600 hover:shadow-md dark:shadow-none transition-all flex flex-col text-right no-underline"
                         >
-                            <span class="text-xs font-mono text-slate-400 tracking-widest mb-2 group-hover:text-blue-600">
+                            <span class="text-xs font-mono text-slate-400 dark:text-slate-500 tracking-widest mb-2 group-hover:text-blue-600 dark:group-hover:text-twprobe-blue">
                                 NEXT →
                             </span>
-                            <span class="font-bold text-slate-800 line-clamp-2">
+                            <span class="font-bold text-slate-800 dark:text-slate-200 line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                                 {nextPost.frontmatter.title}
                             </span>
                         </a>
@@ -223,11 +264,11 @@ const pageDescription = frontmatter.abstract;
                 }
             </div>
 
-            <div class="mt-12 pt-12 border-t border-slate-200">
+            <div class="mt-12 pt-12 border-t border-slate-200 dark:border-slate-800/80">
                 <div
-                    class="font-mono text-xs font-bold tracking-widest text-slate-400 mb-6 uppercase flex items-center"
+                    class="font-mono text-xs font-bold tracking-widest text-slate-400 dark:text-slate-500 mb-6 uppercase flex items-center"
                 >
-                    <span class="w-2 h-2 bg-blue-600 mr-3 block"></span>
+                    <span class="w-2 h-2 bg-blue-600 dark:bg-twprobe-blue mr-3 block"></span>
                     Topological Extension / 矩陣延伸解析
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -235,12 +276,12 @@ const pageDescription = frontmatter.abstract;
                         relatedPosts.map((related) => (
                             <a
                                 href={related.url}
-                                class="block p-5 bg-white border border-slate-200 rounded-lg hover:border-blue-400 hover:shadow-md transition-all no-underline"
+                                class="block p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg hover:border-blue-400 dark:hover:border-slate-600 hover:shadow-md dark:shadow-none transition-all no-underline group"
                             >
-                                <span class="font-mono text-[10px] text-slate-400 block mb-2 font-bold tracking-widest">
+                                <span class="font-mono text-[10px] text-slate-400 dark:text-slate-500 block mb-2 font-bold tracking-widest">
                                     {related.frontmatter.docId}
                                 </span>
-                                <h4 class="font-bold text-slate-800 text-sm leading-snug">
+                                <h4 class="font-bold text-slate-800 dark:text-slate-200 text-sm leading-snug group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                                     {related.frontmatter.title}
                                 </h4>
                             </a>
@@ -248,12 +289,35 @@ const pageDescription = frontmatter.abstract;
                     }
                 </div>
             </div>
-        </main>
+            </main>
+
+            {headings && headings.length > 0 && (
+                <aside class="hidden lg:block w-64 flex-shrink-0 sticky top-32">
+                    <div class="font-mono text-xs font-bold text-slate-400 dark:text-slate-500 tracking-widest mb-6 uppercase flex items-center gap-2">
+                        <div class="w-1.5 h-1.5 bg-twprobe-blue rounded-full"></div>
+                        Table of Contents
+                    </div>
+                    <ul class="space-y-3.5 text-sm border-l-2 border-slate-100 dark:border-slate-800 pl-4 py-1">
+                        {headings.map((h) => (
+                            <li>
+                                <a 
+                                    href={`#${h.slug}`} 
+                                    class={`toc-link block text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors line-clamp-2 ${h.depth > 2 ? 'ml-3 text-[13px]' : 'font-medium'}`}
+                                    data-slug={h.slug}
+                                >
+                                    {h.text}
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </aside>
+            )}
+        </div>
 
         <footer
-            class="border-t border-slate-200 bg-white py-12 mt-12 text-center"
+            class="border-t border-slate-200 dark:border-slate-800/80 bg-white dark:bg-slate-950 py-12 mt-12 text-center transition-colors duration-300"
         >
-            <span class="font-mono text-xs text-slate-400 tracking-widest">
+            <span class="font-mono text-xs text-slate-400 dark:text-slate-500 tracking-widest">
                 © {new Date().getFullYear()} TWPROBE. ALL SYSTEMS NOMINAL.
             </span>
         </footer>
@@ -276,9 +340,47 @@ const pageDescription = frontmatter.abstract;
                     progressBar.style.width = `${Math.min(Math.max(progress, 0), 100)}%`;
                 }
             };
-            window.addEventListener('scroll', updateProgress);
-            window.addEventListener('resize', updateProgress);
+            window.addEventListener('scroll', updateProgress, {passive: true});
+            window.addEventListener('resize', updateProgress, {passive: true});
             updateProgress();
+
+            // Scrollspy for TOC
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -60% 0px',
+                threshold: 0
+            };
+            
+            const headingElements = Array.from(document.querySelectorAll('article h1, article h2, article h3, article h4, article h5, article h6'))
+                                        .filter(el => el.id);
+            
+            // Highlight the first item by default if no scroll
+            if (headingElements.length > 0) {
+               const links = document.querySelectorAll('.toc-link');
+               if (links.length > 0 && window.scrollY < 50) {
+                   links[0].classList.add('text-blue-600', 'font-black', 'dark:text-twprobe-blue');
+                   links[0].classList.remove('text-slate-500', 'dark:text-slate-400');
+               }
+            }
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.id;
+                        document.querySelectorAll('.toc-link').forEach(link => {
+                            if (link.getAttribute('data-slug') === id) {
+                                link.classList.add('text-blue-600', 'font-black', 'dark:text-twprobe-blue');
+                                link.classList.remove('text-slate-500', 'dark:text-slate-400', 'font-medium');
+                            } else {
+                                link.classList.remove('text-blue-600', 'font-black', 'dark:text-twprobe-blue');
+                                link.classList.add('text-slate-500', 'dark:text-slate-400', 'font-medium');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            headingElements.forEach(el => observer.observe(el));
         </script>
     </body>
 </html>
