@@ -119,12 +119,14 @@
 /* 毛玻璃全域按鈕設計 (一致化 WordPress 圓形風格) */
 .twp-glass-btn {
     position: fixed; z-index: 9999995;
-    background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(0, 0, 0, 0.05); box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    background: rgba(255, 255, 255, 0.4); 
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* 增強毛玻璃透明感與立體感 */
     color: #4A5568; text-decoration: none; cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
     display: flex; align-items: center; justify-content: center;
     width: 44px; height: 44px; border-radius: 50%;
+    appearance: none; -webkit-appearance: none; outline: none; /* 清除實體 button 預設塗層 */
 }
 .twp-glass-btn:hover {
     background: #ffffff; color: #1E90FF; box-shadow: 0 6px 15px rgba(30, 144, 255, 0.2); transform: scale(1.05) translateY(-2px);
@@ -156,6 +158,56 @@ html.twp-dark-mode .twp-glass-btn {
 }
 html.twp-dark-mode .twp-glass-btn:hover {
     background: rgba(15, 23, 42, 0.7); box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+/* =========================================================
+   [TWProbe] 全局靜態輕量搜尋庫 UI 設計 
+   ========================================================= */
+.twp-search-wrapper {
+    position: relative;
+    display: flex; align-items: center; justify-content: flex-end;
+}
+.twp-search-input {
+    background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255,255,255,0.2);
+    color: #ffffff; border-radius: 6px; padding: 6px 12px; width: 220px;
+    font-size: 14px; outline: none; transition: all 0.3s ease;
+}
+.twp-search-input::placeholder { color: rgba(255,255,255,0.5); }
+.twp-search-input:focus {
+    background: rgba(255, 255, 255, 0.2); border-color: rgba(255,255,255,0.5); width: 260px;
+}
+.twp-search-dropdown {
+    position: absolute; top: calc(100% + 5px); right: 0;
+    width: 320px; max-height: 400px; overflow-y: auto;
+    background: #ffffff; border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1); border: 1px solid #e2e8f0;
+    z-index: 99999; flex-direction: column;
+}
+html.twp-dark-mode .twp-search-dropdown {
+    background: #1e293b; border-color: #334155; box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+.twp-search-dropdown.hidden-dropdown { display: none; }
+.twp-search-item {
+    padding: 12px 16px; border-bottom: 1px solid #f1f5f9;
+    text-decoration: none; display: flex; flex-direction: column; gap: 4px;
+    transition: background 0.2s ease;
+}
+html.twp-dark-mode .twp-search-item { border-bottom-color: #334155; }
+.twp-search-item:last-child { border-bottom: none; }
+.twp-search-item:hover { background: #f8fafc; }
+html.twp-dark-mode .twp-search-item:hover { background: #0f172a; }
+.twp-search-title { font-size: 14px; font-weight: 600; color: #1e293b; }
+html.twp-dark-mode .twp-search-title { color: #f8fafc; }
+.twp-search-meta { font-size: 11px; color: #64748b; display: flex; justify-content: space-between; }
+html.twp-dark-mode .twp-search-meta { color: #94a3b8; }
+.twp-search-highlight { color: #2563eb; font-weight: 700; background: rgba(37,99,235,0.1); padding: 0 2px; border-radius: 2px; }
+html.twp-dark-mode .twp-search-highlight { color: #60a5fa; background: rgba(96,165,250,0.15); }
+
+@media (max-width: 768px) {
+    .twp-search-input { width: 100%; }
+    .twp-search-input:focus { width: 100%; }
+    .twp-search-dropdown { width: calc(100vw - 32px); right: -16px; }
+    .twp-search-wrapper { position: static; width: 100%; margin-top: 5px; }
 }
 </style>
 
@@ -241,7 +293,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let backBtn = target.closest('#twp-smart-back-btn');
         if (backBtn) {
             e.preventDefault();
-            history.length > 2 ? history.back() : window.location.href = 'https://twprobe.com';
+            history.length > 2 ? history.back() : window.location.href = '/';
             return;
         }
 
@@ -265,6 +317,75 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+
+    // =========================================================
+    // [TWProbe] 靜態輕量搜尋邏輯 (Vanilla JS Client-side Index)
+    // =========================================================
+    let searchDataCache = null;
+    const searchInput = document.getElementById('twp-static-search');
+    const searchResults = document.getElementById('twp-search-results');
+
+    if (searchInput && searchResults) {
+        // 懶載入抓取 search.json
+        const fetchSearchData = async () => {
+            if (searchDataCache !== null) return searchDataCache;
+            try {
+                const res = await fetch('/search.json');
+                if(!res.ok) return [];
+                searchDataCache = await res.json();
+                return searchDataCache;
+            } catch (err) {
+                console.error('Search index failed to load:', err);
+                return [];
+            }
+        };
+
+        const renderResults = (results, query) => {
+            if(results.length === 0) {
+                searchResults.innerHTML = `<div class="twp-search-item"><span class="twp-search-meta">查無符合 "${query}" 的文獻結果</span></div>`;
+                searchResults.classList.remove('hidden-dropdown');
+                return;
+            }
+            
+            searchResults.innerHTML = results.slice(0, 8).map(item => {
+                const regex = new RegExp(`(${query})`, 'gi');
+                const highlightedTitle = item.title.replace(regex, '<span class="twp-search-highlight">$1</span>');
+                const dateObj = new Date(item.date);
+                const dateStr = `${dateObj.getFullYear()}-${String(dateObj.getMonth()+1).padStart(2,'0')}-${String(dateObj.getDate()).padStart(2,'0')}`;
+
+                return `
+                <a href="${item.href}" class="twp-search-item">
+                    <span class="twp-search-title">${highlightedTitle}</span>
+                    <span class="twp-search-meta"><span>📂 ${item.category}</span><span>⏱️ ${dateStr}</span></span>
+                </a>`;
+            }).join('');
+            searchResults.classList.remove('hidden-dropdown');
+        };
+
+        searchInput.addEventListener('input', async (e) => {
+            const query = e.target.value.trim().toLowerCase();
+            if(query.length < 1) {
+                searchResults.classList.add('hidden-dropdown');
+                return;
+            }
+            const data = await fetchSearchData();
+            const filtered = data.filter(item => 
+                item.title.toLowerCase().includes(query) || 
+                item.category.toLowerCase().includes(query)
+            );
+            renderResults(filtered, query);
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                searchResults.classList.add('hidden-dropdown');
+            }
+        });
+        
+        searchInput.addEventListener('focus', () => {
+            if(searchInput.value.trim().length > 0) searchResults.classList.remove('hidden-dropdown');
+        });
+    }
 
 });
 </script>
