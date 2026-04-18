@@ -7,6 +7,7 @@
 import ThemeToggle from '../components/ThemeToggle.astro';
 import PillarCard from '../components/PillarCard.astro';
 import ProtocolCard from '../components/ProtocolCard.astro';
+import TwprobeButtons from '../components/TwprobeButtons.astro';
 import { ClientRouter } from 'astro:transitions';
 
 const allPosts = await Astro.glob("./**/*.md");
@@ -216,5 +217,7 @@ const defaultOgImage = new URL("/favicon.png", canonicalURL).toString();
         &copy; 2024 - 2026 <a href="https://twprobe.com" class="font-bold hover:text-blue-500 dark:hover:text-blue-400 transition-colors no-underline">TWProbe</a>. All rights reserved.
       </span>
     </footer>
+
+    <TwprobeButtons />
   </body>
 </html>
