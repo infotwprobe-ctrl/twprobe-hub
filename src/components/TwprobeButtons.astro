@@ -116,17 +116,16 @@
     .tw-share-menu { left: 45px; transform: translateX(10px) scale(0.9); }
 }
 
-/* 毛玻璃全域按鈕設計 (一致化 WordPress 圓形風格) */
+/* 全域懸浮按鈕設計 (一致化純白質感風格) */
 .twp-glass-btn {
     position: fixed; z-index: 9999995;
-    background: rgba(255, 255, 255, 0.4); 
-    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* 增強毛玻璃透明感與立體感 */
+    background: #ffffff; 
+    border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     color: #4A5568; text-decoration: none; cursor: pointer;
     transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
     display: flex; align-items: center; justify-content: center;
     width: 44px; height: 44px; border-radius: 50%;
-    appearance: none; -webkit-appearance: none; outline: none; /* 清除實體 button 預設塗層 */
+    appearance: none; -webkit-appearance: none; outline: none;
 }
 .twp-glass-btn:hover {
     background: #ffffff; color: #1E90FF; box-shadow: 0 6px 15px rgba(30, 144, 255, 0.2); transform: scale(1.05) translateY(-2px);
@@ -152,12 +151,13 @@
     .twp-top-btn { bottom: 20px; right: 15px; }
 }
 
-/* 暗黑模式對應 (包含毛玻璃按鈕) */
+/* 暗黑模式對應 */
 html.twp-dark-mode .twp-glass-btn {
-    background: rgba(15, 23, 42, 0.4); border-color: rgba(255, 255, 255, 0.1); color: #E2E8F0;
+    background: #1e293b; border-color: #334155; color: #f8fafc;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
 }
 html.twp-dark-mode .twp-glass-btn:hover {
-    background: rgba(15, 23, 42, 0.7); box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    background: #0f172a; box-shadow: 0 6px 15px rgba(0,0,0,0.7);
 }
 
 /* =========================================================
