@@ -44,13 +44,12 @@
 
 <!-- 毛玻璃 返回按鈕 (左上角) -->
 <a href="#" id="twp-smart-back-btn" class="twp-glass-btn twp-back-btn" aria-label="返回上一頁">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
-    <span>返回</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
 </a>
 
 <!-- 毛玻璃 回到頁首 (右下角) -->
 <button id="twp-scroll-top-btn" class="twp-glass-btn twp-top-btn" aria-label="回到頁首">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
 </button>
 
 <style is:global>
@@ -117,35 +116,38 @@
     .tw-share-menu { left: 45px; transform: translateX(10px) scale(0.9); }
 }
 
-/* 毛玻璃全域按鈕設計 */
+/* 毛玻璃全域按鈕設計 (一致化 WordPress 圓形風格) */
 .twp-glass-btn {
     position: fixed; z-index: 9999995;
-    background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    color: #334155; text-decoration: none; cursor: pointer;
-    transition: all 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(0, 0, 0, 0.05); box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    color: #4A5568; text-decoration: none; cursor: pointer;
+    transition: all 0.2s ease;
     display: flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; border-radius: 50%;
 }
 .twp-glass-btn:hover {
-    background: rgba(255, 255, 255, 0.7); box-shadow: 0 6px 24px rgba(0,0,0,0.1); transform: translateY(-2px);
+    background: #ffffff; color: #1E90FF; box-shadow: 0 6px 15px rgba(30, 144, 255, 0.2); transform: scale(1.05) translateY(-2px);
 }
-.twp-back-btn {
-    top: 25px; left: 25px; font-weight: bold; font-size: 13px; gap: 4px;
-    padding: 8px 14px 8px 10px; border-radius: 20px;
-}
-.twp-back-btn svg { width: 16px; height: 16px; }
+.twp-back-btn { top: 15px; left: 20px; }
+.twp-back-btn svg { width: 20px; height: 20px; }
+
 .twp-top-btn {
-    bottom: 25px; right: 25px; width: 44px; height: 44px; border-radius: 50%;
+    bottom: 25px; right: 25px;
     opacity: 0; pointer-events: none; transform: translateY(15px);
 }
 .twp-top-btn.visible {
     opacity: 1; pointer-events: auto; transform: translateY(0);
 }
-.twp-top-btn svg { width: 22px; height: 22px; }
+.twp-top-btn:hover.visible {
+    transform: scale(1.05) translateY(-2px);
+}
+.twp-top-btn svg { width: 22px; height: 22px; margin-top: 2px; }
 
 @media (max-width: 768px) {
-    .twp-back-btn { top: 15px; left: 15px; padding: 6px 10px; font-size: 12px; }
-    .twp-top-btn { bottom: 20px; right: 15px; width: 38px; height: 38px; }
+    .twp-glass-btn { width: 38px; height: 38px; }
+    .twp-back-btn { top: 12px; left: 12px; }
+    .twp-top-btn { bottom: 20px; right: 15px; }
 }
 
 /* 暗黑模式對應 (包含毛玻璃按鈕) */
