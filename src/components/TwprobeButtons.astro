@@ -48,9 +48,9 @@
 </a>
 
 <!-- 毛玻璃 回到頁首 (右下角) -->
-<button id="twp-scroll-top-btn" class="twp-glass-btn twp-top-btn" aria-label="回到頁首">
+<a href="#" id="twp-scroll-top-btn" class="twp-glass-btn twp-top-btn" aria-label="回到頁首">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
-</button>
+</a>
 
 <style is:global>
 /* TWProbe Left Bottom Flow UI */
@@ -289,11 +289,15 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Smart Back 按鈕
+        // Smart Back 按鈕 (智能阻擋跨網域回退)
         let backBtn = target.closest('#twp-smart-back-btn');
         if (backBtn) {
             e.preventDefault();
-            history.length > 2 ? history.back() : window.location.href = '/';
+            if (document.referrer && new URL(document.referrer).hostname === window.location.hostname) {
+                history.back(); // 如果是站內跳轉，正常回上一頁
+            } else {
+                window.location.href = '/'; // 如果是外部連入 (如 Google)，回退會回到本站首頁
+            }
             return;
         }
 
@@ -321,18 +325,26 @@ document.addEventListener('DOMContentLoaded', function() {
     // =========================================================
     // [TWProbe] 靜態輕量搜尋邏輯 (Vanilla JS Client-side Index)
     // =========================================================
-    let searchDataCache = null;
-    const searchInput = document.getElementById('twp-static-search');
-    const searchResults = document.getElementById('twp-search-results');
+    // 定義 SearchItem 型別
+    interface SearchItem {
+        title: string;
+        href: string;
+        category: string;
+        date: string;
+    }
+
+    let searchDataCache: SearchItem[] | null = null;
+    const searchInput = document.getElementById('twp-static-search') as HTMLInputElement | null;
+    const searchResults = document.getElementById('twp-search-results') as HTMLDivElement | null;
 
     if (searchInput && searchResults) {
         // 懶載入抓取 search.json
-        const fetchSearchData = async () => {
+        const fetchSearchData = async (): Promise<SearchItem[]> => {
             if (searchDataCache !== null) return searchDataCache;
             try {
                 const res = await fetch('/search.json');
                 if(!res.ok) return [];
-                searchDataCache = await res.json();
+                searchDataCache = await res.json() as SearchItem[];
                 return searchDataCache;
             } catch (err) {
                 console.error('Search index failed to load:', err);
@@ -340,14 +352,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         };
 
-        const renderResults = (results, query) => {
+        const renderResults = (results: SearchItem[], query: string) => {
             if(results.length === 0) {
                 searchResults.innerHTML = `<div class="twp-search-item"><span class="twp-search-meta">查無符合 "${query}" 的文獻結果</span></div>`;
                 searchResults.classList.remove('hidden-dropdown');
                 return;
             }
             
-            searchResults.innerHTML = results.slice(0, 8).map(item => {
+            searchResults.innerHTML = results.slice(0, 8).map((item: SearchItem) => {
                 const regex = new RegExp(`(${query})`, 'gi');
                 const highlightedTitle = item.title.replace(regex, '<span class="twp-search-highlight">$1</span>');
                 const dateObj = new Date(item.date);
@@ -362,22 +374,24 @@ document.addEventListener('DOMContentLoaded', function() {
             searchResults.classList.remove('hidden-dropdown');
         };
 
-        searchInput.addEventListener('input', async (e) => {
-            const query = e.target.value.trim().toLowerCase();
+        searchInput.addEventListener('input', async (e: Event) => {
+            const target = e.target as HTMLInputElement;
+            const query = target.value.trim().toLowerCase();
             if(query.length < 1) {
                 searchResults.classList.add('hidden-dropdown');
                 return;
             }
             const data = await fetchSearchData();
-            const filtered = data.filter(item => 
+            const filtered = data.filter((item: SearchItem) => 
                 item.title.toLowerCase().includes(query) || 
                 item.category.toLowerCase().includes(query)
             );
             renderResults(filtered, query);
         });
 
-        document.addEventListener('click', (e) => {
-            if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+        document.addEventListener('click', (e: Event) => {
+            const targetNode = e.target as Node;
+            if (!searchInput.contains(targetNode) && !searchResults.contains(targetNode)) {
                 searchResults.classList.add('hidden-dropdown');
             }
         });
