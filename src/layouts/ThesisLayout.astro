@@ -161,7 +161,7 @@ const pageDescription = frontmatter.abstract;
         
         <TwprobeButtons />
         <nav
-            class="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-800/80 bg-white/90 dark:bg-slate-950/80 backdrop-blur-md px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4 shadow-sm"
+            class="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-800/80 bg-white/90 dark:bg-slate-950/80 backdrop-blur-md px-6 py-4 flex justify-between items-center w-full gap-4 shadow-sm"
         >
             <div class="flex items-center gap-6">
                 <a href="/" class="flex items-center gap-3 group no-underline">
@@ -181,6 +181,12 @@ const pageDescription = frontmatter.abstract;
                     <a href="/category/開發工程" class="hover:text-blue-600 dark:hover:text-twprobe-blue transition-colors no-underline">開發工程</a>
                     <a href="/category/投資法規" class="hover:text-blue-600 dark:hover:text-twprobe-blue transition-colors no-underline">投資法規</a>
                 </div>
+            </div>
+            <div class="flex items-center gap-4 sm:gap-6">
+                <ThemeToggle />
+                <a href="https://twprobe.com" class="hidden sm:inline-flex items-center justify-center px-4 py-2 text-xs font-bold font-mono tracking-widest text-white bg-blue-600 hover:bg-blue-700 dark:bg-twprobe-blue dark:hover:bg-blue-500 hover:scale-[1.02] active:scale-95 rounded-md transition-all shadow-sm ring-1 ring-blue-700/50 no-underline">
+                    造訪主站 ↗
+                </a>
             </div>
         </nav>
 
