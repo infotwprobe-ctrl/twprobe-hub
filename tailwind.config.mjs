@@ -12,7 +12,7 @@ export default {
                 'twprobe-blue': '#2563eb',
             },
             fontFamily: {
-                sans: ['system-ui', '-apple-system', 'sans-serif'],
+                sans: ['Inter', '-apple-system', 'system-ui', '"Noto Sans TC"', 'sans-serif'],
                 mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', 'monospace'],
             },
             animation: {
