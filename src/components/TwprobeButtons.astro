@@ -1,46 +1,6 @@
 ---
 ---
-<!-- TWProbe Buttons (Global Action Hub) -->
-<div class="tw-share-container twp-fab-group">
-    
-    <!-- 沉浸式閱讀模式 -->
-    <button class="tw-share-toggler twp-reading-fab" id="twpThemeToggleBtn" aria-label="切換閱讀模式" title="閱讀模式">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
-    </button>
 
-    <!-- 回原站按鈕 (Blue House) 取代 Radar -->
-    <a href="https://twprobe.com" class="tw-share-toggler" aria-label="回主站" title="首頁">
-        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" scale="0.8"><path d="M16 2L2 12h3v14h7v-8h8v8h7V12h3L16 2z"/></svg>
-    </a>
-
-    <!-- 分享按鈕展開器 -->
-    <div class="tw-share-group" id="twp-share-wrapper">
-        <button class="tw-share-toggler twp-share-action share-deep-blue" aria-label="Share options">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
-        </button>
-        <div class="tw-share-menu">
-            <button class="tw-share-btn btn-line twp-social-share" data-platform="line" aria-label="Share on Line">
-                <svg class="twp-share-svg" viewBox="0 0 24 24"><path d="M24 10.3c0-5.7-5.4-10.3-12-10.3S0 4.6 0 10.3c0 5.1 4.3 9.3 10.2 10.2.4.1.9.3.7 1.2l-.3 1.5c0 0-.2 1.1.9.6 5.6-3.3 9.2-7.2 9.2-7.2 3.3-1.7 3.3-6.2 3.3-6.2z"/></svg>
-            </button>
-            <button class="tw-share-btn btn-fb twp-social-share" data-platform="fb" aria-label="Share on Facebook">
-                <svg class="twp-share-svg" viewBox="0 0 24 24"><path d="M24 12c0-6.6-5.4-12-12-12S0 5.4 0 12c0 6 4.4 11 10.1 11.9v-8.4H7v-3.5h3.1V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9v2.3h3.3l-.5 3.5h-2.8v8.4C19.6 23 24 18 24 12z"/></svg>
-            </button>
-            <button class="tw-share-btn btn-messenger twp-social-share" data-platform="messenger" aria-label="Share on Messenger">
-                <svg class="twp-share-svg" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5 0 11.1c0 3.5 1.7 6.6 4.5 8.7V24l4.1-2.2c1.1.3 2.2.5 3.4.5 6.6 0 12-5 12-11.1S18.6 0 12 0zm1.2 15l-3.1-3.3-6 3.3 6.6-7 3.3 3.3 5.6-3.3-6.4 7z"/></svg>
-            </button>
-            <button class="tw-share-btn btn-threads twp-social-share" data-platform="threads" aria-label="Share on Threads">
-                <svg class="twp-share-svg" viewBox="0 0 24 24"><path d="M17.8 22.8a12.8 12.8 0 0 0 2.5-1.2l-1.4-2.2a10.6 10.6 0 0 1-1.9.9c-3.2.9-6.2-.2-7.6-3.4-.4-1-.6-2.2-.6-3.8v-1.1c0-3.7 2.6-6.5 5.8-6.5 3.1 0 5.1 2.1 5.1 5.1v3c0 2.1-1.5 2.4-2 2.4-.5 0-1.5-.2-1.5-2V8.9a2.9 2.9 0 0 0-2.3-1.2c-1.7 0-3 1.4-3 3.4 0 2 1.3 3.4 3 3.4 1.2 0 2.1-.6 2.7-1.4.4 1.5 1.9 2.3 3.4 2.3 1.8 0 3.8-1.3 3.8-4.9V7.5C24 3 19.5 0 13.1 0 6.3 0 1.3 4.5 1.3 11.8c0 7.4 5.2 12 12.3 12 1.5 0 2.9-.3 4.1-.9l-1-2.3-1 .3ZM13.1 13.5c-1.4 0-2-1-2-2.2 0-1.3.7-2.3 2-2.3.9 0 1.6.7 1.6 2.3 0 1.6-.7 2.2-1.6 2.2Z"/></svg>
-            </button>
-            <button class="tw-share-btn btn-copy twp-copy-action-btn" aria-label="Copy Link">
-                <svg class="default-icon twp-share-svg" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
-                <svg class="success-icon twp-share-svg" viewBox="0 0 24 24" style="display:none;"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
-            </button>
-    <!-- 回原站按鈕 (Blue House) 取代 Radar -->
-    <a href="https://twprobe.com" class="tw-share-toggler" aria-label="回主站" title="首頁">
-        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" scale="0.8"><path d="M16 2L2 12h3v14h7v-8h8v8h7V12h3L16 2z"/></svg>
-    </a>
-
-</div>
 
 <!-- 毛玻璃 返回按鈕 (左上角) -->
 <a href="#" id="twp-smart-back-btn" class="twp-glass-btn twp-back-btn" aria-label="返回上一頁">
