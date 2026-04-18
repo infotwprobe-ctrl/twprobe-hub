@@ -15,7 +15,7 @@
 
     <!-- 分享按鈕展開器 -->
     <div class="tw-share-group" id="twp-share-wrapper">
-        <button class="tw-share-toggler twp-share-action" aria-label="Share options">
+        <button class="tw-share-toggler twp-share-action share-deep-blue" aria-label="Share options">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
         </button>
         <div class="tw-share-menu">
@@ -60,7 +60,11 @@
 .tw-share-toggler svg { width: 18px; height: 18px; stroke: white; stroke-width: 2.5; fill: none; margin: 0 auto; display: block; transition: transform 0.3s; }
 
 .tw-share-group { position: relative; display: flex; align-items: center; }
-.tw-share-group.expanded .tw-share-toggler { background: #1E293B; box-shadow: 0 4px 15px rgba(30, 41, 59, 0.3); }
+
+/* 深色調分享按鈕 */
+.tw-share-toggler.share-deep-blue { background: #1E3A8A; box-shadow: 0 4px 15px rgba(30, 58, 138, 0.4); }
+.tw-share-toggler.share-deep-blue:hover { background: #172554; box-shadow: 0 6px 20px rgba(30, 58, 138, 0.5); }
+.tw-share-group.expanded .tw-share-toggler.share-deep-blue { background: #0F172A; box-shadow: 0 4px 15px rgba(15, 23, 42, 0.5); }
 .tw-share-group.expanded .tw-share-toggler svg { transform: rotate(90deg); }
 
 .tw-share-menu {
@@ -104,12 +108,6 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     
-    // 動態隱藏非單頁面分享按鈕 (避免主頁過剩)
-    if (window.location.pathname === '/' || window.location.pathname.startsWith('/category') || window.location.pathname.startsWith('/search')) {
-        let sw = document.getElementById('twp-share-wrapper');
-        if(sw) sw.style.display = 'none';
-    }
-
     // 暗黑模式邏輯 (Astro)
     const btn = document.getElementById('twpThemeToggleBtn');
     if (localStorage.getItem('twp-theme') === 'dark' || localStorage.getItem('theme') === 'dark') {
