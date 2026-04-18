@@ -35,10 +35,23 @@
                 <svg class="default-icon twp-share-svg" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
                 <svg class="success-icon twp-share-svg" viewBox="0 0 24 24" style="display:none;"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
             </button>
-        </div>
-    </div>
+    <!-- 回原站按鈕 (Blue House) 取代 Radar -->
+    <a href="https://twprobe.com" class="tw-share-toggler" aria-label="回主站" title="首頁">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" scale="0.8"><path d="M16 2L2 12h3v14h7v-8h8v8h7V12h3L16 2z"/></svg>
+    </a>
 
 </div>
+
+<!-- 毛玻璃 返回按鈕 (左上角) -->
+<a href="#" id="twp-smart-back-btn" class="twp-glass-btn twp-back-btn" aria-label="返回上一頁">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    <span>返回</span>
+</a>
+
+<!-- 毛玻璃 回到頁首 (右下角) -->
+<button id="twp-scroll-top-btn" class="twp-glass-btn twp-top-btn" aria-label="回到頁首">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</button>
 
 <style is:global>
 /* TWProbe Left Bottom Flow UI */
@@ -102,6 +115,45 @@
     .tw-share-toggler { width: 38px !important; height: 34px !important; min-width: 38px !important; border-radius: 5px !important; }
     .tw-share-toggler svg { width: 16px; height: 16px; stroke-width: 2.2; }
     .tw-share-menu { left: 45px; transform: translateX(10px) scale(0.9); }
+}
+
+/* 毛玻璃全域按鈕設計 */
+.twp-glass-btn {
+    position: fixed; z-index: 9999995;
+    background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    color: #334155; text-decoration: none; cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    display: flex; align-items: center; justify-content: center;
+}
+.twp-glass-btn:hover {
+    background: rgba(255, 255, 255, 0.7); box-shadow: 0 6px 24px rgba(0,0,0,0.1); transform: translateY(-2px);
+}
+.twp-back-btn {
+    top: 25px; left: 25px; font-weight: bold; font-size: 13px; gap: 4px;
+    padding: 8px 14px 8px 10px; border-radius: 20px;
+}
+.twp-back-btn svg { width: 16px; height: 16px; }
+.twp-top-btn {
+    bottom: 25px; right: 25px; width: 44px; height: 44px; border-radius: 50%;
+    opacity: 0; pointer-events: none; transform: translateY(15px);
+}
+.twp-top-btn.visible {
+    opacity: 1; pointer-events: auto; transform: translateY(0);
+}
+.twp-top-btn svg { width: 22px; height: 22px; }
+
+@media (max-width: 768px) {
+    .twp-back-btn { top: 15px; left: 15px; padding: 6px 10px; font-size: 12px; }
+    .twp-top-btn { bottom: 20px; right: 15px; width: 38px; height: 38px; }
+}
+
+/* 暗黑模式對應 (包含毛玻璃按鈕) */
+html.twp-dark-mode .twp-glass-btn {
+    background: rgba(15, 23, 42, 0.4); border-color: rgba(255, 255, 255, 0.1); color: #E2E8F0;
+}
+html.twp-dark-mode .twp-glass-btn:hover {
+    background: rgba(15, 23, 42, 0.7); box-shadow: 0 4px 15px rgba(0,0,0,0.5);
 }
 </style>
 
@@ -182,8 +234,35 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             return;
         }
+
+        // Smart Back 按鈕
+        let backBtn = target.closest('#twp-smart-back-btn');
+        if (backBtn) {
+            e.preventDefault();
+            history.length > 2 ? history.back() : window.location.href = 'https://twprobe.com';
+            return;
+        }
+
+        // 回到頁首按鈕
+        let topBtn = target.closest('#twp-scroll-top-btn');
+        if (topBtn) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+            return;
+        }
     });
 
-    // 智能返回邏輯 (If needed globally anywhere else, but blue house links directly to twprobe.com anyway)
+    // 監聽滾動事件顯示回到頁首按鈕
+    window.addEventListener('scroll', function() {
+        let topBtn = document.getElementById('twp-scroll-top-btn');
+        if (topBtn) {
+            if (window.scrollY > 300) {
+                topBtn.classList.add('visible');
+            } else {
+                topBtn.classList.remove('visible');
+            }
+        }
+    });
+
 });
 </script>
