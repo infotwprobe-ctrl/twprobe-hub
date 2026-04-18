@@ -5,6 +5,7 @@
 // ==============================================
 
 import ThemeToggle from '../components/ThemeToggle.astro';
+import TwprobeButtons from '../components/TwprobeButtons.astro';
 import { ClientRouter } from 'astro:transitions';
 const { frontmatter, headings } = Astro.props;
 
@@ -153,14 +154,12 @@ const pageDescription = frontmatter.abstract;
         <!-- Background Matrix Grid -->
         <div class="fixed inset-0 z-[-1] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03] dark:opacity-[0.05] mix-blend-overlay"></div>
 
-        <!-- Floating Action Button (FAB) 小房子 -->
-        <a href="https://twprobe.com" onclick="event.preventDefault(); history.length > 2 ? history.back() : window.location.href='https://twprobe.com';" class="fixed left-6 bottom-6 md:left-10 md:bottom-10 z-[70] bg-blue-600 hover:bg-blue-500 dark:bg-twprobe-blue hover:scale-[1.05] shadow-xl text-white w-12 h-12 flex justify-center items-center rounded-xl transition-all duration-300 no-underline animate-fade-in-up" aria-label="回到 TWProbe 主站">
-            <svg viewBox="0 0 32 32" class="w-6 h-6 fill-white"><path d="M16 2L2 12h3v14h7v-8h8v8h7V12h3L16 2z"/></svg>
-        </a>
         <!-- 閱讀進度條 -->
         <div class="fixed top-0 left-0 w-full h-1 bg-transparent z-[60]">
             <div id="reading-progress" class="h-full bg-blue-600 dark:bg-twprobe-blue w-0 transition-all duration-150 ease-out"></div>
         </div>
+        
+        <TwprobeButtons />
         <nav
             class="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-800/80 bg-white/90 dark:bg-slate-950/80 backdrop-blur-md px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4 shadow-sm"
         >
@@ -182,7 +181,6 @@ const pageDescription = frontmatter.abstract;
                     <a href="/category/投資法規" class="hover:text-blue-600 dark:hover:text-twprobe-blue transition-colors no-underline">投資法規</a>
                 </div>
             </div>
-            <ThemeToggle />
         </nav>
 
         <div class="flex-grow w-full max-w-[1200px] mx-auto px-6 py-16 flex flex-col lg:flex-row gap-12 items-start relative">
