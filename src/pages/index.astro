@@ -94,7 +94,7 @@ const defaultOgImage = new URL("/favicon.png", canonicalURL).toString();
             "itemListElement": pillars.map((p, index) => ({
               "@type": "ListItem",
               "position": index + 1,
-              "url": new URL(p.url, canonicalURL).toString(),
+              "url": new URL(p.url || "", canonicalURL).toString(),
               "name": p.frontmatter.title
             }))
           }
