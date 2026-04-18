@@ -8,8 +8,13 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
     </button>
 
+    <!-- 回原站按鈕 (Blue House) 取代 Radar -->
+    <a href="https://twprobe.com" class="tw-share-toggler" aria-label="回主站" title="首頁">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" scale="0.8"><path d="M16 2L2 12h3v14h7v-8h8v8h7V12h3L16 2z"/></svg>
+    </a>
+
     <!-- 分享按鈕展開器 -->
-    <div class="tw-share-group">
+    <div class="tw-share-group" id="twp-share-wrapper">
         <button class="tw-share-toggler twp-share-action" aria-label="Share options">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
         </button>
@@ -32,11 +37,6 @@
             </button>
         </div>
     </div>
-
-    <!-- 回原站按鈕 (Blue House) 取代 Radar -->
-    <a href="https://twprobe.com" class="tw-share-toggler" aria-label="回主站" title="首頁">
-        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" scale="0.8"><path d="M16 2L2 12h3v14h7v-8h8v8h7V12h3L16 2z"/></svg>
-    </a>
 
 </div>
 
@@ -104,6 +104,12 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     
+    // 動態隱藏非單頁面分享按鈕 (避免主頁過剩)
+    if (window.location.pathname === '/' || window.location.pathname.startsWith('/category') || window.location.pathname.startsWith('/search')) {
+        let sw = document.getElementById('twp-share-wrapper');
+        if(sw) sw.style.display = 'none';
+    }
+
     // 暗黑模式邏輯 (Astro)
     const btn = document.getElementById('twpThemeToggleBtn');
     if (localStorage.getItem('twp-theme') === 'dark' || localStorage.getItem('theme') === 'dark') {
