@@ -1,0 +1,51 @@
+---
+// ==============================================
+// TWProbe Hub - 404 Interceptor (V6.0 LIGHT-MATRIX)
+// Target: SEO Soft 404 Prevention
+// ==============================================
+
+import Navigation from '../components/Navigation.astro';
+---
+
+<!doctype html>
+<html lang="zh-TW" class="scroll-smooth antialiased bg-slate-50 dark:bg-[#0a0f1d] selection:bg-blue-500/30 selection:text-blue-200 dark:selection:bg-blue-500/40 dark:selection:text-blue-100 transition-colors duration-500">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 // 節點失去連線 | TWProbe 深層架構中樞</title>
+    <!-- Prevent Search Engines from indexing 404 -->
+    <meta name="robots" content="noindex, nofollow" />
+  </head>
+  <body class="flex flex-col min-h-screen text-slate-800 dark:text-slate-200 overflow-x-hidden font-sans">
+    
+    <div class="fixed inset-0 z-[-1] pointer-events-none">
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-100/40 via-slate-50 to-white dark:from-blue-900/20 dark:via-[#0a0f1d] dark:to-[#050810] transition-colors duration-500"></div>
+    </div>
+    
+    <div class="fixed top-0 left-0 w-full z-50">
+      <div class="absolute inset-0 bg-white/80 dark:bg-slate-900/60 backdrop-blur-xl border-b border-slate-200/80 dark:border-slate-800/80 transition-colors duration-500"></div>
+      <div class="relative">
+        <Navigation />
+      </div>
+    </div>
+
+    <!-- 404 Terminal UI -->
+    <main class="flex-grow flex items-center justify-center pt-24 pb-12 px-4 relative z-10 w-full mb-12">
+      <div class="text-center">
+        <div class="font-mono text-xs text-blue-500 tracking-widest uppercase mb-4 animate-pulse">
+            [ SYSTEM ERROR / ROUTE_FAILURE ]
+        </div>
+        <h1 class="text-7xl md:text-9xl font-bold tracking-tighter text-slate-900 dark:text-white mb-6">
+            404
+        </h1>
+        <p class="text-lg md:text-xl text-slate-500 dark:text-slate-400 max-w-lg mx-auto mb-10 leading-relaxed font-light">
+            您所查詢的學術情報節點不存在，或已被核心轉移至其他象限。請重新發送請求。
+        </p>
+        <a href="/" class="inline-flex items-center gap-2 px-8 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg shadow-lg hover:shadow-blue-500/25 transition-all active:scale-95 font-medium tracking-wide">
+            返回深層中樞
+        </a>
+      </div>
+    </main>
+
+  </body>
+</html>
