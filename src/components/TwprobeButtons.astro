@@ -173,19 +173,7 @@ html.twp-dark-mode .twp-search-highlight { color: #60a5fa; background: rgba(96,1
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    
-    // 暗黑模式邏輯 (Astro)
-    const btn = document.getElementById('twpThemeToggleBtn');
-    if (localStorage.getItem('twp-theme') === 'dark' || localStorage.getItem('theme') === 'dark') {
-        document.documentElement.classList.add('twp-dark-mode', 'dark'); 
-    }
-    btn?.addEventListener('click', () => {
-        document.documentElement.classList.toggle('twp-dark-mode');
-        document.documentElement.classList.toggle('dark');
-        let isDark = document.documentElement.classList.contains('twp-dark-mode');
-        localStorage.setItem('twp-theme', isDark ? 'dark' : 'light');
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    });
+
 
     // 分享選單邏輯
     document.body.addEventListener('click', function(e) {

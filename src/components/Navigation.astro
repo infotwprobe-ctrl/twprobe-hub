@@ -1,0 +1,87 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+---
+<nav class="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-800/80 bg-white/90 dark:bg-slate-950/80 backdrop-blur-md px-3 md:px-6 py-3 w-full shadow-sm relative">
+  <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3 lg:gap-0">
+    
+    <!-- 行動版第一排：置中的 Logo -->
+    <div class="flex lg:hidden justify-center w-full pb-2 border-b border-slate-100 dark:border-slate-800/50">
+        <a class="flex items-center gap-2 group no-underline shrink-0" href="/">
+          <svg class="h-6 w-6 rounded-[4px] shadow-sm transition-transform group-hover:scale-105" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+              <rect width="32" height="32" fill="#f8fafc" rx="4" class="dark:fill-slate-800" />
+              <g transform="translate(4, 4)">
+                  <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" fill="#2563EB" class="dark:fill-twprobe-blue" />
+              </g>
+          </svg>
+          <span class="font-bold text-slate-800 dark:text-slate-100 text-[1rem] tracking-wide whitespace-nowrap">TWProbe 深層架構中樞</span>
+        </a>
+    </div>
+
+    <!-- 行動版第二排統整區塊 / 桌機版主導航列 -->
+    <div class="flex flex-nowrap items-center justify-between w-full lg:w-auto gap-2 lg:gap-3 z-20">
+       
+       <!-- 桌機版 Logo (在手機時隱藏) -->
+       <a class="hidden lg:flex items-center gap-2.5 group no-underline shrink-0 mr-6" href="/">
+          <svg class="h-7 w-7 rounded-[4px] shadow-sm transition-transform group-hover:scale-105" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+              <rect width="32" height="32" fill="#f8fafc" rx="4" class="dark:fill-slate-800" />
+              <g transform="translate(4, 4)">
+                  <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" fill="#2563EB" class="dark:fill-twprobe-blue" />
+              </g>
+          </svg>
+          <span class="font-bold text-slate-800 dark:text-slate-100 text-[1.05rem] tracking-wide whitespace-nowrap">TWProbe 深層架構中樞</span>
+       </a>
+
+       <!-- 漢堡按鈕 -->
+       <button id="mobile-menu-btn" class="lg:hidden p-1.5 -ml-1 text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800/80 rounded-md focus:outline-none transition-colors shrink-0" aria-label="Toggle menu">
+          <svg class="w-[1.4rem] h-[1.4rem]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+       </button>
+       
+       <!-- 太陽/月亮 明暗切換 -->
+       <div class="shrink-0 -mx-1 lg:mx-0">
+         <ThemeToggle />
+       </div>
+
+       <!-- SYSTEM ONLINE Badge (自適應延展) -->
+       <div class="flex-grow flex justify-center lg:justify-start lg:w-48 mx-1 lg:mx-0">
+         <div class="flex items-center gap-2 lg:gap-3 bg-slate-100/80 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 px-3 md:px-4 py-1.5 md:py-2 rounded-md shadow-inner relative overflow-hidden group">
+           <div class="absolute inset-0 bg-blue-500/5 dark:bg-blue-400/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+           <div class="relative flex items-center justify-center w-2 h-2">
+             <div class="absolute w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)] animate-ping opacity-75"></div>
+             <div class="relative w-1.5 h-1.5 rounded-full bg-blue-400 shadow-[0_0_5px_rgba(59,130,246,1)]"></div>
+           </div>
+           <span class="font-mono text-[11px] md:text-[13px] font-bold text-slate-600 dark:text-blue-400/90 tracking-widest uppercase">System Online</span>
+         </div>
+       </div>
+
+       <!-- 情報站按鈕 -->
+       <a href="https://news.twprobe.com" class="inline-flex items-center justify-center px-2 py-1.5 text-[11px] lg:px-4 lg:py-2 lg:text-xs font-bold font-mono tracking-widest text-white bg-blue-600 hover:bg-blue-700 dark:bg-twprobe-blue dark:hover:bg-blue-500 hover:scale-[1.02] active:scale-95 rounded-md transition-all shadow-sm ring-1 ring-blue-700/50 no-underline shrink-0 whitespace-nowrap">
+          情報站 ↗
+       </a>
+    </div>
+
+    <!-- 桌機版置中分類 / 行動版展開選單 -->
+    <div id="mobile-menu" class="hidden lg:flex flex-col lg:flex-row items-stretch lg:items-center gap-1 lg:gap-6 text-[0.9rem] font-bold text-slate-500 dark:text-slate-400 w-full lg:w-auto absolute lg:static top-full left-0 bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl lg:bg-transparent lg:dark:bg-transparent px-4 py-3 lg:p-0 border-b border-slate-200 dark:border-slate-800 shadow-xl lg:shadow-none z-10 lg:absolute lg:left-1/2 lg:-translate-x-1/2 transition-all">
+      <a href="/" class="hover:text-blue-600 dark:hover:text-twprobe-blue transition-colors no-underline block w-full lg:w-auto py-2.5 lg:py-0 border-b lg:border-none border-slate-100 dark:border-slate-800/80">大廳</a>
+      <a href="/category/交易持有" class="hover:text-blue-600 dark:hover:text-twprobe-blue transition-colors no-underline block w-full lg:w-auto py-2.5 lg:py-0 border-b lg:border-none border-slate-100 dark:border-slate-800/80">交易持有</a>
+      <a href="/category/開發工程" class="hover:text-blue-600 dark:hover:text-twprobe-blue transition-colors no-underline block w-full lg:w-auto py-2.5 lg:py-0 border-b lg:border-none border-slate-100 dark:border-slate-800/80">開發工程</a>
+      <a href="/category/投資法規" class="hover:text-blue-600 dark:hover:text-twprobe-blue transition-colors no-underline block w-full lg:w-auto py-2.5 lg:py-0">投資法規</a>
+    </div>
+
+  </div>
+</nav>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        mobileMenu.classList.toggle('flex');
+      });
+    }
+  });
+</script>
