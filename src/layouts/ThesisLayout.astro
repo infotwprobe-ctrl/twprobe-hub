@@ -156,7 +156,7 @@ const pageDescription = frontmatter.abstract;
 
         <!-- 閱讀進度條 -->
         <div class="fixed top-0 left-0 w-full h-1 bg-transparent z-[60]">
-            <div id="reading-progress" class="h-full bg-blue-600 dark:bg-twprobe-blue w-0 transition-all duration-150 ease-out"></div>
+            <div id="reading-progress" class="h-full bg-blue-600 dark:bg-twprobe-blue w-full origin-left scale-x-0 transition-transform duration-150 ease-out will-change-transform"></div>
         </div>
         
         <TwprobeButtons />
@@ -212,7 +212,7 @@ const pageDescription = frontmatter.abstract;
                             href={prevPost.url}
                             class="group p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl hover:border-blue-400 dark:hover:border-slate-600 hover:shadow-md dark:shadow-none transition-all flex flex-col text-left no-underline"
                         >
-                            <span class="text-xs font-mono text-slate-400 dark:text-slate-500 tracking-widest mb-2 group-hover:text-blue-600 dark:group-hover:text-twprobe-blue">
+                            <span class="text-xs font-mono text-slate-500 dark:text-slate-400 tracking-widest mb-2 group-hover:text-blue-600 dark:group-hover:text-twprobe-blue">
                                 ← PREVIOUS
                             </span>
                             <span class="font-bold text-slate-800 dark:text-slate-200 line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
@@ -230,7 +230,7 @@ const pageDescription = frontmatter.abstract;
                             href={nextPost.url}
                             class="group p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl hover:border-blue-400 dark:hover:border-slate-600 hover:shadow-md dark:shadow-none transition-all flex flex-col text-right no-underline"
                         >
-                            <span class="text-xs font-mono text-slate-400 dark:text-slate-500 tracking-widest mb-2 group-hover:text-blue-600 dark:group-hover:text-twprobe-blue">
+                            <span class="text-xs font-mono text-slate-500 dark:text-slate-400 tracking-widest mb-2 group-hover:text-blue-600 dark:group-hover:text-twprobe-blue">
                                 NEXT →
                             </span>
                             <span class="font-bold text-slate-800 dark:text-slate-200 line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
@@ -243,7 +243,7 @@ const pageDescription = frontmatter.abstract;
 
             <div class="mt-12 pt-12 border-t border-slate-200 dark:border-slate-800/80">
                 <div
-                    class="font-mono text-xs font-bold tracking-widest text-slate-400 dark:text-slate-500 mb-6 uppercase flex items-center"
+                    class="font-mono text-xs font-bold tracking-widest text-slate-500 dark:text-slate-400 mb-6 uppercase flex items-center"
                 >
                     <span class="w-2 h-2 bg-blue-600 dark:bg-twprobe-blue mr-3 block"></span>
                     Topological Extension / 矩陣延伸解析
@@ -270,7 +270,7 @@ const pageDescription = frontmatter.abstract;
 
             {headings && headings.length > 0 && (
                 <aside class="hidden lg:block w-64 flex-shrink-0 sticky top-32">
-                    <div class="font-mono text-xs font-bold text-slate-400 dark:text-slate-500 tracking-widest mb-6 uppercase flex items-center gap-2">
+                    <div class="font-mono text-xs font-bold text-slate-500 dark:text-slate-400 tracking-widest mb-6 uppercase flex items-center gap-2">
                         <div class="w-1.5 h-1.5 bg-twprobe-blue rounded-full"></div>
                         Table of Contents
                     </div>
@@ -294,7 +294,7 @@ const pageDescription = frontmatter.abstract;
         <footer
             class="border-t border-slate-200 dark:border-slate-800/80 bg-white dark:bg-slate-950 py-12 mt-12 text-center transition-colors duration-300"
         >
-            <span class="font-mono text-xs text-slate-400 dark:text-slate-500 tracking-widest">
+            <span class="font-mono text-xs text-slate-500 tracking-widest">
                 &copy; 2024 - 2026 <a href="https://twprobe.com" class="font-bold hover:text-blue-500 dark:hover:text-blue-400 transition-colors no-underline">TWProbe</a>. All rights reserved.
             </span>
         </footer>
@@ -317,7 +317,7 @@ const pageDescription = frontmatter.abstract;
                     if (scrollY > articleTop) {
                         progress = ((scrollY - articleTop) / (articleHeight - windowHeight)) * 100;
                     }
-                    progressBar.style.width = `${Math.min(Math.max(progress, 0), 100)}%`;
+                    progressBar.style.transform = `scaleX(${Math.min(Math.max(progress, 0), 100) / 100})`;
                 }
             };
             window.addEventListener('scroll', updateProgress, {passive: true});
