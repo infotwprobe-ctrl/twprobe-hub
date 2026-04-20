@@ -111,7 +111,11 @@ const defaultOgImage = new URL("/favicon.png", canonicalURL).toString();
         document.documentElement.classList.remove('dark');
       }
     </script>
-  </head>
+  
+  <!-- Cloudflare Web Analytics -->
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{""token"": ""0beb82c844c340c7aac034d476804b6a""}"></script>
+  <!-- End Cloudflare Web Analytics -->
+</head>
   <body
     class="bg-paper dark:bg-slate-950 text-slate-700 dark:text-slate-300 font-sans antialiased min-h-screen flex flex-col selection:bg-twprobe-blue/20 selection:text-blue-900 dark:selection:text-blue-300 transition-colors duration-300 relative overflow-x-hidden"
   >

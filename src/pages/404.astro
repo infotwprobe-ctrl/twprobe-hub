@@ -15,7 +15,11 @@ import Navigation from '../components/Navigation.astro';
     <title>404 // 節點失去連線 | TWProbe 深層架構中樞</title>
     <!-- Prevent Search Engines from indexing 404 -->
     <meta name="robots" content="noindex, nofollow" />
-  </head>
+  
+  <!-- Cloudflare Web Analytics -->
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{""token"": ""0beb82c844c340c7aac034d476804b6a""}"></script>
+  <!-- End Cloudflare Web Analytics -->
+</head>
   <body class="flex flex-col min-h-screen text-slate-800 dark:text-slate-200 overflow-x-hidden font-sans">
     
     <div class="fixed inset-0 z-[-1] pointer-events-none">
