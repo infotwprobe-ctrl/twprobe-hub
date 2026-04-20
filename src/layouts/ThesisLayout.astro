@@ -61,6 +61,56 @@ const ogImage = frontmatter.image
 
 const pageTitle = `${frontmatter.title} | TWProbe`;
 const pageDescription = frontmatter.abstract;
+
+const schema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "BreadcrumbList",
+            itemListElement: [
+                {
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "KERNEL",
+                    item: "https://hub.twprobe.com",
+                },
+                {
+                    "@type": "ListItem",
+                    position: 2,
+                    name: frontmatter.docId,
+                    item: canonicalURL.toString(),
+                },
+            ],
+        },
+        {
+            "@type": "Article",
+            headline: frontmatter.title,
+            description: frontmatter.abstract,
+            image: [ogImage],
+            datePublished: frontmatter.date || new Date().toISOString().split('T')[0],
+            dateModified: frontmatter.updatedDate || frontmatter.date || new Date().toISOString().split('T')[0],
+            author: { 
+                "@type": "Organization", 
+                "name": "TWProbe",
+                "url": "https://twprobe.com" 
+            },
+            publisher: { 
+                "@type": "Organization", 
+                "name": "TWProbe",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": new URL("/favicon.png", canonicalURL).toString()
+                }
+            },
+            mainEntityOfPage: {
+                "@type": "WebPage",
+                "@id": canonicalURL.toString(),
+            },
+            inLanguage: "zh-TW",
+            keywords: `${frontmatter.docId}, TWProbe, 宏觀週期, 資本防禦`,
+        },
+    ],
+});
 ---
 
 <html lang="zh-TW" class="scroll-smooth">
@@ -87,58 +137,7 @@ const pageDescription = frontmatter.abstract;
         <meta property="twitter:description" content={pageDescription} />
         <meta property="twitter:image" content={ogImage} />
 
-        <script
-            type="application/ld+json"
-            set:html={JSON.stringify({
-                "@context": "https://schema.org",
-                "@graph": [
-                    {
-                        "@type": "BreadcrumbList",
-                        itemListElement: [
-                            {
-                                "@type": "ListItem",
-                                position: 1,
-                                name: "KERNEL",
-                                item: "https://hub.twprobe.com",
-                            },
-                            {
-                                "@type": "ListItem",
-                                position: 2,
-                                name: frontmatter.docId,
-                                item: canonicalURL.toString(),
-                            },
-                        ],
-                    },
-                    {
-                        "@type": "Article",
-                        headline: frontmatter.title,
-                        description: frontmatter.abstract,
-                        image: [ogImage],
-                        datePublished: frontmatter.date || new Date().toISOString().split('T')[0],
-                        dateModified: frontmatter.updatedDate || frontmatter.date || new Date().toISOString().split('T')[0],
-                        author: { 
-                            "@type": "Organization", 
-                            "name": "TWProbe",
-                            "url": "https://twprobe.com" 
-                        },
-                        publisher: { 
-                            "@type": "Organization", 
-                            "name": "TWProbe",
-                            "logo": {
-                                "@type": "ImageObject",
-                                "url": new URL("/favicon.png", canonicalURL).toString()
-                            }
-                        },
-                        mainEntityOfPage: {
-                            "@type": "WebPage",
-                            "@id": canonicalURL.toString(),
-                        },
-                        inLanguage: "zh-TW",
-                        keywords: `${frontmatter.docId}, TWProbe, 宏觀週期, 資本防禦`,
-                    },
-                ],
-            })}
-        />
+        <script type="application/ld+json" set:html={schema}></script>
         <script is:inline>
             // Prevention of Flash of Unstyled Content (FOUC)
             if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -149,7 +148,7 @@ const pageDescription = frontmatter.abstract;
         </script>
     
   <!-- Cloudflare Web Analytics -->
-  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{""token"": ""0beb82c844c340c7aac034d476804b6a""}"></script>
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "0beb82c844c340c7aac034d476804b6a"}'></script>
   <!-- End Cloudflare Web Analytics -->
 </head>
     <body
